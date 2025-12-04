@@ -1,0 +1,416 @@
+/* ================================
+   GLOBAL
+================================ */
+body {
+    margin: 0;
+    padding: 0;
+    background: #111;
+    font-family: "Times New Roman";
+}
+
+/* ================================
+   NAVBAR
+================================ */
+.navbar {
+    width: 100%;
+    padding: 20px 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50; /* Above hero overlay */
+    background: white !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LEFT / RIGHT NAV */
+.nav-left, .nav-right {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+/* CENTER LOGO */
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #5A5335 !important;
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* ================================
+   NAV LINKS — NO BOX
+================================ */
+.nav-link,
+.nav-link:active,
+.nav-link:visited,
+.nav-link:focus,
+.nav-link.show {
+    color: #5A5335;
+    font-size: 18px;
+    letter-spacing: 0.3px;
+    padding: 0 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    transition: 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #b89255 !important;
+}
+
+.book-btn {
+    border: 2px solid #5A5335 !important;
+    padding: 8px 16px !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+    color: #5A5335 !important;
+    transition: 0.3s ease;
+}
+
+.book-btn:hover {
+    background: #5A5335 !important;
+    color: white !important;
+}
+
+
+/* HAMBURGER */
+.navbar-toggler {
+    border: none !important;
+    background: transparent !important;
+}
+
+.navbar-toggler-icon {
+    background-image: none !important;
+}
+
+.navbar-toggler-icon::before {
+    content: "\2630";
+    font-size: 30px;
+    color: black;
+}
+
+/* ================================
+   RESPONSIVE NAV
+================================ */
+@media (max-width: 991px) {
+
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    .navbar-brand {
+        position: relative;
+        transform: none;
+        margin: 10px auto;
+    }
+
+    .nav-left, .nav-right {
+        flex-direction: column;
+        gap: 18px;
+        margin-bottom: 10px;
+    }
+}
+
+/* ================================
+   SPLIT COVER + TEXT
+================================ */
+.cover-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 600px;
+}
+
+/* DARK OVERLAY ONLY ON IMAGES */
+.cover-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.35);
+    z-index: 10;
+}
+
+/* IMAGES */
+.left-img, .right-img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* CENTERED HERO TEXT */
+.hero-content {
+    position: absolute;
+    z-index: 20;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 90%;
+}
+
+/* TITLE */
+.hero-content h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* SUBTEXT */
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 25px;
+    opacity: 0.95;
+}
+
+/* BUTTON GROUP */
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* BUTTON STYLES */
+.btn-hero {
+    padding: 12px 28px;
+    font-size: 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s ease;
+    display: inline-block;
+}
+
+/* REMOVE UNDERLINE ON HERO BUTTONS */
+.btn-hero,
+.btn-hero:hover,
+.btn-hero:focus,
+.btn-hero:active {
+    text-decoration: none !important;
+}
+
+/* MAIN BUTTON */
+.btn-hero.primary {
+    background: #5A5335;
+    color: white;
+}
+
+.btn-hero.primary:hover {
+    background: #3e3925;
+}
+
+/* OUTLINE BUTTON */
+.btn-hero.secondary {
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-hero.secondary:hover {
+    background: white;
+    color: black;
+}
+
+.hero-typing {
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+}
+
+#typedWord {
+	font-family:"Playfair Display", serif";
+    border-right: 3px solid white;
+    padding-right: 5px;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* ================================
+   WHY CHOOSE US SECTION
+================================ */
+.why-us {
+    background: #ffffff !important;
+    padding: 80px 20px;
+    text-align: center;
+    color: #5A5335 !important;
+}
+
+.why-us h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: #5A5335 !important;
+}
+
+.why-us p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: auto;
+    opacity: 1;
+    color: #5A5335 !important;
+}
+
+.about-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 26px;
+    background: #5A5335;
+    color: white !important;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.about-btn:hover,
+.about-btn:focus,
+.about-btn:active {
+    text-decoration: none !important;
+    background: #3e3925;
+}
+
+/* ================================
+   OUR PROCESS SECTION
+================================ */
+.our-process {
+    background: #5A5335;   /* Updated background */
+    padding: 80px 20px;
+    color: white !important;
+}
+
+.our-process h2 {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: white !important;
+}
+
+.process-intro {
+    font-size: 18px;
+    max-width: 650px;
+    margin: 0 auto 50px;
+    color: white !important;
+}
+
+/* Card container */
+.process-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* Individual card */
+.process-card {
+    text-align: center;
+    max-width: 250px;
+}
+
+/* Images */
+.process-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    margin-bottom: 15px;
+}
+
+/* Headings + text */
+.process-card h4 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: white !important;
+}
+
+.process-card p {
+    font-size: 16px;
+    color: white !important;
+    opacity: 0.9;
+}
+
+/* ================================
+   SIGNATURE FULL COMBINED SECTION
+================================ */
+.signature-full {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 120px 20px 140px;
+    background: url('images/back2.jpg') center/cover no-repeat;
+    text-align: center;
+}
+
+.signature-full-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    z-index: 1;
+}
+
+.signature-full-content {
+    position: relative;
+    z-index: 10;
+}
+
+/* Three Words */
+.signature-full-content .sig-word {
+    font-size: 64px;
+    font-weight: bold;
+    color: white;
+    opacity: 0;
+    margin: 0;
+    animation: fadeUp 1s forwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Message */
+.sig-msg {
+    max-width: 900px;
+    margin: 40px auto 40px;
+    color: white;
+    font-size: 22px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* Button */
+.sig-btn {
+    display: inline-block;
+    padding: 14px 36px;
+    background: rgba(255,255,255,0.15);
+    color: white !important;
+    font-size: 18px;
+    border-radius: 4px;
+    border: 1px solid white;
+    transition: 0.3s ease;
+}
+
+.sig-btn:hover {
+    background: white;
+    color: black !important;
+}
+
+
+
+
+
+
+
+
+
