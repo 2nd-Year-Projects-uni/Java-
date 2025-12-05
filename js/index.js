@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    /* =============================
+       HERO TYPING EFFECT
+    ============================== */
     const words = ["Tailored", "Measured", "Crafted", "Styled"];
     const typedSpan = document.getElementById("typedWord");
 
@@ -11,33 +14,32 @@ document.addEventListener("DOMContentLoaded", function () {
         const currentWord = words[wordIndex];
 
         if (!isDeleting) {
-            // Typing forward
             typedSpan.textContent = currentWord.substring(0, charIndex + 1);
             charIndex++;
 
             if (charIndex === currentWord.length) {
-                setTimeout(() => (isDeleting = true), 1000); // wait before deleting
+                setTimeout(() => (isDeleting = true), 1000);
             }
         } else {
-            // Deleting backward
             typedSpan.textContent = currentWord.substring(0, charIndex - 1);
             charIndex--;
 
             if (charIndex === 0) {
                 isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length; // move to next word
+                wordIndex = (wordIndex + 1) % words.length;
             }
         }
 
         setTimeout(typeEffect, isDeleting ? 200 : 150);
     }
-
     typeEffect();
-});
 
-//JS — SCROLL REVEAL
-document.addEventListener("DOMContentLoaded", () => {
-    const items = document.querySelectorAll('.reveal-item');
+
+
+    /* =============================
+       REVEAL ON SCROLL
+    ============================== */
+    const items = document.querySelectorAll(".reveal-item");
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -50,27 +52,62 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { threshold: 0.2 });
 
     items.forEach(el => observer.observe(el));
-});
 
-// MULTI–IMAGE MOUSE TRACKING FOR 3 WORDS
-document.querySelectorAll(".sig-row").forEach(row => {
 
-    const img = row.querySelector(".sig-moving-img");
 
-    row.addEventListener("mousemove", e => {
-        const rect = row.getBoundingClientRect();
-        const x = e.clientX - rect.left;
+    /* ================================================
+       SIGNATURE WORD — INDIVIDUAL IMAGE TRACKING
+    ================================================= */
+    document.querySelectorAll(".sig-row").forEach(row => {
 
-        img.style.left = `${x}px`;
-        img.style.opacity = "1";
-        img.style.transform = "translateX(-50%) scale(1)";
+        const img = row.querySelector(".sig-moving-img");
+        const word = row.querySelector(".sig-word");
+
+        let currentX = 0;
+        let targetX = 0;
+        const ease = 0.12;   
+
+        function animate() {
+            const diff = targetX - currentX;
+
+            if (Math.abs(diff) > 0.5) {
+                currentX += diff * ease;
+                img.style.left = `${currentX}px`;
+                requestAnimationFrame(animate);
+            } else {
+                currentX = targetX;
+                img.style.left = `${currentX}px`;
+            }
+        }
+  
+        row.addEventListener("mouseenter", () => {
+            img.classList.add("show");
+        });
+        
+        row.addEventListener("mouseleave", () => {
+            img.classList.remove("show");
+        });
+   
+        row.addEventListener("mousemove", e => {
+
+            const rowRect = row.getBoundingClientRect();
+            const wordRect = word.getBoundingClientRect();
+       
+            const mouseX = e.clientX - rowRect.left;
+       
+            const minX = wordRect.left - rowRect.left;
+            const maxX = wordRect.right - rowRect.left;
+
+         
+            targetX = Math.max(minX, Math.min(mouseX, maxX));
+
+            requestAnimationFrame(animate);
+        });
+
     });
 
-    row.addEventListener("mouseleave", () => {
-        img.style.opacity = "0";
-        img.style.transform = "translateX(-50%) scale(0.4)";
-    });
 });
+
 
 
 
