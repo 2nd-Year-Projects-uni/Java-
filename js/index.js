@@ -35,4 +35,42 @@ document.addEventListener("DOMContentLoaded", function () {
     typeEffect();
 });
 
+//JS — SCROLL REVEAL
+document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll('.reveal-item');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let delay = entry.target.getAttribute("data-delay") || "0s";
+                entry.target.style.animationDelay = delay;
+                entry.target.classList.add("show");
+            }
+        });
+    }, { threshold: 0.2 });
+
+    items.forEach(el => observer.observe(el));
+});
+
+// MULTI–IMAGE MOUSE TRACKING FOR 3 WORDS
+document.querySelectorAll(".sig-row").forEach(row => {
+
+    const img = row.querySelector(".sig-moving-img");
+
+    row.addEventListener("mousemove", e => {
+        const rect = row.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+
+        img.style.left = `${x}px`;
+        img.style.opacity = "1";
+        img.style.transform = "translateX(-50%) scale(1)";
+    });
+
+    row.addEventListener("mouseleave", () => {
+        img.style.opacity = "0";
+        img.style.transform = "translateX(-50%) scale(0.4)";
+    });
+});
+
+
 
