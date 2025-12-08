@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =============================
-       HERO TYPING EFFECT
-    ============================== */
+       //HERO TYPING EFFECT
+	
     const words = ["Tailored", "Measured", "Crafted", "Styled"];
     const typedSpan = document.getElementById("typedWord");
 
@@ -34,11 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     typeEffect();
 
+       //REVEAL ON SCROLL
 
-
-    /* =============================
-       REVEAL ON SCROLL
-    ============================== */
     const items = document.querySelectorAll(".reveal-item");
 
     const observer = new IntersectionObserver(entries => {
@@ -53,11 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     items.forEach(el => observer.observe(el));
 
+       //INDIVIDUAL IMAGE TRACKING
 
-
-    /* ================================================
-       SIGNATURE WORD — INDIVIDUAL IMAGE TRACKING
-    ================================================= */
     document.querySelectorAll(".sig-row").forEach(row => {
 
         const img = row.querySelector(".sig-moving-img");

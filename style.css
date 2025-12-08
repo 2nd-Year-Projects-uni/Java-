@@ -6,7 +6,7 @@ body {
 }
 
 /* ================================
-   REVEAL SCROLL ANIMATION BASE
+   REVEAL SCROLL ANIMATION 
 ================================ */
 .reveal-item {
     opacity: 0;
@@ -186,9 +186,6 @@ body {
 	background: #3e3925; 
 }
 
-/* ================================
-   UNIFORM SECTION HEIGHT
-================================ */
 .why-us, .our-process, .signature-full {
     display: flex;
     flex-direction: column;
@@ -223,7 +220,7 @@ body {
     opacity: 0.95; 
 }
 
-/* Keep 4 images in one row , wrap on smaller screens */
+/* Keep 4 images in one row */
 .process-row {
     display: flex;
     justify-content: center;
@@ -672,6 +669,155 @@ body {
     .sig-row { height: 90px; margin: 18px 0; }
     .sig-moving-img { width: 100px; height: 100px; }
 }
+
+/* ================================
+   NEW COLLECTION SECTION
+================================ */
+.new-collection {
+    background: #fff;
+    padding: 120px 40px;
+    text-align: center;
+    color: #5A5335;
+}
+
+.new-collection h2 {
+    font-size: 44px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.collection-sub {
+    font-size: 18px;
+    opacity: 0.8;
+    margin-bottom: 50px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* 4 grid columns */
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.collection-card {
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Image container */
+.img-wrap {
+    position: relative;
+    width: 100%;
+    height: 360px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* main image */
+.img-main {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+/* hover image */
+.img-hover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0;
+    transition: 0.5s ease;
+}
+
+
+.collection-card:hover .img-main {
+    opacity: 0;
+    transform: scale(1.05);
+}
+
+.collection-card:hover .img-hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.collection-card h4 {
+    font-size: 20px;
+    margin-top: 14px;
+    font-weight: 600;
+}
+
+.collection-card .price {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+/* BUTTON */
+.collection-btn {
+    display: inline-block;
+    margin-top: 50px;
+    padding: 14px 36px;
+
+    color: #5A5335;
+    border: 2px solid #5A5335;
+    border-radius: 6px;
+    text-decoration: none !important;
+    font-size: 18px;
+
+    transition: 0.3s ease;
+}
+.collection-btn:hover {
+    background: #5A5335;
+    color: #fff;
+}
+
+/* ================================
+   PRICE ALIGNMENT (NEW + OLD PRICE)
+================================ */
+.price-row {
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+    gap: 12px;                 
+    margin-top: 6px;
+}
+
+/* New price  */
+.new-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #5A5335;            
+}
+
+/* Old price */
+.old-price {
+    font-size: 18px;
+    color: #aaa;              
+    text-decoration: line-through;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .collection-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .collection-grid {
+        grid-template-columns: 1fr;
+    }
+    .img-wrap { height: 300px; }
+}
+
+
+
 
 
 
