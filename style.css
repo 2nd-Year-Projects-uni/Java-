@@ -31,13 +31,13 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    color: #5A5335 !important;
+    color: #2E2B1F !important;
     font-size: 40px;
     font-weight: bold;
     letter-spacing: 1px;
 }
 .nav-link { 
-	color: #5A5335;
+	color: #2E2B1F;
 	font-size: 18px;
 	padding: 0 !important;
 	transition: 0.3s ease; 
@@ -46,18 +46,19 @@ body {
 	color: #b89255 !important;
 }
 .book-btn { 
-	border: 2px solid #5A5335 !important; 
-	padding: 8px 16px !important; 
-	border-radius: 6px; 
-	background: transparent !important;
-	color: #5A5335 !important; 
-	transition: 0.3s ease;
+    border: 2px solid #2E2B1F !important; 
+    padding: 8px 16px !important; 
+    border-radius: 6px; 
+    background: #2E2B1F !important;  /* <-- set your desired color here */
+    color: white !important;          /* text color */
+    transition: 0.3s ease;
 }
 
 .book-btn:hover { 
-	background: #5A5335 !important; 
-	color: white !important; 
+    background: transparent !important; /* maybe reverse color on hover */
+    color: #2E2B1F !important;          /* text color on hover */
 }
+
 
 /* ================================
    HERO SECTION
@@ -113,7 +114,7 @@ body {
 	transition: 0.3s ease;
 }
 .btn-hero.primary {
-	background: #5A5335;
+	background: #2E2B1F;
 	color: white;
 }
 .btn-hero.primary:hover {
@@ -125,7 +126,7 @@ body {
 }
 .btn-hero.secondary:hover {
 	background: white;
-	color: #5A5335;
+	color: #2E2B1F;
 }
 .hero-typing {
 	font-size: 48px;
@@ -138,7 +139,7 @@ body {
 .why-us { 
     background: #ffffff; 
     text-align: center; 
-    color: #5A5335; 
+    color: #2E2B1F; 
     display: block;
     flex-direction: column;
     justify-content: center;
@@ -161,7 +162,7 @@ body {
 
 .about-btn { 
     padding: 14px 32px; 
-    background: #5A5335; 
+    background: #2E2B1F; 
     color: white !important; 
     border-radius: 6px; 
     font-size: 20px; 
@@ -186,7 +187,7 @@ body {
    OUR PROCESS
 ================================ */
 .our-process { 
-    background: #5A5335; 
+    background: #2E2B1F; 
     color: white; 
     text-align: center; 
     font-family: 'Poppins', sans-serif; 
@@ -245,66 +246,6 @@ body {
     line-height: 1.6; 
     opacity: 0.9; 
 }
-body {
-    margin: 0;
-    padding: 0;
-    background: #111;
-    font-family: "Times New Roman", serif;
-}
-
-
-/* ================================
-   NAVBAR
-================================ */
-.navbar {
-    width: 100%;
-    padding: 20px 50px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 50;
-    background: white !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.nav-left, .nav-right {
-    display: flex;
-    gap: 32px;
-    align-items: center;
-}
-.navbar-brand {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #5A5335 !important;
-    font-size: 40px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-.nav-link { 
-	color: #5A5335;
-	font-size: 18px;
-	padding: 0 !important;
-	transition: 0.3s ease; 
-}
-.nav-link:hover { 
-	color: #b89255 !important;
-}
-.book-btn { 
-	border: 2px solid #5A5335 !important; 
-	padding: 8px 16px !important; 
-	border-radius: 6px; 
-	background: transparent !important;
-	color: #5A5335 !important; 
-	transition: 0.3s ease;
-}
-.book-btn:hover { 
-	background: #5A5335 !important; 
-	color: white !important; 
-}
 
 /* ================================
    HERO SECTION
@@ -360,7 +301,7 @@ body {
 	transition: 0.3s ease;
 }
 .btn-hero.primary {
-	background: #5A5335;
+	background: #2E2B1F;
 	color: white;
 }
 .btn-hero.primary:hover {
@@ -385,7 +326,7 @@ body {
 .why-us { 
     background: #ffffff; 
     text-align: center; 
-    color: #5A5335; 
+    color: #2E2B1F; 
     display: block;
     flex-direction: column;
     justify-content: center;
@@ -408,7 +349,7 @@ body {
 
 .about-btn { 
     padding: 14px 32px; 
-    background: #5A5335; 
+    background: #2E2B1F; 
     color: white !important; 
     border-radius: 6px; 
     font-size: 20px; 
@@ -417,7 +358,7 @@ body {
     transition: 0.3s ease; 
 }
 .about-btn:hover { 
-	background: #3e3925; 
+	background:#5A5335; 
 }
 
 /* ================================
@@ -436,7 +377,7 @@ body {
    OUR PROCESS
 ================================ */
 .our-process { 
-    background: #5A5335; 
+    background:#2E2B1F; 
     color: white; 
     text-align: center; 
     font-family: 'Poppins', sans-serif; 
@@ -652,13 +593,17 @@ body {
     background: #fff;
     padding: 120px 40px;
     text-align: center;
-    color: #5A5335;
+    color: #2E2B1F;
 }
 
 .new-collection h2 {
     font-size: 44px;
     font-weight: 700;
     margin-bottom: 10px;
+}
+
+.new-collection p{
+	color:#5A5335;
 }
 
 .collection-sub {
@@ -739,8 +684,8 @@ body {
     margin-top: 50px;
     padding: 14px 36px;
 
-    color: #5A5335;
-    border: 2px solid #5A5335;
+    color: #2E2B1F;
+    border: 2px solid #2E2B1F;
     border-radius: 6px;
     text-decoration: none !important;
     font-size: 18px;
@@ -748,7 +693,7 @@ body {
     transition: 0.3s ease;
 }
 .collection-btn:hover {
-    background: #5A5335;
+    background: #2E2B1F;
     color: #fff;
 }
 
@@ -975,7 +920,7 @@ body {
 
 .services-prev:hover,
 .services-next:hover {
-  background: #5A5335;
+  background:#2E2B1F;
   color: #ffffff;
 }
 
@@ -1017,7 +962,7 @@ body {
 /* Hover */
 .services-section .view-all-btn:hover {
   background: #ffffff !important;
-  color: #5A5335 !important;
+  color: #2E2B1F!important;
 }
 
 
