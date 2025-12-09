@@ -805,6 +805,253 @@ body {
     transform: translateY(0);
 }
 
+/* ================================
+   SERVICES OVERVIEW (Swiper)
+================================ */
+.services-section {
+  padding: 80px 20px;
+  background: url("images/service cover.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+}
+
+/* Dark overlay */
+.services-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.40);
+  backdrop-filter: blur(1px);
+  z-index: 1;
+}
+
+/* Keep content above overlay */
+.services-section .container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ================================
+   SECTION HEAD
+================================ */
+.services-head {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.services-head h2 {
+  font-family: "Lora", serif;
+  font-weight: 500;
+  font-size: 38px;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.services-head p {
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: #f0f0f0;
+  line-height: 1.75;
+  max-width: 650px;
+  margin: 0 auto 26px;
+  opacity: 0.95;
+}
+
+/* ================================
+   SWIPER
+================================ */
+.services-swiper {
+  position: relative;
+  padding: 20px 0 40px;
+}
+
+.service-slide {
+  display: flex;
+  justify-content: center;
+}
+
+/* ================================
+   CARD
+================================ */
+.service-card {
+  width: 100%;
+  max-width: 360px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(3px);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: 0.35s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+/* ================================
+   INNER IMAGE CAROUSEL
+================================ */
+.inner-swiper {
+  width: 100%;
+  height: 220px;
+  background: #ddd;
+}
+
+.inner-swiper .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ================================
+   CARD TEXT
+================================ */
+.service-body {
+  padding: 20px 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.service-body h3 {
+  font-family: "Lora", serif;
+  font-weight: 500;
+  font-size: 21px;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
+.service-body p {
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: #e6e6e6;
+  line-height: 1.7;
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* ================================
+   CTA LINK
+================================ */
+.service-cta {
+  margin-top: auto;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  color: #ffffff;
+  text-decoration: none;
+  opacity: 0.9;
+  transition: 0.3s ease;
+}
+
+.service-cta:hover {
+  opacity: 1;
+}
+
+/* ================================
+   SWIPER ARROWS & PAGINATION
+================================ */
+.services-prev,
+.services-next {
+  color: #ffffff !important;
+  border: 2px solid #ffffff;
+  background: rgba(90, 83, 53, 0.65);
+  padding: 18px;
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+
+.services-prev:hover,
+.services-next:hover {
+  background: #5A5335;
+  color: #ffffff;
+}
+
+.services-pagination {
+  margin-top: 16px;
+}
+
+.services-pagination .swiper-pagination-bullet {
+  background: #ffffff !important;
+  opacity: 0.5 !important;
+}
+
+.services-pagination .swiper-pagination-bullet-active {
+  background: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* ================================
+   VIEW ALL SERVICES BUTTON (EXACT MATCH TO .sig-btn)
+================================ */
+.services-section .view-all-btn {
+  display: inline-block;
+  padding: 10px 28px;        /* smaller */
+  border: 1px solid #ffffff !important;
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+
+  color: #ffffff !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;          /* slightly smaller text */
+  letter-spacing: 0.8px;
+  text-decoration: none !important;
+
+  backdrop-filter: blur(2px);
+  transition: 0.3s ease;
+}
+
+/* Hover */
+.services-section .view-all-btn:hover {
+  background: #ffffff !important;
+  color: #5A5335 !important;
+}
+
+
+.services-footer {
+    width: 100%;
+    text-align: center !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+    position: relative;
+    z-index: 20;
+}
+
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 599px) {
+  .inner-swiper { height: 180px; }
+}
+
+@media (min-width: 600px) and (max-width: 991px) {
+  .inner-swiper { height: 200px; }
+}
+
+@media (min-width: 992px) {
+  .inner-swiper { height: 220px; }
+}
+
+
+
+
 
 
 

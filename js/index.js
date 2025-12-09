@@ -101,6 +101,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+// initialize after DOMContentLoaded or put at end of page
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Outer Swiper (services)
+  const servicesSwiper = new Swiper('.services-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 22,
+    loop: true,
+    navigation: {
+      nextEl: '.services-next',
+      prevEl: '.services-prev',
+    },
+    pagination: {
+      el: '.services-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      700: { slidesPerView: 2 },
+      1100: { slidesPerView: 3 }
+    },
+    grabCursor: true,
+    autoplay: {
+      delay: 4200,
+      disableOnInteraction: false
+    }
+  });
+
+  // Initialize all inner swipers (one per service card)
+  const innerSwipers = [];
+  document.querySelectorAll('.inner-swiper').forEach((el, idx) => {
+    const s = new Swiper(el, {
+      effect: 'fade',
+      fadeEffect: { crossFade: true },
+      loop: true,
+      allowTouchMove: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false
+      },
+      slidesPerView: 1,
+    });
+    innerSwipers.push(s);
+
+    // Pause autoplay when user hovers the card (optional)
+    const card = el.closest('.service-card');
+    if (card) {
+      card.addEventListener('mouseenter', () => s.autoplay.stop());
+      card.addEventListener('mouseleave', () => s.autoplay.start());
+    }
+  });
+
+});
+
+
 
 
 
