@@ -49,16 +49,15 @@ body {
     border: 2px solid #2E2B1F !important; 
     padding: 8px 16px !important; 
     border-radius: 6px; 
-    background: #2E2B1F !important;  /* <-- set your desired color here */
-    color: white !important;          /* text color */
+    background: #2E2B1F !important;  
+    color: white !important;         
     transition: 0.3s ease;
 }
 
 .book-btn:hover { 
-    background: transparent !important; /* maybe reverse color on hover */
-    color: #2E2B1F !important;          /* text color on hover */
+    background: transparent !important; 
+    color: #2E2B1F !important;          
 }
-
 
 /* ================================
    HERO SECTION
@@ -751,7 +750,7 @@ body {
 }
 
 /* ================================
-   SERVICES OVERVIEW (Swiper)
+   SERVICES OVERVIEW 
 ================================ */
 .services-section {
   padding: 80px 20px;
@@ -774,7 +773,6 @@ body {
   z-index: 1;
 }
 
-/* Keep content above overlay */
 .services-section .container {
   position: relative;
   z-index: 2;
@@ -939,11 +937,11 @@ body {
 }
 
 /* ================================
-   VIEW ALL SERVICES BUTTON (EXACT MATCH TO .sig-btn)
+   VIEW ALL SERVICES BUTTON 
 ================================ */
 .services-section .view-all-btn {
   display: inline-block;
-  padding: 10px 28px;        /* smaller */
+  padding: 10px 28px;      
   border: 1px solid #ffffff !important;
   background: rgba(255,255,255,0.15);
   border-radius: 6px;
@@ -951,7 +949,7 @@ body {
   color: #ffffff !important;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 14px;          /* slightly smaller text */
+  font-size: 14px;          
   letter-spacing: 0.8px;
   text-decoration: none !important;
 
@@ -965,7 +963,6 @@ body {
   color: #2E2B1F!important;
 }
 
-
 .services-footer {
     width: 100%;
     text-align: center !important;
@@ -977,7 +974,123 @@ body {
     z-index: 20;
 }
 
+/* ================================
+   TESTIMONIALS SECTION
+================================ */
 
+.testimonials-section {
+    width: 100%;
+    padding: 80px 0;
+    background: #ffffff;
+}
+
+.testimonials-head {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.testimonials-head h2 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #222;
+}
+
+.testimonials-head p {
+    font-size: 16px;
+    color: #555;
+    max-width: 600px;
+    margin: 10px auto 0;
+}
+
+/* Testimonial Slider */
+.testimonial-swiper {
+    width: 100%;
+    padding: 20px 0 40px;
+}
+
+.testimonial-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-7px);
+    box-shadow: none;
+	
+}
+
+/* Client Image */
+.client-img {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid white;
+}
+
+.client-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Client Name */
+.client-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 10px;
+    color: #222;
+}
+
+/* Client Role */
+.client-role {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 12px;
+}
+
+/* Review Text */
+.client-review {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 15px;
+    padding: 0 8px;
+}
+
+/* Rating Stars */
+.rating {
+    font-size: 18px;
+    color: #d4a017;
+}
+
+/* Swiper Navigation Buttons */
+.testimonial-prev,
+.testimonial-next {
+    color: #333;
+    transition: 0.3s ease;
+}
+
+.testimonial-prev:hover,
+.testimonial-next:hover {
+    color: #000;
+}
+
+/* Pagination Dots */
+.testimonial-pagination .swiper-pagination-bullet {
+    background: #aaa;
+    opacity: 0.7;
+}
+
+.testimonial-pagination .swiper-pagination-bullet-active {
+    background: #333;
+    opacity: 1;
+}
 
 /* ================================
    RESPONSIVE
@@ -993,6 +1106,29 @@ body {
 @media (min-width: 992px) {
   .inner-swiper { height: 220px; }
 }
+
+@media (max-width: 480px) {
+    .testimonials-head h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonial-card {
+        padding: 25px 20px;
+    }
+
+    .client-img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .client-name {
+        font-size: 18px;
+    }
+}
+
+
 
 
 

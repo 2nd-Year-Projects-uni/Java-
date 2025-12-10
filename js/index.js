@@ -154,6 +154,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+var testimonialSwiper = new Swiper(".testimonial-swiper", {
+  loop: true,
+  autoplay: {
+    delay: 3500,
+    disableOnInteraction: false,
+  },
+  speed: 700,
+  spaceBetween: 30,
+  grabCursor: true,
+
+  slidesPerView: 1,   // Always ONE card
+
+  pagination: {
+    el: ".testimonial-pagination",
+    clickable: true,
+  }
+});
+
+
 
 
 
