@@ -908,18 +908,18 @@ body {
 ================================ */
 .services-prev,
 .services-next {
-  color: #ffffff !important;
-  border: 2px solid #ffffff;
-  background: rgba(90, 83, 53, 0.65);
-  padding: 18px;
-  border-radius: 50%;
-  transition: 0.3s ease;
+  background: none !important;  
+  border: none !important;       
+  padding: 0 !important;         
+  color: #ffffff !important;     
+  font-size: 32px !important;    
+  transform: none !important;    
 }
 
 .services-prev:hover,
 .services-next:hover {
-  background:#2E2B1F;
-  color: #ffffff;
+  background: none !important;  
+  color: #ffffff !important;     
 }
 
 .services-pagination {
