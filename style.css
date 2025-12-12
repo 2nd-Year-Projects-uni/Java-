@@ -1019,11 +1019,9 @@ body {
 
 .testimonial-card:hover {
     transform: translateY(-7px);
-    box-shadow: none;
-	
+    box-shadow: none;	
 }
 
-/* Client Image */
 .client-img {
     width: 110px;
     height: 110px;
@@ -1039,7 +1037,6 @@ body {
     object-fit: cover;
 }
 
-/* Client Name */
 .client-name {
     font-size: 20px;
     font-weight: 600;
@@ -1047,14 +1044,12 @@ body {
     color: #222;
 }
 
-/* Client Role */
 .client-role {
     font-size: 14px;
     color: #777;
     margin-bottom: 12px;
 }
 
-/* Review Text */
 .client-review {
     font-size: 15px;
     line-height: 1.6;
@@ -1134,7 +1129,7 @@ body {
 #footer {
   background:#2E2B1F;
   padding: 60px 0 30px;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.75);
   font-family: "Times New Roman", serif;
 }
 
@@ -1172,7 +1167,7 @@ body {
 }
 
 .footer-col ul li a {
-  color: #ffffff;
+  color:rgba(255, 255, 255, 0.75);
   text-decoration: none;
   transition: 0.3s ease;
 }
@@ -1195,15 +1190,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid #ffffff;
+  border: 2px solid  rgba(255, 255, 255, 0.75);
   border-radius: 50%;
   font-size: 18px;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.75);
   transition: 0.3s;
 }
 
-.footer-social a img:hover {
+.footer-social a:hover {
     transform: translateY(-3px);
+	text-decoration: none;
 }
 
 .footer-social a img {
