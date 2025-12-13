@@ -1,18 +1,17 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const reveals = document.querySelectorAll(".reveal");
+const reveals = document.querySelectorAll(".reveal");
 
-    function revealOnScroll() {
-        const windowHeight = window.innerHeight;
+function revealOnScroll() {
+  const windowHeight = window.innerHeight;
 
-        reveals.forEach(function (el) {
-            const elementTop = el.getBoundingClientRect().top;
+  reveals.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+    const elementVisible = 100;
 
-            if (elementTop < windowHeight - 100) {
-                el.classList.add("active");
-            }
-        });
+    if (elementTop < windowHeight - elementVisible) {
+      el.classList.add("active");
     }
+  });
+}
 
-    window.addEventListener("scroll", revealOnScroll);
-    revealOnScroll(); // Trigger once on page load
-});
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);

@@ -60,6 +60,46 @@ body {
 }
 
 /* ================================
+   NAVBAR RESPONSIVE FIX
+================================ */
+@media (max-width: 991px) {
+
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  /* Reset brand position */
+  .navbar-brand {
+    position: static;
+    transform: none;
+    font-size: 28px;
+  }
+
+  /* Stack menu items */
+  .navbar-collapse {
+    margin-top: 15px;
+  }
+
+  .nav-left,
+  .nav-right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .nav-link {
+    font-size: 16px;
+    padding: 6px 0 !important;
+  }
+
+  .book-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ================================
    Hero --> About Us
 ================================ */
 .about-hero {

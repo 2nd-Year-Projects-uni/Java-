@@ -60,6 +60,46 @@ body {
 }
 
 /* ================================
+   NAVBAR RESPONSIVE FIX
+================================ */
+@media (max-width: 991px) {
+
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  /* Reset brand position */
+  .navbar-brand {
+    position: static;
+    transform: none;
+    font-size: 28px;
+  }
+
+  /* Stack menu items */
+  .navbar-collapse {
+    margin-top: 15px;
+  }
+
+  .nav-left,
+  .nav-right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .nav-link {
+    font-size: 16px;
+    padding: 6px 0 !important;
+  }
+
+  .book-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ================================
    HERO SECTION
 ================================ */
 .cover-container { 
@@ -586,11 +626,11 @@ body {
 }
 
 /* ================================
-   NEW COLLECTION SECTION
+   NEW COLLECTION SECTION 
 ================================ */
 .new-collection {
-    background: #fff;
-    padding: 120px 40px;
+    background: #ffffff;
+    padding: 100px 20px;
     text-align: center;
     color: #2E2B1F;
 }
@@ -601,61 +641,68 @@ body {
     margin-bottom: 10px;
 }
 
-.new-collection p{
-	color:#5A5335;
-}
-
 .collection-sub {
     font-size: 18px;
-    opacity: 0.8;
+    opacity: 0.85;
     margin-bottom: 50px;
+    color: #5A5335;
     font-family: 'Poppins', sans-serif;
 }
 
-/* 4 grid columns */
+/* ================================
+   GRID LAYOUT
+================================ */
 .collection-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
+    gap: 32px;
     max-width: 1300px;
     margin: auto;
 }
 
+/* ================================
+   COLLECTION CARD
+================================ */
 .collection-card {
     text-align: center;
     cursor: pointer;
 }
 
-/* Image container */
+.collection-card h4 {
+    font-size: 20px;
+    margin-top: 14px;
+    font-weight: 600;
+}
+
+/* ================================
+   IMAGE WRAPPER (RESPONSIVE)
+================================ */
 .img-wrap {
     position: relative;
     width: 100%;
-    height: 360px;
+    aspect-ratio: 3 / 4;   
     border-radius: 12px;
     overflow: hidden;
+    background: #f5f5f5;
 }
 
-/* main image */
-.img-main {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: 0.5s ease;
-}
-
-/* hover image */
+/* Main image */
+.img-main,
 .img-hover {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-
-    opacity: 0;
     transition: 0.5s ease;
 }
 
+/* Hover image */
+.img-hover {
+    opacity: 0;
+}
 
+/* Hover effect (desktop) */
 .collection-card:hover .img-main {
     opacity: 0;
     transform: scale(1.05);
@@ -666,73 +713,87 @@ body {
     transform: scale(1.05);
 }
 
-.collection-card h4 {
+/* ================================
+   PRICE ROW
+================================ */
+.price-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.new-price {
     font-size: 20px;
-    margin-top: 14px;
-    font-weight: 600;
+    font-weight: 700;
+    color: #5A5335;
 }
 
-.collection-card .price {
+.old-price {
     font-size: 18px;
-    opacity: 0.8;
+    color: #aaa;
+    text-decoration: line-through;
 }
 
-/* BUTTON */
+/* ================================
+   VIEW MORE BUTTON
+================================ */
 .collection-btn {
     display: inline-block;
     margin-top: 50px;
     padding: 14px 36px;
-
+    font-size: 18px;
+    font-weight: 600;
     color: #2E2B1F;
     border: 2px solid #2E2B1F;
     border-radius: 6px;
     text-decoration: none !important;
-    font-size: 18px;
-
     transition: 0.3s ease;
 }
+
 .collection-btn:hover {
     background: #2E2B1F;
-    color: #fff;
+    color: #ffffff;
 }
 
 /* ================================
-   PRICE ALIGNMENT (NEW + OLD PRICE)
+   RESPONSIVE BREAKPOINTS
 ================================ */
-.price-row {
-    display: flex;
-    justify-content: center;  
-    align-items: center;
-    gap: 12px;                 
-    margin-top: 6px;
+
+/* Large tablets / small laptops */
+@media (max-width: 1200px) {
+    .collection-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
-/* New price  */
-.new-price {
-    font-size: 20px;
-    font-weight: 700;
-    color: #5A5335;            
-}
-
-/* Old price */
-.old-price {
-    font-size: 18px;
-    color: #aaa;              
-    text-decoration: line-through;
-}
-
-/* RESPONSIVE */
+/* Tablets */
 @media (max-width: 992px) {
     .collection-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* Mobile */
 @media (max-width: 576px) {
     .collection-grid {
         grid-template-columns: 1fr;
     }
-    .img-wrap { height: 300px; }
+
+    .new-collection h2 {
+        font-size: 32px;
+    }
+
+    .collection-sub {
+        font-size: 16px;
+        margin-bottom: 35px;
+    }
+
+    .collection-btn {
+        font-size: 16px;
+        padding: 12px 28px;
+    }
 }
 
 /* ================================
