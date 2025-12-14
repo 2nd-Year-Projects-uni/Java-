@@ -37,7 +37,7 @@ body {
     letter-spacing: 1px;
 }
 .nav-link { 
-	color: #2E2B1F;
+	color: #2E2B1F !important;
 	font-size: 18px;
 	padding: 0 !important;
 	transition: 0.3s ease; 
@@ -422,22 +422,22 @@ body {
 }
 
 /* ================================
-   Book your measurement
+   Add to cart
 ================================ */
-.book-cta-light {
+.cart-cta-light {
   background: #F7F3E8; 
   padding: 80px 20px;
   text-align: center;
 }
 
-.book-cta-light h2 {
+.cart-cta-light h2 {
   font-size: 36px;
   color: #2E2B1F; 
   margin-bottom: 15px;
   font-weight: 600;
 }
 
-.book-cta-light p {
+.cart-cta-light p {
   font-size: 18px;
   color: #444; 
   margin-bottom: 25px;

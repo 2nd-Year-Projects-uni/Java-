@@ -37,7 +37,7 @@ body {
     letter-spacing: 1px;
 }
 .nav-link { 
-	color: #2E2B1F;
+	color: #2E2B1F !important;
 	font-size: 18px;
 	padding: 0 !important;
 	transition: 0.3s ease; 
