@@ -4,14 +4,211 @@
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Untitled Document</title>
+    <title>Our Services</title>
     <!-- Bootstrap -->
 	<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-	
+	<!-- Custom CSS -->
+    <link rel="stylesheet" href="services.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">	
   </head>
   <body>
-  	<!-- body code goes here -->
+<!-- ================================
+     NAVBAR
+================================ -->
+<nav class="navbar navbar-light navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Tailor.</a>
 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navMenu">
+            <div class="nav-left navbar-nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="aboutus.html">About Us</a>
+                <a class="nav-link" href="services.html">Services</a>
+                <a class="nav-link" href="trackorder.html">Contact Us</a>
+            </div>
+
+            <div class="nav-right navbar-nav">
+                <a class="nav-link" href="contactus.html">Track Order</a>
+                <a class="nav-link" href="measurementguide.html"> Shop</a>
+                <a class="nav-link book-btn" href="cart.html">Cart</a>
+                <a class="nav-link" href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+</nav>
+	  
+<!-- SERVICES HERO -->
+<section class="services-hero reveal" aria-label="Services hero">
+  <img src="images/servicescover.jpg" alt="Services Cover Image" class="services-hero-img">
+
+  <div class="services-hero-overlay"></div>
+
+  <div class="services-hero-content">
+    <h1 class="services-hero__title">Our Services</h1>
+    <p class="services-hero__subtitle">
+      Tailoring services designed with precision, elegance and attention to every detail.
+    </p>
+  </div>
+</section>
+
+<!-- ================================
+   SERVICES OVERVIEW
+================================ -->
+<section class="services-section">
+
+  <!-- Service 1 -->
+  <div class="service-block dark">
+    <div class="container">
+      <div class="service-row reveal">
+        <div class="service-image">
+          <img src="images/service1.jpg" alt="Men's Tailoring">
+        </div>
+        <div class="service-content">
+          <h3>
+			  <i class="service-icon fas fa-user-tie"></i> Men’s Tailoring</h3>
+          <p>
+            Custom-made suits, shirts, and trousers crafted to reflect confidence, comfort and timeless style.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service 2  -->
+  <div class="service-block light">
+    <div class="container">
+      <div class="service-row reverse reveal">
+        <div class="service-image">
+          <img src="images/service2.jpg" alt="Women's Tailoring">
+        </div>
+        <div class="service-content">
+          <h3>
+			   <i class="service-icon fas fa-female"></i> Women’s Tailoring</h3>
+          <p>
+            Elegant garments designed to enhance your individuality through refined tailoring and precision.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service 3  -->
+  <div class="service-block dark">
+    <div class="container">
+      <div class="service-row reveal">
+        <div class="service-image">
+          <img src="images/service3.jpg" alt="Alterations">
+        </div>
+        <div class="service-content">
+          <h3>
+			  <i class="service-icon fas fa-cut"></i> Alterations</h3>
+          <p>
+            Professional alterations ensuring balance, comfort and a flawless finish for every garment.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+	  
+<!-- Service 4 -->
+<div class="service-block light">
+  <div class="container">
+    <div class="service-row reverse reveal">
+      <div class="service-image">
+        <img src="images/service4.jpeg" alt="Wedding Tailoring">
+      </div>
+      <div class="service-content">
+        <h3>
+			<i class="service-icon fas fa-ring"></i> Wedding Tailoring</h3>
+        <p>
+          Bespoke wedding attire crafted with precision and elegance, ensuring a perfect fit
+          for your most important day.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+	  
+<!-- Contact CTA -->
+<section class="cart-cta-light">
+  <div class="cta-container reveal">
+    <h2>Let’s Create Your Perfect Fit</h2>
+    <p>
+      Have a question or ready to begin your tailoring journey?
+      Get in touch with us and we’ll take care of the rest.
+    </p>
+    <a href="contactus.html" class="cta-btn-light">
+      Contact Us
+    </a>
+  </div>
+</section>
+	  
+<!-- ================================
+            FOOTER
+================================ -->
+<footer id="footer">
+  <div class="footer-container reveal">
+
+    <!-- Column 1 -->
+    <div class="footer-col footer-brand reveal">
+      <h2 class="footer-title">TAILOR</h2>
+      <p class="footer-desc">
+        Our expert tailors craft exquisite garments that fit you perfectly,
+        reflecting your personal style and elegance.
+      </p>
+
+      <div class="footer-social reveal">
+        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="footer-col reveal">
+      <h3>Extra links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="shop.html">Shop</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="footer-col reveal">
+      <h3>Useful links</h3>
+      <ul>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="trackorder.html">Track Order</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contactus.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4 -->
+    <div class="footer-col reveal">
+      <h3>Our contacts</h3>
+      <p>45 Galle Road, Colombo 03, Western Province, Sri Lanka</p>
+      <p class="email"> 
+		  <a href="info@tailorstudio.lk" style="color: rgba(255, 255, 255, 0.75);">info@tailorstudio.lk</p></a>                                      
+      <p>+94 77 456 7890</p>
+
+      <p class="working-hours">
+        OUR WORKING HOURS <br>
+        MON – SAT: 8 AM – 6 PM
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© Tailor. All Rights Reserved.</p>
+  </div>
+</footer>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 	<script src="js/jquery-3.4.1.min.js"></script>
@@ -19,5 +216,6 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/popper.min.js"></script> 
 	<script src="js/bootstrap-4.4.1.js"></script>
+	<script src="js/aboutus.js"></script>
   </body>
 </html>
