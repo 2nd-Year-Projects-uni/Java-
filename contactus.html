@@ -4,20 +4,329 @@
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Untitled Document</title>
+    <title>Contact Us</title>
     <!-- Bootstrap -->
 	<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-	
+	<!-- Custom CSS -->
+    <link rel="stylesheet" href="contactus.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">	
   </head>
   <body>
-  	<!-- body code goes here -->
+<!-- ================================
+     NAVBAR
+================================ -->
+<nav class="navbar navbar-light navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Tailor.</a>
 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse justify-content-between" id="navMenu">
+            <div class="nav-left navbar-nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="aboutus.html">About Us</a>
+                <a class="nav-link" href="services.html">Services</a>
+                <a class="nav-link" href="contactus.html">Contact Us</a>
+            </div>
+
+            <div class="nav-right navbar-nav">
+                <a class="nav-link" href="contactus.html">Track Order</a>
+                <a class="nav-link" href="shop.html"> Shop</a>
+                <a class="nav-link book-btn" href="cart.html">Cart</a>
+                <a class="nav-link" href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTACT HERO -->
+<section class="contact-hero reveal" aria-label="Contact us hero">
+  <img src="images/contactcover.jpg" alt="Contact Us Cover Image" class="contact-hero-img">
+
+  <div class="contact-hero-overlay"></div>
+
+  <div class="contact-hero-content">
+    <h1 class="contact-hero__title">Contact Us</h1>
+    <p class="contact-hero__subtitle">
+      Let’s talk about your perfect fit. Reach out and we’ll take care of the rest.
+    </p>
+  </div>
+</section>
+
+<!-- ================================
+   CONTACT CONTENT
+================================ -->
+<section class="contact-section">
+  <div class="contact-container">
+
+    <!-- LEFT CONTENT -->
+<div class="contact-info reveal">
+
+  <span class="contact-eyebrow">GET IN TOUCH</span>
+
+  <h2 class="contact-title">
+    We would love to<br>hear from you!
+  </h2>
+
+  <p class="contact-desc">
+    Whether you have a question, need a consultation, or want to schedule a fitting,
+    feel free to reach out.
+  </p>
+
+  <h4 class="contact-subtitle">Contact Information</h4>
+
+  <div class="info-item">
+    <i class="fa-solid fa-location-dot"></i>
+    <p>
+      45 Galle Road,<br>
+      Colombo 03,<br>
+      Western Province, Sri Lanka
+    </p>
+  </div>
+
+  <div class="info-item">
+    <i class="fa-solid fa-envelope"></i>
+    <p>info@tailorstudio.lk</p>
+  </div>
+
+  <div class="info-item">
+    <i class="fa-solid fa-phone"></i>
+    <p>+94 77 456 7890</p>
+  </div>
+
+</div>
+
+<!-- CONTACT FORM -->
+<div class="contact-form reveal">
+  <h3 class="form-title">Send us a message</h3>
+
+  <form>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="name">Name*</label>
+        <input type="text" id="name" placeholder="Name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address*</label>
+        <input type="email" id="email" placeholder="Email Address" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="phone">Phone Number*</label>
+        <input type="tel" id="phone" placeholder="Phone Number">
+      </div>
+
+      <div class="form-group">
+        <label for="service">Services*</label>
+        <select id="service" required>
+          <option value="">Please Select</option>
+          <option>Men’s Tailoring</option>
+          <option>Women’s Tailoring</option>
+          <option>Wedding Services</option>
+          <option>Alterations</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group full">
+      <label for="message">Message*</label>
+      <textarea id="message" placeholder="Your message" rows="5"></textarea>
+    </div>
+
+    <button type="submit" class="contact-submit">
+      Submit
+    </button>
+
+  </form>
+</div>
+  </div>
+</section>
+
+<section class="contact-services">
+  <div class="services-wrap reveal">
+
+    <!-- Section header -->
+    <div class="services-header">
+      <h3 class="services-title">Services included in every plan</h3>
+      <p class="services-subtitle">
+        Everything you need for a premium tailoring experience.
+      </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="services-row">
+
+      <div class="service-card">
+        <i class="fa-solid fa-scissors"></i>
+        <h4>Expert Craftsmanship</h4>
+        <p>Our tailors have years of experience in creating custom garments.</p>
+      </div>
+
+      <div class="service-card">
+        <i class="fa-solid fa-shirt"></i>
+        <h4>High-Quality Fabrics</h4>
+        <p>We use only the best materials for all our creations.</p>
+      </div>
+
+      <div class="service-card">
+        <i class="fa-solid fa-ruler-combined"></i>
+        <h4>Perfectly Tailored Fit</h4>
+        <p>Each piece is meticulously crafted to ensure a perfect fit.</p>
+      </div>
+
+      <div class="service-card">
+        <i class="fa-solid fa-user-check"></i>
+        <h4>Personalized Service</h4>
+        <p>We work closely with you to bring your vision to life.</p>
+      </div>
+    </div>
+  </div>
+	<div class="services-cta">
+  <a href="services.html" class="services-btn">Our Services</a>
+</div>
+</section>
+	  
+<!-- ================================
+   TESTIMONIALS SECTION
+================================ -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+<section id="testimonials" class="testimonials-section">
+  <div class="container">
+
+    <div class="testimonials-head">
+      <h2 class="reveal-item">What Our Clients Say</h2>
+      <p class="reveal-item">Real experiences from customers who trusted our tailoring.</p>
+    </div>
+
+    <!-- Swiper -->
+    <div class="swiper testimonial-swiper">
+      <div class="swiper-wrapper">
+
+        <!-- Testimonial 1 -->
+        <div class="swiper-slide testimonial-card reveal">
+          <div class="client-img">
+            <img src="images/client1.jpg" alt="Client 1">
+          </div>
+          <h3 class="client-name">Alex Morgan</h3>
+          <p class="client-role">Regular Customer</p>
+          <p class="client-review">
+            “The fitting was absolutely perfect! The measurements and stitching were done with great precision.”
+          </p>
+          <div class="rating">★★★★★</div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="swiper-slide testimonial-card reveal">
+          <div class="client-img">
+            <img src="images/client2.jpg" alt="Client 2">
+          </div>
+          <h3 class="client-name">Maya Thompson</h3>
+          <p class="client-role">Bride</p>
+          <p class="client-review">
+            “They understood exactly what I wanted for my wedding dress. Amazing detailing and finishing!”
+          </p>
+          <div class="rating">★★★★★</div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="swiper-slide testimonial-card reveal">
+          <div class="client-img">
+            <img src="images/client3.jpg" alt="Client 3">
+          </div>
+          <h3 class="client-name">Noah Parker</h3>
+          <p class="client-role">Business Professional</p>
+          <p class="client-review">
+            “My suit fits better than any branded one. Tailored to perfection. Highly recommended!”
+          </p>
+          <div class="rating">★★★★★</div>
+        </div>
+
+      </div>
+
+      <!-- Pagination -->
+      <div class="swiper-pagination testimonial-pagination"></div>
+    </div>
+
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+	
+<!-- ================================
+            FOOTER
+================================ -->
+<footer id="footer">
+  <div class="footer-container reveal">
+
+    <!-- Column 1 -->
+    <div class="footer-col footer-brand reveal">
+      <h2 class="footer-title">TAILOR</h2>
+      <p class="footer-desc">
+        Our expert tailors craft exquisite garments that fit you perfectly,
+        reflecting your personal style and elegance.
+      </p>
+
+      <div class="footer-social reveal">
+        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="footer-col reveal">
+      <h3>Extra links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="shop.html">Shop</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="footer-col reveal">
+      <h3>Useful links</h3>
+      <ul>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="trackorder.html">Track Order</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contactus.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4 -->
+    <div class="footer-col reveal">
+      <h3>Our contacts</h3>
+      <p>45 Galle Road, Colombo 03, Western Province, Sri Lanka</p>
+      <p class="email"> 
+		  <a href="info@tailorstudio.lk" style="color: rgba(255, 255, 255, 0.75);">info@tailorstudio.lk</p></a>                                      
+      <p>+94 77 456 7890</p>
+
+      <p class="working-hours">
+        OUR WORKING HOURS <br>
+        MON – SAT: 8 AM – 6 PM
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© Tailor. All Rights Reserved.</p>
+  </div>
+</footer>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 	<script src="js/jquery-3.4.1.min.js"></script>
 
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/popper.min.js"></script> 
 	<script src="js/bootstrap-4.4.1.js"></script>
+	<script src="js/contactus.js"></script>
   </body>
 </html>
