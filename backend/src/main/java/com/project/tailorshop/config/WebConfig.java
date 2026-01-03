@@ -38,18 +38,18 @@ public class WebConfig {
              * Serve uploaded images from /uploads/** endpoints
              * Maps virtual path /uploads/** to actual file system directory
              */
-            @Override
-            public void addResourceHandlers(ResourceHandlerRegistry registry) {
-                // Serve images from uploads directory
-                // When client requests: http://localhost:8080/uploads/products/image.jpg
-                // Spring serves from: file:uploads/products/image.jpg
+                @Override
+                public void addResourceHandlers(ResourceHandlerRegistry registry) {
+                // Serve images from uploads root. Pattern /uploads/** should map to /uploads/** on disk.
+                // Example: request /uploads/products/grey.jpg -> file:<project>/uploads/products/grey.jpg
+                String uploadsRoot = Paths.get("uploads").toAbsolutePath().toString();
                 registry.addResourceHandler("/uploads/**")
-                        .addResourceLocations("file:" + Paths.get(uploadDir).toAbsolutePath().toString() + "/");
+                    .addResourceLocations("file:" + uploadsRoot + "/");
 
                 // Also serve common static resources
                 registry.addResourceHandler("/static/**")
-                        .addResourceLocations("classpath:/static/");
-            }
+                    .addResourceLocations("classpath:/static/");
+                }
         };
     }
 }

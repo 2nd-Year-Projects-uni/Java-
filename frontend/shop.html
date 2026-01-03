@@ -190,6 +190,7 @@
                     const category = product.category ? product.category.toLowerCase() : 'all';
                     card.setAttribute('data-category', category);
 
+                    // Construct image URL defensively (supports imageUrl, imagePath, image)
                     // Construct image URL
                     // If imageUrl is null, use a placeholder
                     let imageUrl = product.imageUrl 
