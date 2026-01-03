@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shop - Tailor</title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/shop.css">
+
+</head>
+<body>
+
+<!-- ================================
+     NAVBAR
+================================ -->
+<nav class="navbar navbar-light navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Tailor.</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navMenu">
+            <div class="nav-left navbar-nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="aboutus.html">About Us</a>
+                <a class="nav-link" href="services.html">Services</a>
+                <a class="nav-link" href="contactus.html">Contact Us</a>
+            </div>
+
+            <div class="nav-right navbar-nav">
+                <a class="nav-link" href="trackorder.html">Track Order</a>
+                <a class="nav-link" href="shop.html">Shop</a>
+                <a class="nav-link book-btn" href="cart.html">Cart</a>
+                <a class="nav-link" href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ================================
+     SHOP INTRO SECTION
+================================ -->
+<section class="shop-intro-section">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="shop-intro-title">Tailored Just for You</h1>
+            </div>
+            <div class="col-md-6">
+                <div class="shop-intro-content">
+                    <p class="shop-description">
+                        Experience the art of exceptional craftsmanship with our premium collection. Each piece is 
+                        meticulously tailored to your exact specifications, combining timeless elegance with modern 
+                        sophistication. From hand-selected fabrics to precision stitching, every detail reflects 
+                        our commitment to perfection. Whether you seek refined formal wear or distinguished casual 
+                        attire, our master tailors create garments that embody your unique style and personality. 
+                        Elevate your wardrobe with pieces designed exclusively for you where luxury meets 
+                        unparalleled fit and comfort.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     SHOP COLLECTION SECTION
+================================ -->
+<section class="shop-collection">
+    <div class="shop-collection-wrapper">
+        <!-- Section Header -->
+        <div class="shop-collection-header">
+            <h2 class="shop-collection-title">Our Collection</h2>
+            <p class="shop-collection-subtitle">Curated fabrics and premium tailored pieces designed for the discerning gentleman</p>
+        </div>
+
+        <!-- Category Tabs + Product Grid Container -->
+        <div class="shop-content-wrapper">
+            <!-- Category Tabs - Left Side -->
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="all">All Items</button>
+                <button class="category-tab" data-category="men">Men</button>
+                <button class="category-tab" data-category="women">Women</button>
+            </div>
+
+            <!-- Product Grid Container (Empty - Ready for Dynamic Injection) -->
+            <div class="products-container" id="productsGrid">
+            <!-- Products will be dynamically injected here via JavaScript -->
+            
+            <!-- SAMPLE PRODUCT CARD (for design reference - will be replaced by dynamic data) -->
+            <div class="product-card" data-category="men">
+                <div class="product-image-wrapper">
+                    <img src="images/blazer.jpg" alt="Premium Cotton Blazer" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Premium Cotton Blazer</h3>
+                    <p class="product-description">Hand-tailored from finest Italian cotton with precision stitching</p>
+                    <p class="product-price">$299.99</p>
+                    <button class="product-btn-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="men">
+                <div class="product-image-wrapper">
+                    <img src="images/grey.jpg" alt="Grey Wool Trousers" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Grey Wool Jacket</h3>
+                    <p class="product-description">Expertly crafted grey wool jacket with classic tailoring</p>
+                    <p class="product-price">$199.99</p>
+                    <button class="product-btn-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     PRODUCT ROW HEIGHT EQUALIZATION
+================================ -->
+<script>
+    function equalizeRowHeights() {
+        const grid = document.getElementById('productsGrid');
+        const cards = Array.from(grid.querySelectorAll('.product-card'));
+        
+        if (cards.length === 0) return;
+        
+        // Reset heights first
+        cards.forEach(card => card.style.height = 'auto');
+        
+        // Group cards by row using their top position
+        const rows = {};
+        cards.forEach(card => {
+            const top = card.getBoundingClientRect().top;
+            if (!rows[top]) {
+                rows[top] = [];
+            }
+            rows[top].push(card);
+        });
+        
+        // Equalize height for each row
+        Object.values(rows).forEach(rowCards => {
+            const maxHeight = Math.max(...rowCards.map(card => card.offsetHeight));
+            rowCards.forEach(card => {
+                card.style.height = maxHeight + 'px';
+            });
+        });
+    }
+    
+    // Run on page load and fetch products
+    document.addEventListener('DOMContentLoaded', () => {
+        const productsGrid = document.getElementById('productsGrid');
+        const API_URL = 'http://localhost:8080/api/products';
+
+        // Fetch products from backend API
+        fetch(API_URL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(apiResponse => {
+                // Handle API response wrapper
+                const products = apiResponse.data || apiResponse;
+                
+                if (!products || products.length === 0) {
+                    productsGrid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No products available at the moment.</p>';
+                    return;
+                }
+
+                // Clear any placeholder cards
+                productsGrid.innerHTML = '';
+
+                products.forEach((product) => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    
+                    // Set category for filtering (default to 'all' if not provided)
+                    const category = product.category ? product.category.toLowerCase() : 'all';
+                    card.setAttribute('data-category', category);
+
+                    // Construct image URL defensively (supports imageUrl, imagePath, image)
+                    // Construct image URL
+                    // If imageUrl is null, use a placeholder
+                    let imageUrl = product.imageUrl 
+                        ? `http://localhost:8080${product.imageUrl}` 
+                        : 'images/placeholder.jpg';
+
+                    // Format price
+                    const formattedPrice = typeof product.price === 'number' 
+                        ? product.price.toFixed(2) 
+                        : parseFloat(product.price).toFixed(2);
+
+                    card.innerHTML = `
+                        <div class="product-image-wrapper">
+                            <img src="${imageUrl}" alt="${product.name || 'Product'}" class="product-image" onerror="this.src='images/placeholder.jpg'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name || 'Unnamed Product'}</h3>
+                            <p class="product-description">${product.description || 'No description available'}</p>
+                            <p class="product-price">Rs ${formattedPrice}</p>
+                            <button class="product-btn-cart" data-product-id="${product.id}">Add to Cart</button>
+                        </div>
+                    `;
+
+                    productsGrid.appendChild(card);
+
+                    // Attach cart click handler to each button
+                    const addToCartBtn = card.querySelector('.product-btn-cart');
+                    addToCartBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+
+                        // Add product to cart
+                        addToCart({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            imageUrl: product.imageUrl
+                        });
+
+                        // Visual feedback: change button text
+                        const originalText = this.textContent;
+                        this.textContent = 'Added!';
+                        this.disabled = true;
+
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                            this.disabled = false;
+                        }, 1500);
+                    });
+                });
+
+                // Equalize row heights after all cards are rendered
+                // Wait for images to load before calculating heights
+                Promise.all(Array.from(document.querySelectorAll('.product-image')).map(img => {
+                    return new Promise(resolve => {
+                        if (img.complete) {
+                            resolve();
+                        } else {
+                            img.onload = img.onerror = resolve;
+                        }
+                    });
+                })).then(() => {
+                    equalizeRowHeights();
+                });
+            })
+            .catch(err => {
+                console.error('Error fetching products:', err);
+                productsGrid.innerHTML = '<p style="text-align: center; color: red; grid-column: 1 / -1;">Failed to load products. Please try again later.</p>';
+            });
+    });
+
+    
+    // Re-run on window resize for responsive behavior
+    window.addEventListener('resize', () => {
+        equalizeRowHeights();
+    });
+    
+    // Watch for DOM changes (if cards are dynamically added)
+    const observer = new MutationObserver(() => {
+        equalizeRowHeights();
+    });
+    
+    observer.observe(document.getElementById('productsGrid'), {
+        childList: true,
+        subtree: false
+    });
+</script>
+
+        </div>
+    </div>
+</section> 
+<script src="js/jquery-3.4.1.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/popper.min.js"></script> 
+<script src="js/bootstrap-4.4.1.js"></script>
+
+<!-- ================================
+     CART SYSTEM (Frontend Only)
+================================ -->
+<script>
+    // In-memory cart array
+    const cart = [];
+
+    /**
+     * Add product to cart or increase quantity if exists
+     * @param {Object} product - Product object with id, name, price, imagePath
+     */
+    function addToCart(product) {
+        const existingItem = cart.find(item => item.id === product.id);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                imagePath: product.imagePath,
+                quantity: 1
+            });
+        }
+        
+        console.log('Cart updated:', cart);
+        
+        // Optional: Store cart in localStorage for persistence across pages
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+</script>
+
+<!-- ================================
+     CATEGORY TAB FILTERING
+================================ -->
+<script>
+    /**
+     * Filter products based on selected category
+     * @param {string} category - The category to filter by
+     */
+    function filterProducts(category) {
+        const productsGrid = document.getElementById('productsGrid');
+        const productCards = productsGrid.querySelectorAll('.product-card');
+        let visibleCount = 0;
+
+        productCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            
+            // Show card if it matches the selected category or if category is 'all'
+            if (category === 'all' || cardCategory === category) {
+                card.style.display = '';
+                card.style.animation = 'fadeIn 0.3s ease-in-out';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Re-equalize row heights after filtering
+        setTimeout(equalizeRowHeights, 50);
+    }
+
+    /**
+     * Update active tab styling
+     * @param {string} category - The selected category
+     */
+    function updateActiveTab(category) {
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        categoryTabs.forEach(tab => {
+            if (tab.getAttribute('data-category') === category) {
+                tab.classList.add('active');
+            } else {
+                tab.classList.remove('active');
+            }
+        });
+    }
+
+    /**
+     * Initialize category tabs and filtering
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        let currentCategory = 'all';
+
+        /**
+         * Handle tab click events
+         */
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selectedCategory = this.getAttribute('data-category');
+                
+                // Only update if different category selected
+                if (selectedCategory !== currentCategory) {
+                    currentCategory = selectedCategory;
+                    updateActiveTab(currentCategory);
+                    filterProducts(currentCategory);
+                }
+            });
+        });
+
+        // Initialize with 'all' category shown
+        filterProducts('all');
+    });
+</script>
+
+<!-- ================================
+     ANIMATION FOR FILTERED PRODUCTS
+================================ -->
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<!-- ================================
+     FOOTER
+================================ -->
+<footer id="footer">
+  <div class="footer-container reveal">
+
+    <!-- Column 1 -->
+    <div class="footer-col footer-brand reveal">
+      <h2 class="footer-title">TAILOR</h2>
+      <p class="footer-desc">
+        Our expert tailors craft exquisite garments that fit you perfectly,
+        reflecting your personal style and elegance.
+      </p>
+
+      <div class="footer-social reveal">
+        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="footer-col reveal">
+      <h3>Extra links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="shop.html">Shop</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="footer-col reveal">
+      <h3>Useful links</h3>
+      <ul>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="trackorder.html">Track Order</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contactus.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4 -->
+    <div class="footer-col reveal">
+      <h3>Our contacts</h3>
+      <p>45 Galle Road, Colombo 03, Western Province, Sri Lanka</p>
+      <p class="email"> 
+		  <a href="info@tailorstudio.lk" style="color: rgba(255, 255, 255, 0.75);">info@tailorstudio.lk</p></a>                                      
+      <p>+94 77 456 7890</p>
+
+      <p class="working-hours">
+        OUR WORKING HOURS <br>
+        MON – SAT: 8 AM – 6 PM
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© Tailor. All Rights Reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

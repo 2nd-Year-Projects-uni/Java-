@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailor Shop - Admin Login</title>
+  
+  <!-- Bootstrap -->
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-light navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Tailor.</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navMenu">
+            <div class="nav-left navbar-nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="aboutus.html">About Us</a>
+                <a class="nav-link" href="services.html">Services</a>
+                <a class="nav-link" href="contactus.html">Contact Us</a>
+            </div>
+
+            <div class="nav-right navbar-nav">
+                <a class="nav-link" href="trackorder.html">Track Order</a>
+                <a class="nav-link" href="shop.html">Shop</a>
+                <a class="nav-link book-btn" href="cart.html">Cart</a>
+                <a class="nav-link" href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+  </nav>
+
+  <!-- Main admin login container -->
+  <div class="login-page admin-login">
+    <div class="login-container">
+      
+      <div class="login-header">
+        <h2>Admin Login</h2>
+        <p class="login-subtitle">Enter your admin credentials to continue</p>
+      </div>
+
+      <!-- Admin Login Panel -->
+      <div class="panels">
+        
+        <div id="adminLoginPanel" class="panel active">
+          <form class="login-form" id="adminLoginForm">
+            <div class="form-group">
+              <label for="adminEmail">Admin Email</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="adminEmail" 
+                placeholder="Enter your admin email"
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="adminPassword">Password</label>
+              <input 
+                type="password" 
+                class="form-control" 
+                id="adminPassword" 
+                placeholder="Enter your password"
+                required
+              >
+            </div>
+            
+            <div class="form-options">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMeAdmin">
+                <label class="form-check-label" for="rememberMeAdmin">Remember me</label>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary login-btn">Admin Login</button>
+            
+            <div class="form-footer">
+              <p><a href="login.html">User Login</a></p>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="footer-container">
+
+      <!-- Column 1 -->
+      <div class="footer-col footer-brand">
+        <h2 class="footer-title">TAILOR</h2>
+        <p class="footer-desc">
+          Our expert tailors craft exquisite garments that fit you perfectly,
+          reflecting your personal style and elegance.
+        </p>
+
+        <div class="footer-social">
+          <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+
+      <!-- Column 2 -->
+      <div class="footer-col">
+        <h3>Extra links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="shop.html">Shop</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3 -->
+      <div class="footer-col">
+        <h3>Useful links</h3>
+        <ul>
+          <li><a href="cart.html">Cart</a></li>
+          <li><a href="trackorder.html">Track Order</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contactus.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4 -->
+      <div class="footer-col">
+        <h3>Our contacts</h3>
+        <p>45 Galle Road, Colombo 03, Western Province, Sri Lanka</p>
+        <p class="email"> 
+          <a href="mailto:info@tailorstudio.lk" style="color: rgba(255, 255, 255, 0.75);">info@tailorstudio.lk</a>
+        </p>                                      
+        <p>+94 77 456 7890</p>
+
+        <p class="working-hours">
+          OUR WORKING HOURS <br>
+          MON – SAT: 8 AM – 6 PM
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© Tailor. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap-4.4.1.js"></script>
+  
+  <!-- Custom JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Admin login form submission handler
+      document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('adminEmail').value;
+        const password = document.getElementById('adminPassword').value;
+        console.log('Admin login attempt:', email);
+        // Add your admin login logic here
+        alert('Admin login functionality to be implemented');
+      });
+    });
+  </script>
+
+</body>
+</html>
