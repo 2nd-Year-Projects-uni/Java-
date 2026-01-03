@@ -1827,7 +1827,7 @@ body {
 ================================ */
 .shop-collection {
     background: #ffffff;
-    padding: 120px 20px;
+    padding: 120px 20px 120px 0;
     min-height: 600px;
     display: flex;
     align-items: center;
@@ -1838,7 +1838,7 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 0 0 20px;
 }
 
 /* Collection Header */
@@ -1995,11 +1995,125 @@ body {
 }
 
 /* ================================
+   CATEGORY TABS & SHOP LAYOUT
+================================ */
+
+/* Wrapper for tabs and grid (horizontal layout) */
+.shop-content-wrapper {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Category Tabs - Left Side */
+.category-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 15%;
+    flex-shrink: 0;
+    padding-top: 4px;
+}
+
+/* Individual Tab Button */
+.category-tab {
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    border-left: 3px solid transparent;
+    color: #6b6b6b;
+    font-size: 16px;
+    font-family: "Times New Roman", serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+    text-align: left;
+    position: relative;
+}
+
+.category-tab:hover {
+    color: #2E2B1F;
+    padding-left: 20px;
+}
+
+/* Active Tab State */
+.category-tab.active {
+    color: #2E2B1F;
+    border-left-color: #b89255;
+    font-weight: 600;
+    background: rgba(184, 146, 85, 0.05);
+}
+
+.category-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #b89255;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Products Grid - Right Side */
+.products-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    gap: 32px;
+    width: 85%;
+    justify-content: flex-start;
+}
+
+/* ================================
    RESPONSIVE ADJUSTMENTS
 ================================ */
 
 /* Tablet and below: Adjust padding and spacing */
 @media (max-width: 768px) {
+    /* Stack tabs on top on tablet */
+    .shop-content-wrapper {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .category-tabs {
+        width: 100%;
+        flex-direction: row;
+        gap: 12px;
+        padding-top: 0;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 16px;
+        overflow-x: auto;
+    }
+
+    .category-tab {
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        padding: 10px 12px;
+        white-space: nowrap;
+    }
+
+    .category-tab:hover {
+        padding-left: 12px;
+    }
+
+    .category-tab.active {
+        border-left-color: transparent;
+        border-bottom-color: #b89255;
+        background: transparent;
+    }
+
+    .products-container {
+        width: 100%;
+        grid-template-columns: repeat(auto-fill, 220px);
+        gap: 24px;
+        justify-content: center;
+    }
+
     .shop-collection {
         padding: 80px 16px;
     }
@@ -2055,6 +2169,48 @@ body {
 
 /* Mobile: Compact spacing */
 @media (max-width: 480px) {
+    /* Mobile tabs - horizontal scrollable */
+    .category-tabs {
+        width: 100%;
+        flex-direction: row;
+        gap: 8px;
+        padding-top: 0;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 12px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .category-tab {
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        padding: 8px 10px;
+        white-space: nowrap;
+        font-size: 14px;
+    }
+
+    .category-tab:hover {
+        padding-left: 10px;
+    }
+
+    .category-tab.active {
+        border-left-color: transparent;
+        border-bottom-color: #b89255;
+        background: transparent;
+    }
+
+    .shop-content-wrapper {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .products-container {
+        width: 100%;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 16px;
+        justify-content: center;
+    }
+
     .shop-collection {
         padding: 60px 12px;
     }
