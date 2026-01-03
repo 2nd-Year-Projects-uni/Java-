@@ -15,17 +15,31 @@ public class TailorshopApplication {
     }
 
     @Bean
-    CommandLineRunner runner(ProductRepository productRepository) {
+    CommandLineRunner addSampleProducts(ProductRepository productRepository) {
         return args -> {
-            // Save a sample product
-            Product sample = new Product(
-                    "Premium Cotton Blazer",
-                    "Hand-tailored from finest Italian cotton",
-                    299.99,
+
+            productRepository.deleteAll();
+
+
+            Product greyMen = new Product(
+                    "Grey Cotton Coat",
+                    "Stylish grey coat",
+                    16000,
                     "MEN",
-                    "/images/blazer.jpg"
+                    "/uploads/products/grey.jpg"
             );
-            productRepository.save(sample);
+            productRepository.save(greyMen);
+
+
+            Product greyWomen = new Product(
+                    "Grey Cotton Coat",
+                    "Elegant grey coat",
+                    16000,
+                    "WOMEN",
+                    "/uploads/products/greyf.jpg"
+            );
+            productRepository.save(greyWomen);
         };
     }
+
 }

@@ -157,10 +157,109 @@
         });
     }
     
-    // Run on page load
+    // Run on page load and fetch products
     document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(equalizeRowHeights, 100);
+        const productsGrid = document.getElementById('productsGrid');
+        const API_URL = 'http://localhost:8080/api/products';
+
+        // Fetch products from backend API
+        fetch(API_URL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(apiResponse => {
+                // Handle API response wrapper
+                const products = apiResponse.data || apiResponse;
+                
+                if (!products || products.length === 0) {
+                    productsGrid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No products available at the moment.</p>';
+                    return;
+                }
+
+                // Clear any placeholder cards
+                productsGrid.innerHTML = '';
+
+                products.forEach((product) => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    
+                    // Set category for filtering (default to 'all' if not provided)
+                    const category = product.category ? product.category.toLowerCase() : 'all';
+                    card.setAttribute('data-category', category);
+
+                    // Construct image URL
+                    // If imageUrl is null, use a placeholder
+                    let imageUrl = product.imageUrl 
+                        ? `http://localhost:8080${product.imageUrl}` 
+                        : 'images/placeholder.jpg';
+
+                    // Format price
+                    const formattedPrice = typeof product.price === 'number' 
+                        ? product.price.toFixed(2) 
+                        : parseFloat(product.price).toFixed(2);
+
+                    card.innerHTML = `
+                        <div class="product-image-wrapper">
+                            <img src="${imageUrl}" alt="${product.name || 'Product'}" class="product-image" onerror="this.src='images/placeholder.jpg'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name || 'Unnamed Product'}</h3>
+                            <p class="product-description">${product.description || 'No description available'}</p>
+                            <p class="product-price">Rs ${formattedPrice}</p>
+                            <button class="product-btn-cart" data-product-id="${product.id}">Add to Cart</button>
+                        </div>
+                    `;
+
+                    productsGrid.appendChild(card);
+
+                    // Attach cart click handler to each button
+                    const addToCartBtn = card.querySelector('.product-btn-cart');
+                    addToCartBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+
+                        // Add product to cart
+                        addToCart({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            imageUrl: product.imageUrl
+                        });
+
+                        // Visual feedback: change button text
+                        const originalText = this.textContent;
+                        this.textContent = 'Added!';
+                        this.disabled = true;
+
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                            this.disabled = false;
+                        }, 1500);
+                    });
+                });
+
+                // Equalize row heights after all cards are rendered
+                // Wait for images to load before calculating heights
+                Promise.all(Array.from(document.querySelectorAll('.product-image')).map(img => {
+                    return new Promise(resolve => {
+                        if (img.complete) {
+                            resolve();
+                        } else {
+                            img.onload = img.onerror = resolve;
+                        }
+                    });
+                })).then(() => {
+                    equalizeRowHeights();
+                });
+            })
+            .catch(err => {
+                console.error('Error fetching products:', err);
+                productsGrid.innerHTML = '<p style="text-align: center; color: red; grid-column: 1 / -1;">Failed to load products. Please try again later.</p>';
+            });
     });
+
     
     // Re-run on window resize for responsive behavior
     window.addEventListener('resize', () => {
@@ -196,7 +295,7 @@
 
     /**
      * Add product to cart or increase quantity if exists
-     * @param {Object} product - Product object with id, name, price
+     * @param {Object} product - Product object with id, name, price, imagePath
      */
     function addToCart(product) {
         const existingItem = cart.find(item => item.id === product.id);
@@ -208,39 +307,16 @@
                 id: product.id,
                 name: product.name,
                 price: product.price,
+                imagePath: product.imagePath,
                 quantity: 1
             });
         }
         
         console.log('Cart updated:', cart);
-    }
-
-    // Initialize cart system on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        // Attach click handlers to all "Add to Cart" buttons
-        const addToCartButtons = document.querySelectorAll('.product-btn-cart');
         
-        addToCartButtons.forEach((button, index) => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Get product info from the card
-                const card = this.closest('.product-card');
-                const name = card.querySelector('.product-name').textContent;
-                const price = parseFloat(card.querySelector('.product-price').textContent.replace('$', ''));
-                const id = index; // Simple ID based on button index
-                
-                // Add to cart
-                addToCart({ id, name, price });
-                
-                // Visual feedback
-                this.textContent = 'Added!';
-                setTimeout(() => {
-                    this.textContent = 'Add to Cart';
-                }, 1500);
-            });
-        });
-    });
+        // Optional: Store cart in localStorage for persistence across pages
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
 </script>
 
 <!-- ================================
@@ -248,52 +324,52 @@
 ================================ -->
 <script>
     /**
+     * Filter products based on selected category
+     * @param {string} category - The category to filter by
+     */
+    function filterProducts(category) {
+        const productsGrid = document.getElementById('productsGrid');
+        const productCards = productsGrid.querySelectorAll('.product-card');
+        let visibleCount = 0;
+
+        productCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            
+            // Show card if it matches the selected category or if category is 'all'
+            if (category === 'all' || cardCategory === category) {
+                card.style.display = '';
+                card.style.animation = 'fadeIn 0.3s ease-in-out';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Re-equalize row heights after filtering
+        setTimeout(equalizeRowHeights, 50);
+    }
+
+    /**
+     * Update active tab styling
+     * @param {string} category - The selected category
+     */
+    function updateActiveTab(category) {
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        categoryTabs.forEach(tab => {
+            if (tab.getAttribute('data-category') === category) {
+                tab.classList.add('active');
+            } else {
+                tab.classList.remove('active');
+            }
+        });
+    }
+
+    /**
      * Initialize category tabs and filtering
-     * Each product card should have a data-category attribute
      */
     document.addEventListener('DOMContentLoaded', () => {
         const categoryTabs = document.querySelectorAll('.category-tab');
-        const productsGrid = document.getElementById('productsGrid');
         let currentCategory = 'all';
-
-        /**
-         * Filter products based on selected category
-         * @param {string} category - The category to filter by
-         */
-        function filterProducts(category) {
-            const productCards = productsGrid.querySelectorAll('.product-card');
-            let visibleCount = 0;
-
-            productCards.forEach(card => {
-                const cardCategory = card.getAttribute('data-category');
-                
-                // Show card if it matches the selected category or if category is 'all'
-                if (category === 'all' || cardCategory === category) {
-                    card.style.display = '';
-                    card.style.animation = 'fadeIn 0.3s ease-in-out';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Re-equalize row heights after filtering
-            setTimeout(equalizeRowHeights, 50);
-        }
-
-        /**
-         * Update active tab styling
-         * @param {string} category - The selected category
-         */
-        function updateActiveTab(category) {
-            categoryTabs.forEach(tab => {
-                if (tab.getAttribute('data-category') === category) {
-                    tab.classList.add('active');
-                } else {
-                    tab.classList.remove('active');
-                }
-            });
-        }
 
         /**
          * Handle tab click events
