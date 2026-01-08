@@ -1,23 +1,455 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Untitled Document</title>
-    <!-- Bootstrap -->
-	<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-	
-  </head>
-  <body>
-  	<!-- body code goes here -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart - Tailor</title>
 
+  <!-- Bootstrap -->
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-	<script src="js/jquery-3.4.1.min.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cart.css">
 
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="js/popper.min.js"></script> 
-	<script src="js/bootstrap-4.4.1.js"></script>
-  </body>
+</head>
+<body>
+
+<!-- ================================
+     NAVBAR
+================================ -->
+<nav class="navbar navbar-light navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Tailor.</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navMenu">
+            <div class="nav-left navbar-nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="aboutus.html">About Us</a>
+                <a class="nav-link" href="services.html">Services</a>
+                <a class="nav-link" href="contactus.html">Contact Us</a>
+            </div>
+
+            <div class="nav-right navbar-nav">
+                <a class="nav-link" href="trackorder.html">Track Order</a>
+                <a class="nav-link" href="shop.html">Shop</a>
+                <a class="nav-link book-btn" href="cart.html">Cart</a>
+                <a class="nav-link" href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ================================
+     PROMOTIONAL BANNER
+================================ -->
+<section class="promo-banner">
+    <div class="promo-content">
+        <i class="fas fa-truck-fast promo-icon"></i>
+        <div class="promo-text">
+            <span class="promo-highlight">Free Delivery</span>
+            <span class="promo-separator">|</span>
+            <span class="promo-description">On orders over Rs 20,000</span>
+        </div>
+    </div>
+</section>
+
+<div class="cart-divider-line"></div>
+
+<!-- ================================
+     CART HEADER SECTION
+================================ -->
+<section class="cart-header-section">
+    <div class="cart-header-content">
+        <h1 class="cart-header-title">Your Shopping Cart</h1>
+        <p class="cart-header-subtitle">Review your carefully selected items, adjust quantities as needed, and proceed to secure checkout. Each piece is crafted with precision and care, tailored to your exact specifications. Our team is committed to delivering excellence in every stitch.</p>
+    </div>
+</section>
+
+<!-- ================================
+     MAIN CART SECTION
+================================ -->
+<section class="cart-main-section">
+    <div class="cart-container">
+
+        <!-- Cart Items Column -->
+        <div class="cart-items-column">
+            
+            <!-- Cart Items List -->
+            <div class="cart-items-wrapper" id="cartItemsWrapper">
+                <!-- Cart items will be dynamically injected here -->
+            </div>
+
+            <!-- Empty Cart Message -->
+            <div class="empty-cart-message" id="emptyCartMessage" style="display: none;">
+                <div class="empty-cart-content">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h2>Your Cart is Empty</h2>
+                    <p>Looks like you haven't added any items yet. Explore our collection and find something you love!</p>
+                    <a href="shop.html" class="btn-continue-shopping">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Summary Column -->
+        <div class="order-summary-column" id="orderSummaryColumn">
+            <div class="order-summary-wrapper">
+                <h2 class="order-summary-title">Order Summary</h2>
+                
+                <div class="order-summary-details">
+                    <div class="summary-row">
+                        <span class="summary-label">Subtotal:</span>
+                        <span class="summary-value" id="subtotalValue">Rs 0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Tax:</span>
+                        <span class="summary-value" id="taxValue">Rs 0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Delivery:</span>
+                        <span class="summary-value" id="deliveryValue">Rs 250.00</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-row summary-total">
+                        <span class="summary-label">Grand Total:</span>
+                        <span class="summary-value" id="totalValue">Rs 0.00</span>
+                    </div>
+                </div>
+
+                <button class="btn-checkout" id="checkoutBtn" disabled>
+                    Proceed to Checkout
+                </button>
+                
+                <a href="shop.html" class="btn-continue-shop">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     FOOTER
+================================ -->
+<footer id="footer">
+  <div class="footer-container reveal">
+
+    <!-- Column 1 -->
+    <div class="footer-col footer-brand reveal">
+      <h2 class="footer-title">TAILOR</h2>
+      <p class="footer-desc">
+        Our expert tailors craft exquisite garments that fit you perfectly,
+        reflecting your personal style and elegance.
+      </p>
+
+      <div class="footer-social reveal">
+        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="footer-col reveal">
+      <h3>Extra links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="shop.html">Shop</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="footer-col reveal">
+      <h3>Useful links</h3>
+      <ul>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="trackorder.html">Track Order</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contactus.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4 -->
+    <div class="footer-col reveal">
+      <h3>Our contacts</h3>
+      <p>45 Galle Road, Colombo 03, Western Province, Sri Lanka</p>
+      <p class="email"> 
+        <a href="info@tailorstudio.lk" style="color: rgba(255, 255, 255, 0.75);">info@tailorstudio.lk</a>
+      </p>
+      <p>+94 77 456 7890</p>
+
+      <p class="working-hours">
+        OUR WORKING HOURS <br>
+        MON – SAT: 8 AM – 6 PM
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© Tailor. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<!-- ================================
+     SCRIPTS
+================================ -->
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="css/bootstrap-4.4.1.js"></script>
+
+<script>
+    // ================================
+    // CART DATA STRUCTURE
+    // ================================
+    // Expected localStorage format:
+    // localStorage.setItem('cart', JSON.stringify([
+    //   {
+    //     productId: 1,
+    //     name: 'Product Name',
+    //     price: 99.99,
+    //     image: 'path/to/image.jpg',
+    //     quantity: 2
+    //   }
+    // ]))
+
+    const STORAGE_KEY = 'cart';
+    const TAX_RATE = 0.02; // 2% tax
+    const DELIVERY_FEE = 250; // base delivery fee
+
+    // ================================
+    // INITIALIZATION
+    // ================================
+    document.addEventListener('DOMContentLoaded', function() {
+        renderCart();
+        setupEventListeners();
+    });
+
+    // ================================
+    // RENDER CART
+    // ================================
+    function renderCart() {
+        const cart = getCartFromStorage();
+        const cartItemsWrapper = document.getElementById('cartItemsWrapper');
+        const emptyCartMessage = document.getElementById('emptyCartMessage');
+        const orderSummaryColumn = document.getElementById('orderSummaryColumn');
+
+        // Clear previous content
+        cartItemsWrapper.innerHTML = '';
+
+        if (cart.length === 0) {
+            // Show empty cart message
+            cartItemsWrapper.style.display = 'none';
+            emptyCartMessage.style.display = 'flex';
+            orderSummaryColumn.style.display = 'none';
+        } else {
+            // Show cart items
+            cartItemsWrapper.style.display = 'block';
+            emptyCartMessage.style.display = 'none';
+            orderSummaryColumn.style.display = 'block';
+
+            // Render each cart item
+            cart.forEach(item => {
+                const cartItemElement = createCartItemElement(item);
+                cartItemsWrapper.appendChild(cartItemElement);
+            });
+
+            // Update order summary
+            updateOrderSummary();
+        }
+    }
+
+    // ================================
+    // CREATE CART ITEM ELEMENT
+    // ================================
+    function createCartItemElement(item) {
+        const container = document.createElement('div');
+        container.className = 'cart-item';
+        container.setAttribute('data-product-id', item.productId);
+
+        const itemTotal = (item.price * item.quantity).toFixed(2);
+
+        container.innerHTML = `
+            <div class="cart-item-image">
+                <img src="${item.image}" alt="${item.name}" onerror="this.src='images/placeholder.jpg'">
+            </div>
+
+            <div class="cart-item-details">
+                <h3 class="cart-item-name">${item.name}</h3>
+                <p class="cart-item-price">Rs ${item.price.toFixed(2)}</p>
+            </div>
+
+            <div class="cart-item-quantity">
+                <button class="qty-btn qty-minus" data-product-id="${item.productId}">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <input type="number" class="qty-input" value="${item.quantity}" min="1" data-product-id="${item.productId}">
+                <button class="qty-btn qty-plus" data-product-id="${item.productId}">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+
+            <div class="cart-item-total">
+                <p class="total-label">Total</p>
+                <p class="total-amount" data-product-id="${item.productId}">Rs ${itemTotal}</p>
+            </div>
+
+            <div class="cart-item-remove">
+                <button class="btn-remove" data-product-id="${item.productId}" title="Remove item">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        `;
+
+        return container;
+    }
+
+    // ================================
+    // SETUP EVENT LISTENERS
+    // ================================
+    function setupEventListeners() {
+        // Event delegation for dynamically created elements
+        document.addEventListener('click', function(event) {
+            const target = event.target.closest('[class*="qty-"]') || event.target.closest('.btn-remove');
+            
+            if (!target) return;
+
+            const productId = parseInt(target.getAttribute('data-product-id'));
+
+            // Handle quantity increase
+            if (target.closest('.qty-plus')) {
+                increaseQuantity(productId);
+            }
+            // Handle quantity decrease
+            else if (target.closest('.qty-minus')) {
+                decreaseQuantity(productId);
+            }
+            // Handle item removal
+            else if (target.closest('.btn-remove')) {
+                removeItem(productId);
+            }
+        });
+
+        // Handle quantity input change
+        document.addEventListener('change', function(event) {
+            if (event.target.classList.contains('qty-input')) {
+                const productId = parseInt(event.target.getAttribute('data-product-id'));
+                const newQuantity = parseInt(event.target.value);
+                
+                if (newQuantity >= 1) {
+                    updateQuantity(productId, newQuantity);
+                } else {
+                    event.target.value = 1;
+                    updateQuantity(productId, 1);
+                }
+            }
+        });
+    }
+
+    // ================================
+    // CART OPERATIONS
+    // ================================
+
+    function getCartFromStorage() {
+        const cartData = localStorage.getItem(STORAGE_KEY);
+        return cartData ? JSON.parse(cartData) : [];
+    }
+
+    function saveCartToStorage(cart) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    }
+
+    function increaseQuantity(productId) {
+        const cart = getCartFromStorage();
+        const item = cart.find(p => p.productId === productId);
+        
+        if (item) {
+            item.quantity += 1;
+            saveCartToStorage(cart);
+            renderCart();
+        }
+    }
+
+    function decreaseQuantity(productId) {
+        const cart = getCartFromStorage();
+        const item = cart.find(p => p.productId === productId);
+        
+        if (item && item.quantity > 1) {
+            item.quantity -= 1;
+            saveCartToStorage(cart);
+            renderCart();
+        }
+    }
+
+    function updateQuantity(productId, newQuantity) {
+        const cart = getCartFromStorage();
+        const item = cart.find(p => p.productId === productId);
+        
+        if (item && newQuantity >= 1) {
+            item.quantity = newQuantity;
+            saveCartToStorage(cart);
+            renderCart();
+        }
+    }
+
+    function removeItem(productId) {
+        const cart = getCartFromStorage();
+        const filteredCart = cart.filter(item => item.productId !== productId);
+        saveCartToStorage(filteredCart);
+        renderCart();
+    }
+
+    // ================================
+    // ORDER SUMMARY CALCULATIONS
+    // ================================
+
+    function updateOrderSummary() {
+        const cart = getCartFromStorage();
+        
+        // Calculate subtotal
+        const subtotal = cart.reduce((sum, item) => {
+            return sum + (item.price * item.quantity);
+        }, 0);
+
+        // Calculate tax
+        const tax = subtotal * TAX_RATE;
+
+        // Delivery is free if subtotal + tax exceeds Rs 20,000
+        const delivery = (subtotal + tax) > 20000 ? 0 : DELIVERY_FEE;
+
+        // Calculate grand total
+        const grandTotal = subtotal + tax + delivery;
+
+        // Update DOM
+        document.getElementById('subtotalValue').textContent = `Rs ${subtotal.toFixed(2)}`;
+        document.getElementById('taxValue').textContent = `Rs ${tax.toFixed(2)}`;
+        document.getElementById('deliveryValue').textContent = delivery === 0 ? 'Free' : `Rs ${delivery.toFixed(2)}`;
+        document.getElementById('totalValue').textContent = `Rs ${grandTotal.toFixed(2)}`;
+
+        // Enable/Disable checkout button
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        if (cart.length === 0) {
+            checkoutBtn.disabled = true;
+        } else {
+            checkoutBtn.disabled = false;
+        }
+    }
+
+    // ================================
+    // CHECKOUT BUTTON HANDLER
+    // ================================
+    document.getElementById('checkoutBtn').addEventListener('click', function() {
+        const cart = getCartFromStorage();
+        if (cart.length > 0) {
+            // TODO: Replace this with actual backend API call for checkout
+            alert('Proceeding to checkout...\n\nNote: This is a demo. Backend integration coming soon!');
+            // Example: window.location.href = '/checkout';
+        }
+    });
+
+</script>
+
+</body>
 </html>
