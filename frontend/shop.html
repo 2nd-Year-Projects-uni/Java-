@@ -223,10 +223,10 @@
 
                         // Add product to cart
                         addToCart({
-                            id: product.id,
+                            productId: product.id,
                             name: product.name,
-                            price: product.price,
-                            imageUrl: product.imageUrl
+                            price: typeof product.price === 'number' ? product.price : parseFloat(product.price),
+                            image: imageUrl
                         });
 
                         // Visual feedback: change button text
@@ -291,32 +291,35 @@
      CART SYSTEM (Frontend Only)
 ================================ -->
 <script>
-    // In-memory cart array
-    const cart = [];
+    // Persisted cart: load from localStorage (shared with cart.html)
+    let cart = [];
+    try {
+        cart = JSON.parse(localStorage.getItem('cart')) || [];
+    } catch (_) {
+        cart = [];
+    }
 
     /**
      * Add product to cart or increase quantity if exists
-     * @param {Object} product - Product object with id, name, price, imagePath
+     * @param {Object} product - { productId, name, price, image }
      */
     function addToCart(product) {
-        const existingItem = cart.find(item => item.id === product.id);
-        
+        const existingItem = cart.find(item => item.productId === product.productId);
+
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
             cart.push({
-                id: product.id,
+                productId: product.productId,
                 name: product.name,
                 price: product.price,
-                imagePath: product.imagePath,
+                image: product.image,
                 quantity: 1
             });
         }
-        
-        console.log('Cart updated:', cart);
-        
-        // Optional: Store cart in localStorage for persistence across pages
+
         localStorage.setItem('cart', JSON.stringify(cart));
+        console.log('Cart updated:', cart);
     }
 </script>
 

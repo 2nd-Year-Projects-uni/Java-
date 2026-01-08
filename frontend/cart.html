@@ -219,6 +219,18 @@
     const TAX_RATE = 0.02; // 2% tax
     const DELIVERY_FEE = 250; // base delivery fee
 
+    // Demo mode: use in-memory array instead of localStorage and seed mock item
+    const DEMO_MODE = true;
+    let memoryCart = [
+        {
+            productId: 999,
+            name: 'Mock Premium Cotton Blazer',
+            price: 4500,
+            image: 'images/placeholder.jpg',
+            quantity: 1
+        }
+    ];
+
     // ================================
     // INITIALIZATION
     // ================================
@@ -353,11 +365,15 @@
     // ================================
 
     function getCartFromStorage() {
+        // In demo mode, read from in-memory array
+        if (DEMO_MODE) return memoryCart;
         const cartData = localStorage.getItem(STORAGE_KEY);
         return cartData ? JSON.parse(cartData) : [];
     }
 
     function saveCartToStorage(cart) {
+        // In demo mode, persist to in-memory array
+        if (DEMO_MODE) { memoryCart = cart; return; }
         localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
     }
 
