@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Tailor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Tailor Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="nav-item active">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="admin-products.html" class="nav-item">
+                    <i class="fas fa-box"></i>
+                    <span>Products</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h1 class="page-title">Dashboard</h1>
+                </div>
+                <div class="topbar-right">
+                    <div class="admin-profile">
+                        <i class="fas fa-user-circle"></i>
+                        <span class="admin-name">Admin User</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                
+                <section class="stats-section">
+                    <div class="stat-card blue">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3 class="stat-value">248</h3>
+                            <p class="stat-label">Total Orders</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card green">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3 class="stat-value">$12,450</h3>
+                            <p class="stat-label">Total Revenue</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card orange">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3 class="stat-value">12</h3>
+                            <p class="stat-label">Low Stock Products</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card purple">
+                        <div class="stat-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3 class="stat-value">18</h3>
+                            <p class="stat-label">New Feedbacks</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="orders-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Recent Orders</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#ORD-1247</td>
+                                    <td>John Smith</td>
+                                    <td>Jan 12, 2026</td>
+                                    <td><span class="badge badge-new">New</span></td>
+                                    <td>$245.00</td>
+                                </tr>
+                                <tr>
+                                    <td>#ORD-1246</td>
+                                    <td>Sarah Johnson</td>
+                                    <td>Jan 12, 2026</td>
+                                    <td><span class="badge badge-progress">In Progress</span></td>
+                                    <td>$180.50</td>
+                                </tr>
+                                <tr>
+                                    <td>#ORD-1245</td>
+                                    <td>Michael Brown</td>
+                                    <td>Jan 11, 2026</td>
+                                    <td><span class="badge badge-completed">Completed</span></td>
+                                    <td>$320.00</td>
+                                </tr>
+                                <tr>
+                                    <td>#ORD-1244</td>
+                                    <td>Emily Davis</td>
+                                    <td>Jan 11, 2026</td>
+                                    <td><span class="badge badge-progress">In Progress</span></td>
+                                    <td>$150.75</td>
+                                </tr>
+                                <tr>
+                                    <td>#ORD-1243</td>
+                                    <td>David Wilson</td>
+                                    <td>Jan 10, 2026</td>
+                                    <td><span class="badge badge-completed">Completed</span></td>
+                                    <td>$275.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="feedbacks-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Recent Feedbacks</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Category</th>
+                                    <th>Message</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="unread">
+                                    <td>Jessica Martinez</td>
+                                    <td>jessica.m@email.com</td>
+                                    <td>+1 555-0123</td>
+                                    <td>Compliment</td>
+                                    <td>Excellent service and quality work!</td>
+                                </tr>
+                                <tr class="unread">
+                                    <td>Robert Taylor</td>
+                                    <td>robert.t@email.com</td>
+                                    <td>+1 555-0124</td>
+                                    <td>Question</td>
+                                    <td>Do you offer rush delivery options?</td>
+                                </tr>
+                                <tr>
+                                    <td>Amanda Garcia</td>
+                                    <td>amanda.g@email.com</td>
+                                    <td>+1 555-0125</td>
+                                    <td>Suggestion</td>
+                                    <td>Would love to see more fabric options.</td>
+                                </tr>
+                                <tr>
+                                    <td>James Anderson</td>
+                                    <td>james.a@email.com</td>
+                                    <td>+1 555-0126</td>
+                                    <td>Compliment</td>
+                                    <td>Perfect fit on my custom suit!</td>
+                                </tr>
+                                <tr>
+                                    <td>Lisa Thompson</td>
+                                    <td>lisa.t@email.com</td>
+                                    <td>+1 555-0127</td>
+                                    <td>Question</td>
+                                    <td>What is your return policy?</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+    </div>
+</body>
+</html>

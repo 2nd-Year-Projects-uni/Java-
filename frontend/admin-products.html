@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Products - Tailor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Tailor Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="admin-products.html" class="nav-item active">
+                    <i class="fas fa-box"></i>
+                    <span>Products</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h1 class="page-title">Products</h1>
+                </div>
+                <div class="topbar-right">
+                    <div class="admin-profile">
+                        <i class="fas fa-user-circle"></i>
+                        <span class="admin-name">Admin User</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+
+                <section class="page-actions">
+                    <div class="action-group">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Add Product
+                        </button>
+                        <button class="btn btn-ghost">
+                            <i class="fas fa-file-export"></i>
+                            Export CSV
+                        </button>
+                    </div>
+                    <div class="action-group">
+                        <div class="input-wrap">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search products" aria-label="Search products">
+                        </div>
+                        <select class="select" aria-label="Filter by status">
+                            <option value="">All Status</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                            <option>Low Stock</option>
+                        </select>
+                    </div>
+                </section>
+
+                <section class="orders-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Product List</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Status</th>
+                                    <th>Updated</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#P-1023</td>
+                                    <td>Custom Suit - Navy</td>
+                                    <td>Suits</td>
+                                    <td>$420.00</td>
+                                    <td><span class="chip chip-success">82</span></td>
+                                    <td><span class="badge badge-new">Active</span></td>
+                                    <td>Jan 12, 2026</td>
+                                    <td class="table-actions">
+                                        <button class="icon-btn" aria-label="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="icon-btn danger" aria-label="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#P-1022</td>
+                                    <td>Wedding Gown - Silk</td>
+                                    <td>Dresses</td>
+                                    <td>$980.00</td>
+                                    <td><span class="chip chip-warning">12</span></td>
+                                    <td><span class="badge badge-progress">Inactive</span></td>
+                                    <td>Jan 10, 2026</td>
+                                    <td class="table-actions">
+                                        <button class="icon-btn" aria-label="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="icon-btn danger" aria-label="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#P-1021</td>
+                                    <td>Casual Shirt - Linen</td>
+                                    <td>Shirts</td>
+                                    <td>$120.00</td>
+                                    <td><span class="chip chip-danger">4</span></td>
+                                    <td><span class="badge badge-new">Active</span></td>
+                                    <td>Jan 9, 2026</td>
+                                    <td class="table-actions">
+                                        <button class="icon-btn" aria-label="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="icon-btn danger" aria-label="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#P-1020</td>
+                                    <td>Tailored Trousers - Charcoal</td>
+                                    <td>Trousers</td>
+                                    <td>$180.00</td>
+                                    <td><span class="chip chip-success">56</span></td>
+                                    <td><span class="badge badge-completed">Active</span></td>
+                                    <td>Jan 8, 2026</td>
+                                    <td class="table-actions">
+                                        <button class="icon-btn" aria-label="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="icon-btn danger" aria-label="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#P-1019</td>
+                                    <td>Evening Dress - Emerald</td>
+                                    <td>Dresses</td>
+                                    <td>$760.00</td>
+                                    <td><span class="chip chip-warning">15</span></td>
+                                    <td><span class="badge badge-progress">Inactive</span></td>
+                                    <td>Jan 7, 2026</td>
+                                    <td class="table-actions">
+                                        <button class="icon-btn" aria-label="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="icon-btn danger" aria-label="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="orders-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Material List</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Unit Cost</th>
+                                    <th>Stock</th>
+                                    <th>Status</th>
+                                    <th>Updated</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#M-2105</td>
+                                    <td>Italian Wool - Navy</td>
+                                    <td>Wool</td>
+                                    <td>$38.00</td>
+                                    <td><span class="chip chip-success">240 m</span></td>
+                                    <td><span class="badge badge-new">Available</span></td>
+                                    <td>Jan 12, 2026</td>
+                                    <td class="table-actions">
+                                        <button class="icon-btn" aria-label="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="icon-btn danger" aria-label="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#M-2104</td>
+                                    <td>Silk Lining - Ivory</td>
+                                    <td>Silk</td>
+                                    <td>$12.50</td>
+                                    <td><span class="chip chip-warning">48 m</span></td>
+                                    <td><span class="badge badge-progress">Low</span></td>
+                                    <td>Jan 11, 2026</td>
+                                    <td class="table-actions">
+                                        <button class="icon-btn" aria-label="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="icon-btn danger" aria-label="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#M-2103</td>
+                                    <td>Linen - Sand</td>
+                                    <td>Linen</td>
+                                    <td>$15.00</td>
+                                    <td><span class="chip chip-danger">15 m</span></td>
+                                    <td><span class="badge badge-progress">Low</span></td>
+                                    <td>Jan 10, 2026</td>
+                                    <td class="table-actions">
+                                        <button class="icon-btn" aria-label="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="icon-btn danger" aria-label="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#M-2102</td>
+                                    <td>Cotton - White</td>
+                                    <td>Cotton</td>
+                                    <td>$8.40</td>
+                                    <td><span class="chip chip-success">520 m</span></td>
+                                    <td><span class="badge badge-completed">Available</span></td>
+                                    <td>Jan 9, 2026</td>
+                                    <td class="table-actions">
+                                        <button class="icon-btn" aria-label="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="icon-btn danger" aria-label="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#M-2101</td>
+                                    <td>Buttons - Horn 18mm</td>
+                                    <td>Notions</td>
+                                    <td>$0.40</td>
+                                    <td><span class="chip chip-success">2,400 pcs</span></td>
+                                    <td><span class="badge badge-new">Available</span></td>
+                                    <td>Jan 8, 2026</td>
+                                    <td class="table-actions">
+                                        <button class="icon-btn" aria-label="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="icon-btn danger" aria-label="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>
