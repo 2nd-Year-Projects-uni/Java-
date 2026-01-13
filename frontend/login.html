@@ -66,52 +66,54 @@
         <button class="auth-tab" id="registerTab">Register</button>
       </div>
 
-      <!-- LOGIN -->
-      <div class="auth-panel active" id="loginPanel">
-        <form>
-          <div class="form-group">
-            <label>Email</label>
-            <input class="form-control" required>
-          </div>
+      <div class="auth-panels">
+        <!-- LOGIN -->
+        <div class="auth-panel active" id="loginPanel">
+          <form>
+            <div class="form-group">
+              <label>Email</label>
+              <input class="form-control" required>
+            </div>
 
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" required>
-          </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" class="form-control" required>
+            </div>
 
-          <button class="auth-btn">Login</button>
+            <button class="auth-btn">Login</button>
 
-          <div class="auth-footer">
-            <p>No account? <a href="#" id="toRegister">Register</a></p>
-            <p>Admin? <a href="login-admin.html">Admin Login</a></p>
-          </div>
-        </form>
-      </div>
+            <div class="auth-footer">
+              <p>No account? <a href="#" id="toRegister">Register</a></p>
+              <p>Admin? <a href="login-admin.html">Admin Login</a></p>
+            </div>
+          </form>
+        </div>
 
-      <!-- REGISTER -->
-      <div class="auth-panel" id="registerPanel">
-        <form>
-          <div class="form-group">
-            <label>Username</label>
-            <input class="form-control" required>
-          </div>
+        <!-- REGISTER -->
+        <div class="auth-panel" id="registerPanel">
+          <form>
+            <div class="form-group">
+              <label>Username</label>
+              <input class="form-control" required>
+            </div>
 
-          <div class="form-group">
-            <label>Email</label>
-            <input class="form-control" required>
-          </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input class="form-control" required>
+            </div>
 
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" required>
-          </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" class="form-control" required>
+            </div>
 
-          <button class="auth-btn">Create Account</button>
+            <button class="auth-btn">Create Account</button>
 
-          <div class="auth-footer">
-            <p>Already have an account? <a href="#" id="toLogin">Login</a></p>
-          </div>
-        </form>
+            <div class="auth-footer">
+              <p>Already have an account? <a href="#" id="toLogin">Login</a></p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
@@ -123,6 +125,7 @@ const loginTab = document.getElementById("loginTab");
 const registerTab = document.getElementById("registerTab");
 const loginPanel = document.getElementById("loginPanel");
 const registerPanel = document.getElementById("registerPanel");
+const panelsContainer = document.querySelector(".auth-panels");
 
 loginTab.onclick = () => {
   loginTab.classList.add("active");
@@ -137,6 +140,29 @@ registerTab.onclick = () => {
   registerPanel.classList.add("active");
   loginPanel.classList.remove("active");
 };
+
+// Ensure equal height for both panels
+function setPanelsHeight() {
+  // Temporarily show both to measure their natural height
+  const prevLoginActive = loginPanel.classList.contains("active");
+  const prevRegisterActive = registerPanel.classList.contains("active");
+
+  loginPanel.classList.add("measure");
+  registerPanel.classList.add("measure");
+
+  const maxH = Math.max(loginPanel.scrollHeight, registerPanel.scrollHeight);
+  panelsContainer.style.height = maxH + "px";
+
+  loginPanel.classList.remove("measure");
+  registerPanel.classList.remove("measure");
+
+  // Restore active classes (no visual change during measure state)
+  if (!prevLoginActive) loginPanel.classList.remove("active");
+  if (!prevRegisterActive) registerPanel.classList.remove("active");
+}
+
+window.addEventListener("load", setPanelsHeight);
+window.addEventListener("resize", setPanelsHeight);
 
 // Carousel
 let slides = document.querySelectorAll(".carousel-slide");

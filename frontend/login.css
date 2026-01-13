@@ -225,10 +225,19 @@ body {
 
 .auth-panel {
   display: none;
+  position: absolute;
+  inset: 0;
+  overflow: auto;
 }
 
 .auth-panel.active {
   display: block;
+}
+
+/* Temporary state for measuring heights without visual flicker */
+.auth-panel.measure {
+  display: block;
+  visibility: hidden;
 }
 
 .auth-panel form {
@@ -287,6 +296,14 @@ body {
 
 .auth-btn:active {
   transform: translateY(0);
+}
+
+/* Fixed-height container to keep login/register sizes equal */
+.auth-panels {
+  position: relative;
+  width: 100%;
+  /* Default min-height; JS sets exact height to tallest panel on load */
+  min-height: 360px;
 }
 
 @media (max-width: 900px) {
