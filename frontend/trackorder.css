@@ -167,7 +167,7 @@
 }
 
 .stepper-step.active .step-label {
-    color: #66CC00;
+    color: #2D5F3F;
     font-weight: 700;
 }
 
@@ -327,7 +327,7 @@
 }
 
 .mini-step.active .mini-step-label {
-    color: #66CC00;
+    color: #2D5F3F;
     font-weight: 600;
 }
 
@@ -664,11 +664,9 @@
     0%, 100% {
         box-shadow: 0 0 0 0 rgba(102, 204, 0, 0.7),
                     0 2px 8px rgba(0, 0, 0, 0.1);
-        background: linear-gradient(135deg, #66CC00 0%, #57B800 100%);
     }
     50% {
         box-shadow: 0 0 0 8px rgba(102, 204, 0, 0),
                     0 4px 16px rgba(102, 204, 0, 0.4);
-        background: linear-gradient(135deg, #7FE000 0%, #66CC00 100%);
     }
 }
