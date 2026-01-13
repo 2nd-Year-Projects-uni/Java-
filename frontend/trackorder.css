@@ -157,7 +157,7 @@
 }
 
 .stepper-step.active .step-icon-wrapper {
-    background: linear-gradient(135deg, #66CC00 0%, #57B800 100%);
+    background: linear-gradient(135deg, #2D5F3F 0%, #1F4A2F 100%);
     transform: scale(1.1);
     animation: statusPulse 2s ease-in-out infinite;
 }
@@ -167,7 +167,7 @@
 }
 
 .stepper-step.active .step-label {
-    color: #2D5F3F;
+    color: #1F4A2F;
     font-weight: 700;
 }
 
@@ -320,14 +320,14 @@
 }
 
 .mini-step.active .mini-step-icon {
-    background: linear-gradient(135deg, #66CC00 0%, #57B800 100%);
+    background: linear-gradient(135deg, #2D5F3F 0%, #1F4A2F 100%);
     color: white;
     transform: scale(1.1);
     animation: statusPulse 2s ease-in-out infinite;
 }
 
 .mini-step.active .mini-step-label {
-    color: #2D5F3F;
+    color: #1F4A2F;
     font-weight: 600;
 }
 
@@ -662,11 +662,11 @@
 
 @keyframes statusPulse {
     0%, 100% {
-        box-shadow: 0 0 0 0 rgba(102, 204, 0, 0.7),
+        box-shadow: 0 0 0 0 rgba(45, 95, 63, 0.7),
                     0 2px 8px rgba(0, 0, 0, 0.1);
     }
     50% {
-        box-shadow: 0 0 0 8px rgba(102, 204, 0, 0),
-                    0 4px 16px rgba(102, 204, 0, 0.4);
+        box-shadow: 0 0 0 8px rgba(45, 95, 63, 0),
+                    0 4px 16px rgba(45, 95, 63, 0.4);
     }
 }
