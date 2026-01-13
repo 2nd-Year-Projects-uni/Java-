@@ -126,6 +126,8 @@ const registerTab = document.getElementById("registerTab");
 const loginPanel = document.getElementById("loginPanel");
 const registerPanel = document.getElementById("registerPanel");
 const panelsContainer = document.querySelector(".auth-panels");
+const toRegister = document.getElementById("toRegister");
+const toLogin = document.getElementById("toLogin");
 
 loginTab.onclick = () => {
   loginTab.classList.add("active");
@@ -140,6 +142,21 @@ registerTab.onclick = () => {
   registerPanel.classList.add("active");
   loginPanel.classList.remove("active");
 };
+
+// Switch tabs via footer links
+if (toRegister) {
+  toRegister.addEventListener("click", (e) => {
+    e.preventDefault();
+    registerTab.onclick();
+  });
+}
+
+if (toLogin) {
+  toLogin.addEventListener("click", (e) => {
+    e.preventDefault();
+    loginTab.onclick();
+  });
+}
 
 // Ensure equal height for both panels
 function setPanelsHeight() {
