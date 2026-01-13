@@ -2,9 +2,9 @@
    SHOP INTRO SECTION
 ================================ */
 .shop-intro-section {
-    padding: 150px 80px 100px;
+    padding: 160px 60px 70px;
     background-color: #F5F2EB;
-    min-height: 500px;
+    min-height: 568px;
     display: flex;
     align-items: center;
     justify-content: center;

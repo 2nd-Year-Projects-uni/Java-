@@ -5,14 +5,10 @@
     padding-bottom: 60px;
 }
 
-.navbar {
-    padding: 20px 50px !important;
-}
-
 .track-header-section {
     background: #F5F2EB;
-    padding: 150px 80px 100px;
-    min-height: 500px;
+    padding: 160px 60px 70px;
+    min-height: 420px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,9 +51,22 @@
 }
 
 .track-header-image {
-    max-width: 100%;
+    display: block;
+    width: 60%;
+    max-width: 520px;
     height: auto;
     border-radius: 25px;
+    box-shadow: 0 0 0 8px rgba(184, 146, 85, 0.1),
+                0 0 0 16px rgba(184, 146, 85, 0.05),
+                0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transition: all 0.5s ease;
+}
+
+.track-header-image:hover {
+    transform: translateY(-6px) rotate(-1deg);
+    box-shadow: 0 0 0 12px rgba(184, 146, 85, 0.15),
+                0 0 0 24px rgba(184, 146, 85, 0.08),
+                0 35px 70px -12px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -105,7 +114,7 @@
 
 .stepper-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #b89255 0%, #a07d42 100%);
+    background: linear-gradient(90deg, #2D5F3F 0%, #1F4A2F 100%);
     transition: width 0.5s ease;
 }
 
@@ -148,8 +157,9 @@
 }
 
 .stepper-step.active .step-icon-wrapper {
-    background: linear-gradient(135deg, #b89255 0%, #a07d42 100%);
+    background: linear-gradient(135deg, #66CC00 0%, #57B800 100%);
     transform: scale(1.1);
+    animation: statusPulse 2s ease-in-out infinite;
 }
 
 .stepper-step.active .step-icon {
@@ -157,7 +167,7 @@
 }
 
 .stepper-step.active .step-label {
-    color: #b89255;
+    color: #66CC00;
     font-weight: 700;
 }
 
@@ -232,7 +242,7 @@
     position: absolute;
     top: -8px;
     right: -8px;
-    background: linear-gradient(135deg, #b89255 0%, #a07d42 100%);
+    background: linear-gradient(135deg, #2D5F3F 0%, #1F4A2F 100%);
     color: white;
     font-size: 0.7rem;
     padding: 4px 8px;
@@ -310,18 +320,19 @@
 }
 
 .mini-step.active .mini-step-icon {
-    background: linear-gradient(135deg, #b89255 0%, #a07d42 100%);
+    background: linear-gradient(135deg, #66CC00 0%, #57B800 100%);
     color: white;
     transform: scale(1.1);
+    animation: statusPulse 2s ease-in-out infinite;
 }
 
 .mini-step.active .mini-step-label {
-    color: #b89255;
+    color: #66CC00;
     font-weight: 600;
 }
 
 .mini-step.completed .mini-step-icon {
-    background: #b89255;
+    background: #2D5F3F;
     color: white;
 }
 
@@ -419,18 +430,86 @@
 
 .empty-state {
     text-align: center;
-    padding: 60px 20px;
+    padding: 80px 40px;
     color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.empty-state i {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    opacity: 0.3;
+.empty-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 30px;
 }
 
-.empty-state p {
-    font-size: 1.125rem;
+.empty-icon-wrapper i {
+    font-size: 80px;
+    color: #b89255;
+    position: relative;
+    z-index: 2;
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+.empty-icon-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: rgba(184, 146, 85, 0.1);
+    z-index: 1;
+    animation: pulseCircle 3s ease-in-out infinite;
+}
+
+.empty-title {
+    font-family: "Times New Roman", serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #2E2B1F;
+    margin: 0 0 15px 0;
+}
+
+.empty-description {
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 16px;
+    color: #6c757d;
+    line-height: 1.6;
+    margin: 0 0 35px 0;
+}
+
+.btn-start-shopping {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #2E2B1F 0%, #3e3925 100%);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(46, 43, 31, 0.2);
+}
+
+.btn-start-shopping:hover {
+    background: linear-gradient(135deg, #5a5339 0%, #4a442f 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(90, 83, 57, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-start-shopping i {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.btn-start-shopping:hover i {
+    transform: translateX(4px);
 }
 
 /* Footer spacing override for this page */
@@ -446,7 +525,7 @@
     }
 
     .track-header-section {
-        padding: 80px 20px 60px;
+        padding: 90px 20px 60px;
         min-height: auto;
         margin-top: 30px;
     }
@@ -472,6 +551,7 @@
 
     .track-header-image {
         max-width: 100%;
+        height: auto;
     }
 }
 
@@ -539,7 +619,7 @@
 
 @media (max-width: 480px) {
     .track-header-section {
-        padding: 40px 15px 30px;
+        padding: 35px 15px 35px; /* balanced on small phones */
     }
 
     .track-header-title {
@@ -557,5 +637,38 @@
 
     .item-name {
         font-size: 1rem;
+    }
+}
+
+@keyframes floatIcon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes pulseCircle {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.15;
+    }
+}
+
+@keyframes statusPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(102, 204, 0, 0.7),
+                    0 2px 8px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(135deg, #66CC00 0%, #57B800 100%);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(102, 204, 0, 0),
+                    0 4px 16px rgba(102, 204, 0, 0.4);
+        background: linear-gradient(135deg, #7FE000 0%, #66CC00 100%);
     }
 }

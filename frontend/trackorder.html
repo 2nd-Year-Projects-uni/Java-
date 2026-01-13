@@ -223,8 +223,16 @@ function renderOrderedItems() {
     if (orderedItems.length === 0) {
         container.innerHTML = `
             <div class="empty-state">
-                <i class="fas fa-box-open"></i>
-                <p>No items found in this order</p>
+                <div class="empty-icon-wrapper">
+                    <i class="fas fa-shopping-bag"></i>
+                    <div class="empty-icon-circle"></div>
+                </div>
+                <h2 class="empty-title">No Orders Yet</h2>
+                <p class="empty-description">You haven't placed any orders. Start shopping to see your order tracking here!</p>
+                <a href="shop.html" class="btn-start-shopping">
+                    <i class="fas fa-arrow-right"></i>
+                    Browse Collection
+                </a>
             </div>
         `;
         return;
