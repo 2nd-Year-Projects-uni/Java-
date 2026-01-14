@@ -101,20 +101,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-// initialize after DOMContentLoaded or put at end of page
-document.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('load', function () {
 
-  // Outer Swiper (services)
   const servicesSwiper = new Swiper('.services-swiper', {
     slidesPerView: 1,
     spaceBetween: 22,
     loop: true,
     navigation: {
-      nextEl: '.services-next',
-      prevEl: '.services-prev',
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     },
     pagination: {
-      el: '.services-pagination',
+      el: '.swiper-pagination',
       clickable: true,
     },
     breakpoints: {
@@ -128,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Initialize all inner swipers (one per service card)
   const innerSwipers = [];
   document.querySelectorAll('.inner-swiper').forEach((el, idx) => {
     const s = new Swiper(el, {
@@ -144,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     innerSwipers.push(s);
 
-    // Pause autoplay when user hovers the card (optional)
     const card = el.closest('.service-card');
     if (card) {
       card.addEventListener('mouseenter', () => s.autoplay.stop());
@@ -152,24 +148,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-});
+  const testimonialSwiper = new Swiper(".testimonial-swiper", {
+    loop: true,
+    autoplay: {
+      delay: 3500,
+      disableOnInteraction: false,
+    },
+    speed: 700,
+    spaceBetween: 30,
+    grabCursor: true,
+    slidesPerView: 1,
+    pagination: {
+      el: ".testimonial-pagination",
+      clickable: true,
+    }
+  });
 
-var testimonialSwiper = new Swiper(".testimonial-swiper", {
-  loop: true,
-  autoplay: {
-    delay: 3500,
-    disableOnInteraction: false,
-  },
-  speed: 700,
-  spaceBetween: 30,
-  grabCursor: true,
-
-  slidesPerView: 1,   // Always ONE card
-
-  pagination: {
-    el: ".testimonial-pagination",
-    clickable: true,
-  }
 });
 
 

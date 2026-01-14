@@ -142,6 +142,7 @@ public class ProductController {
             @RequestParam String description,
             @RequestParam double price,
             @RequestParam String category,
+            @RequestParam(required = false) Integer stock,
             @RequestParam(required = false) MultipartFile image) {
 
         try {
@@ -156,6 +157,9 @@ public class ProductController {
             product.setDescription(description);
             product.setPrice(price);
             product.setCategory(category);
+            if (stock != null) {
+                product.setStock(stock);
+            }
 
             // Update image if a new one is provided
             if (image != null && !image.isEmpty()) {

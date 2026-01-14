@@ -23,7 +23,7 @@
                     <i class="fas fa-box"></i>
                     <span>Products</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="login-admin.html" class="nav-item">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                 </a>
@@ -90,55 +90,22 @@
 
                 <section class="orders-section">
                     <div class="section-header">
-                        <h2 class="section-title">Recent Orders</h2>
+                        <h2 class="section-title">Products</h2>
                     </div>
                     <div class="table-container">
                         <table class="data-table">
                             <thead>
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer Name</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Total</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Updated Date</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#ORD-1247</td>
-                                    <td>John Smith</td>
-                                    <td>Jan 12, 2026</td>
-                                    <td><span class="badge badge-new">New</span></td>
-                                    <td>$245.00</td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-1246</td>
-                                    <td>Sarah Johnson</td>
-                                    <td>Jan 12, 2026</td>
-                                    <td><span class="badge badge-progress">In Progress</span></td>
-                                    <td>$180.50</td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-1245</td>
-                                    <td>Michael Brown</td>
-                                    <td>Jan 11, 2026</td>
-                                    <td><span class="badge badge-completed">Completed</span></td>
-                                    <td>$320.00</td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-1244</td>
-                                    <td>Emily Davis</td>
-                                    <td>Jan 11, 2026</td>
-                                    <td><span class="badge badge-progress">In Progress</span></td>
-                                    <td>$150.75</td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-1243</td>
-                                    <td>David Wilson</td>
-                                    <td>Jan 10, 2026</td>
-                                    <td><span class="badge badge-completed">Completed</span></td>
-                                    <td>$275.00</td>
-                                </tr>
+                            <tbody id="productsTableBody">
                             </tbody>
                         </table>
                     </div>
@@ -153,46 +120,52 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Date</th>
                                     <th>Email</th>
                                     <th>Phone Number</th>
-                                    <th>Category</th>
+                                    <th>Service</th>
                                     <th>Message</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="feedbacksTableBody">
                                 <tr class="unread">
                                     <td>Jessica Martinez</td>
+                                    <td>2026-01-13</td>
                                     <td>jessica.m@email.com</td>
                                     <td>+1 555-0123</td>
-                                    <td>Compliment</td>
+                                    <td>Men's Tailoring</td>
                                     <td>Excellent service and quality work!</td>
                                 </tr>
                                 <tr class="unread">
                                     <td>Robert Taylor</td>
+                                    <td>2026-01-13</td>
                                     <td>robert.t@email.com</td>
                                     <td>+1 555-0124</td>
-                                    <td>Question</td>
+                                    <td>Women's Tailoring</td>
                                     <td>Do you offer rush delivery options?</td>
                                 </tr>
                                 <tr>
                                     <td>Amanda Garcia</td>
+                                    <td>2026-01-12</td>
                                     <td>amanda.g@email.com</td>
                                     <td>+1 555-0125</td>
-                                    <td>Suggestion</td>
+                                    <td>Wedding Services</td>
                                     <td>Would love to see more fabric options.</td>
                                 </tr>
                                 <tr>
                                     <td>James Anderson</td>
+                                    <td>2026-01-12</td>
                                     <td>james.a@email.com</td>
                                     <td>+1 555-0126</td>
-                                    <td>Compliment</td>
+                                    <td>Alterations</td>
                                     <td>Perfect fit on my custom suit!</td>
                                 </tr>
                                 <tr>
                                     <td>Lisa Thompson</td>
+                                    <td>2026-01-11</td>
                                     <td>lisa.t@email.com</td>
                                     <td>+1 555-0127</td>
-                                    <td>Question</td>
+                                    <td>Men's Tailoring</td>
                                     <td>What is your return policy?</td>
                                 </tr>
                             </tbody>
@@ -204,5 +177,117 @@
         </main>
 
     </div>
+
+    <script>
+        function loadProducts() {
+            fetch('http://localhost:8080/api/products')
+                .then(response => response.json())
+                .then(apiResponse => {
+                    let products = apiResponse.data || apiResponse;
+                    if (!Array.isArray(products)) {
+                        products = [];
+                    }
+
+                    const tbody = document.getElementById('productsTableBody');
+                    tbody.innerHTML = '';
+
+                    if (!products || products.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No products available</td></tr>';
+                        return;
+                    }
+
+                    products.forEach(product => {
+                        const row = document.createElement('tr');
+                        const date = product.createdDate ? new Date(product.createdDate).toLocaleDateString() : 'N/A';
+                        
+                        row.innerHTML = `
+                            <td>${product.id}</td>
+                            <td>${product.name}</td>
+                            <td>${product.category}</td>
+                            <td>Rs ${parseFloat(product.price).toFixed(2)}</td>
+                            <td>${product.stock || 0}</td>
+                            <td>${date}</td>
+                            <td>
+                                <button class="btn-delete" onclick="deleteProduct(${product.id})">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </td>
+                        `;
+                        
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                fetch(`http://localhost:8080/api/products/${productId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Product deleted successfully');
+                        loadProducts();
+                    } else {
+                        alert('Failed to delete product: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting product:', error);
+                    alert('Error deleting product');
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+        });
+
+        function fetchFeedbacks() {
+            fetch('http://localhost:8080/api/contact')
+                .then(response => response.json())
+                .then(apiResponse => {
+                    console.log('API Response:', apiResponse);
+                    
+                    let contacts = apiResponse.data;
+                    if (!Array.isArray(contacts)) {
+                        contacts = Array.isArray(apiResponse) ? apiResponse : [];
+                    }
+                    
+                    const tbody = document.getElementById('feedbacksTableBody');
+                    tbody.innerHTML = '';
+
+                    if (!contacts || contacts.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No feedbacks yet</td></tr>';
+                        return;
+                    }
+
+                    contacts.forEach(contact => {
+                        const row = document.createElement('tr');
+                        const date = new Date(contact.createdDate).toLocaleDateString();
+                        
+                        row.innerHTML = `
+                            <td>${contact.name}</td>
+                            <td>${date}</td>
+                            <td>${contact.email}</td>
+                            <td>${contact.phone}</td>
+                            <td>${contact.service}</td>
+                            <td title="${contact.message}" style="cursor: help;">${contact.message}</td>
+                        `;
+                        
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching feedbacks:', error);
+                });
+        }
+
+        fetchFeedbacks();
+    </script>
 </body>
 </html>

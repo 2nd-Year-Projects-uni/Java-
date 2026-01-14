@@ -339,15 +339,16 @@ body {
   font-size: 16px;
   font-weight: 600;
   border: none;
+  outline: none;
   border-radius: 30px;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
 .contact-submit:hover {
-  background: #C9A75E;
-  color: #2E2B1F;
-  box-shadow: 0 6px 28px rgba(201,167,94,0.45);
+  background: #b89255;
+  color: #ffffff;
+  box-shadow: 0 6px 28px rgba(184, 146, 85, 0.45);
 }
 
 /* ================================

@@ -102,7 +102,7 @@
 <div class="contact-form reveal">
   <h3 class="form-title">Send us a message</h3>
 
-  <form>
+  <form id="contactForm">
 
     <div class="form-row">
       <div class="form-group">
@@ -328,5 +328,36 @@
 	<script src="js/popper.min.js"></script> 
 	<script src="js/bootstrap-4.4.1.js"></script>
 	<script src="js/contactus.js"></script>
+
+	<script>
+		document.getElementById('contactForm').addEventListener('submit', async function(e) {
+			e.preventDefault();
+
+			const formData = new URLSearchParams();
+			formData.append('name', document.getElementById('name').value);
+			formData.append('email', document.getElementById('email').value);
+			formData.append('phone', document.getElementById('phone').value);
+			formData.append('service', document.getElementById('service').value);
+			formData.append('message', document.getElementById('message').value);
+
+			try {
+				const response = await fetch('http://localhost:8080/api/contact', {
+					method: 'POST',
+					body: formData
+				});
+
+				const data = await response.json();
+
+				if (data.success) {
+					alert('Thank you! Your message has been received.');
+					document.getElementById('contactForm').reset();
+				} else {
+					alert('Error: ' + data.message);
+				}
+			} catch (error) {
+				alert('Error submitting form: ' + error.message);
+			}
+		});
+	</script>
   </body>
 </html>

@@ -664,3 +664,203 @@ body {
         overflow-x: scroll;
     }
 }
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal {
+    background: #fff;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 540px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 28px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.form-grid {
+    padding: 28px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.form-group input[type="file"] {
+    width: 100%;
+    font-size: 14px;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+.form-status {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #ef4444;
+    text-align: center;
+}
+
+.form-tabs {
+    display: flex;
+    border-bottom: 1px solid #e5e7eb;
+    margin: 0;
+}
+
+.form-tab {
+    flex: 1;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.form-tab:hover {
+    color: #374151;
+    background: #f9fafb;
+}
+
+.form-tab.active {
+    color: #3b82f6;
+    border-bottom-color: #3b82f6;
+}
+
+.form-tab-content {
+    padding: 0;
+}
+
+.form-tab-pane {
+    display: none;
+}
+
+.form-tab-pane.active {
+    display: grid;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.btn-delete {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.2s;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+}
+
+.btn-delete i {
+    font-size: 12px;
+}
+
+tr.editing {
+    background-color: #fef3c7 !important;
+}
+
+.edit-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #3b82f6;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.edit-input:focus {
+    outline: none;
+    border-color: #1e40af;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.icon-btn.success {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.icon-btn.success:hover {
+    background-color: #059669;
+}
+
