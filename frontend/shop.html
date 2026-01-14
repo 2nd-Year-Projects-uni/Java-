@@ -1,159 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Shop - Tailor</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop - Tailor</title>
 
-<!-- Bootstrap -->
-<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- Custom CSS -->
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="css/shop.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/shop.css">
 
+    <link rel="stylesheet" href="user-auth.css">
 </head>
+
 <body>
 
-<!-- ================================
+    <!-- ================================
      NAVBAR
 ================================ -->
-<nav class="navbar navbar-light navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">Tailor.</a>
+    <nav class="navbar navbar-light navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Tailor.</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse justify-content-between" id="navMenu">
-            <div class="nav-left navbar-nav">
-                <a class="nav-link" href="index.html">Home</a>
-                <a class="nav-link" href="aboutus.html">About Us</a>
-                <a class="nav-link" href="services.html">Services</a>
-                <a class="nav-link" href="contactus.html">Contact Us</a>
-            </div>
+            <div class="collapse navbar-collapse justify-content-between" id="navMenu">
+                <div class="nav-left navbar-nav">
+                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="aboutus.html">About Us</a>
+                    <a class="nav-link" href="services.html">Services</a>
+                    <a class="nav-link" href="contactus.html">Contact Us</a>
+                </div>
 
-            <div class="nav-right navbar-nav">
-                <a class="nav-link" href="trackorder.html">Track Order</a>
-                <a class="nav-link" href="shop.html">Shop</a>
-                <a class="nav-link book-btn" href="cart.html">Cart</a>
-                <a class="nav-link" href="login.html">Login</a>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<!-- ================================
-     SHOP INTRO SECTION
-================================ -->
-<section class="shop-intro-section">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <h1 class="shop-intro-title">Tailored Just for You</h1>
-            </div>
-            <div class="col-md-6">
-                <div class="shop-intro-content">
-                    <p class="shop-description">
-                        Experience the art of exceptional craftsmanship with our premium collection. Each piece is 
-                        meticulously tailored to your exact specifications, combining timeless elegance with modern 
-                        sophistication. From hand-selected fabrics to precision stitching, every detail reflects 
-                        our commitment to perfection. Whether you seek refined formal wear or distinguished casual 
-                        attire, our master tailors create garments that embody your unique style and personality. 
-                        Elevate your wardrobe with pieces designed exclusively for you where luxury meets 
-                        unparalleled fit and comfort.
-                    </p>
+                <div class="nav-right navbar-nav">
+                    <a class="nav-link" href="trackorder.html">Track Order</a>
+                    <a class="nav-link" href="shop.html">Shop</a>
+                    <a class="nav-link book-btn" href="cart.html">Cart</a>
+                    <a class="nav-link" href="login.html">Login</a>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </nav>
 
-<!-- ================================
-     SHOP COLLECTION SECTION
+    <!-- ================================
+     SHOP INTRO SECTION
 ================================ -->
-<section class="shop-collection">
-    <div class="shop-collection-wrapper">
-        <!-- Section Header -->
-        <div class="shop-collection-header">
-            <h2 class="shop-collection-title">Readymade Products</h2>
-            <p class="shop-collection-subtitle">Ready-to-wear garments crafted with precision and style for immediate purchase</p>
-        </div>
-
-        <!-- Category Tabs -->
-        <div class="category-tabs">
-            <button class="category-tab active" data-category="all">All Items</button>
-            <button class="category-tab" data-category="men">Men</button>
-            <button class="category-tab" data-category="women">Women</button>
-        </div>
-
-        <!-- All Items Section (default view) -->
-        <div class="shop-section" id="allSection">
-            <div class="products-container" id="productsGrid">
+    <section class="shop-intro-section">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="shop-intro-title">Tailored Just for You</h1>
+                </div>
+                <div class="col-md-6">
+                    <div class="shop-intro-content">
+                        <p class="shop-description">
+                            Experience the art of exceptional craftsmanship with our premium collection. Each piece is
+                            meticulously tailored to your exact specifications, combining timeless elegance with modern
+                            sophistication. From hand-selected fabrics to precision stitching, every detail reflects
+                            our commitment to perfection. Whether you seek refined formal wear or distinguished casual
+                            attire, our master tailors create garments that embody your unique style and personality.
+                            Elevate your wardrobe with pieces designed exclusively for you where luxury meets
+                            unparalleled fit and comfort.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<script>
-    function equalizeRowHeights() {
-        const grid = document.getElementById('productsGrid');
-        const cards = Array.from(grid.querySelectorAll('.product-card'));
-        
-        if (cards.length === 0) return;
-        
-        // Reset heights first
-        cards.forEach(card => card.style.height = 'auto');
-        
-        // Group cards by row using their top position
-        const rows = {};
-        cards.forEach(card => {
-            const top = card.getBoundingClientRect().top;
-            if (!rows[top]) {
-                rows[top] = [];
-            }
-            rows[top].push(card);
-        });
-        
-        // Equalize height for each row
-        Object.values(rows).forEach(rowCards => {
-            const maxHeight = Math.max(...rowCards.map(card => card.offsetHeight));
-            rowCards.forEach(card => {
-                card.style.height = maxHeight + 'px';
+    <!-- ================================
+     SHOP COLLECTION SECTION
+================================ -->
+    <section class="shop-collection">
+        <div class="shop-collection-wrapper">
+            <!-- Section Header -->
+            <div class="shop-collection-header">
+                <h2 class="shop-collection-title">Readymade Products</h2>
+                <p class="shop-collection-subtitle">Ready-to-wear garments crafted with precision and style for
+                    immediate purchase</p>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="all">All Items</button>
+                <button class="category-tab" data-category="men">Men</button>
+                <button class="category-tab" data-category="women">Women</button>
+            </div>
+
+            <!-- All Items Section (default view) -->
+            <div class="shop-section" id="allSection">
+                <div class="products-container" id="productsGrid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function equalizeRowHeights() {
+            const grid = document.getElementById('productsGrid');
+            const cards = Array.from(grid.querySelectorAll('.product-card'));
+
+            if (cards.length === 0) return;
+
+            // Reset heights first
+            cards.forEach(card => card.style.height = 'auto');
+
+            // Group cards by row using their top position
+            const rows = {};
+            cards.forEach(card => {
+                const top = card.getBoundingClientRect().top;
+                if (!rows[top]) {
+                    rows[top] = [];
+                }
+                rows[top].push(card);
             });
-        });
-    }
 
-    function renderProducts(gridId, products, isMaterial = false) {
-        const grid = document.getElementById(gridId);
-        if (!products || products.length === 0) {
-            grid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No products available.</p>';
-            return;
+            // Equalize height for each row
+            Object.values(rows).forEach(rowCards => {
+                const maxHeight = Math.max(...rowCards.map(card => card.offsetHeight));
+                rowCards.forEach(card => {
+                    card.style.height = maxHeight + 'px';
+                });
+            });
         }
 
-        grid.innerHTML = '';
-        products.forEach((product) => {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-
-            let imageUrl;
-            if (product.imageUrl) {
-                imageUrl = product.imageUrl.startsWith('http')
-                    ? product.imageUrl
-                    : `http://localhost:8080${product.imageUrl}`;
-            } else {
-                imageUrl = 'images/placeholder.jpg';
+        function renderProducts(gridId, products, isMaterial = false) {
+            const grid = document.getElementById(gridId);
+            if (!products || products.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No products available.</p>';
+                return;
             }
 
-            const formattedPrice = typeof product.price === 'number' 
-                ? product.price.toFixed(2) 
-                : parseFloat(product.price).toFixed(2);
-            
-            const priceUnit = isMaterial ? ' /meter' : '';
+            grid.innerHTML = '';
+            products.forEach((product) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
 
-            card.innerHTML = `
+                let imageUrl;
+                if (product.imageUrl) {
+                    imageUrl = product.imageUrl.startsWith('http')
+                        ? product.imageUrl
+                        : `http://localhost:8080${product.imageUrl}`;
+                } else {
+                    imageUrl = 'images/placeholder.jpg';
+                }
+
+                const formattedPrice = typeof product.price === 'number'
+                    ? product.price.toFixed(2)
+                    : parseFloat(product.price).toFixed(2);
+
+                const priceUnit = isMaterial ? ' /meter' : '';
+
+                card.innerHTML = `
                 <div class="product-image-wrapper">
                     <img src="${imageUrl}" alt="${product.name || 'Product'}" class="product-image" onerror="this.src='images/placeholder.jpg'">
                 </div>
@@ -165,83 +169,83 @@
                 </div>
             `;
 
-            grid.appendChild(card);
+                grid.appendChild(card);
 
-            const addToCartBtn = card.querySelector('.product-btn-cart');
-            addToCartBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                addToCart({
-                    productId: product.id,
-                    name: product.name,
-                    price: typeof product.price === 'number' ? product.price : parseFloat(product.price),
-                    image: imageUrl
+                const addToCartBtn = card.querySelector('.product-btn-cart');
+                addToCartBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    addToCart({
+                        productId: product.id,
+                        name: product.name,
+                        price: typeof product.price === 'number' ? product.price : parseFloat(product.price),
+                        image: imageUrl
+                    });
+                    const originalText = this.textContent;
+                    this.textContent = 'Added!';
+                    this.disabled = true;
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.disabled = false;
+                    }, 1500);
                 });
-                const originalText = this.textContent;
-                this.textContent = 'Added!';
-                this.disabled = true;
-                setTimeout(() => {
-                    this.textContent = originalText;
-                    this.disabled = false;
-                }, 1500);
             });
-        });
-    }
+        }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const productsGrid = document.getElementById('productsGrid');
-        const API_URL = 'http://localhost:8080/api/products';
+        document.addEventListener('DOMContentLoaded', () => {
+            const productsGrid = document.getElementById('productsGrid');
+            const API_URL = 'http://localhost:8080/api/products';
 
-        fetch(API_URL)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(apiResponse => {
-                const products = apiResponse.data || apiResponse;
-                
-                if (!products || products.length === 0) {
-                    productsGrid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No products available at the moment.</p>';
-                    return;
-                }
+            fetch(API_URL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(apiResponse => {
+                    const products = apiResponse.data || apiResponse;
 
-                productsGrid.innerHTML = '';
+                    if (!products || products.length === 0) {
+                        productsGrid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No products available at the moment.</p>';
+                        return;
+                    }
 
-                // Filter out Materials - show only Readymade products
-                const readymadeProducts = products.filter(p => p.category !== 'Materials');
+                    productsGrid.innerHTML = '';
 
-                readymadeProducts.forEach((product) => {
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    
-                    // Normalize category to match filter tabs
-                    let category = 'all';
-                    if (product.category) {
-                        if (product.category.includes('Men')) {
-                            category = 'men';
-                        } else if (product.category.includes('Women')) {
-                            category = 'women';
+                    // Filter out Materials - show only Readymade products
+                    const readymadeProducts = products.filter(p => p.category !== 'Materials');
+
+                    readymadeProducts.forEach((product) => {
+                        const card = document.createElement('div');
+                        card.className = 'product-card';
+
+                        // Normalize category to match filter tabs
+                        let category = 'all';
+                        if (product.category) {
+                            if (product.category.includes('Men')) {
+                                category = 'men';
+                            } else if (product.category.includes('Women')) {
+                                category = 'women';
+                            }
                         }
-                    }
-                    card.setAttribute('data-category', category);
+                        card.setAttribute('data-category', category);
 
-                    let imageUrl;
-                    if (product.imageUrl) {
-                        imageUrl = product.imageUrl.startsWith('http')
-                            ? product.imageUrl
-                            : `http://localhost:8080${product.imageUrl}`;
-                    } else {
-                        imageUrl = 'images/placeholder.jpg';
-                    }
+                        let imageUrl;
+                        if (product.imageUrl) {
+                            imageUrl = product.imageUrl.startsWith('http')
+                                ? product.imageUrl
+                                : `http://localhost:8080${product.imageUrl}`;
+                        } else {
+                            imageUrl = 'images/placeholder.jpg';
+                        }
 
-                    const formattedPrice = typeof product.price === 'number' 
-                        ? product.price.toFixed(2) 
-                        : parseFloat(product.price).toFixed(2);
-                    
-                    const priceUnit = product.category === 'Materials' ? ' /meter' : '';
+                        const formattedPrice = typeof product.price === 'number'
+                            ? product.price.toFixed(2)
+                            : parseFloat(product.price).toFixed(2);
 
-                    card.innerHTML = `
+                        const priceUnit = product.category === 'Materials' ? ' /meter' : '';
+
+                        card.innerHTML = `
                         <div class="product-image-wrapper">
                             <img src="${imageUrl}" alt="${product.name || 'Product'}" class="product-image" onerror="this.src='images/placeholder.jpg'">
                         </div>
@@ -253,157 +257,164 @@
                         </div>
                     `;
 
-                    productsGrid.appendChild(card);
+                        productsGrid.appendChild(card);
 
-                    const addToCartBtn = card.querySelector('.product-btn-cart');
-                    addToCartBtn.addEventListener('click', function(e) {
-                        e.preventDefault();
+                        const addToCartBtn = card.querySelector('.product-btn-cart');
+                        addToCartBtn.addEventListener('click', async function (e) {
+                            e.preventDefault();
 
-                        addToCart({
-                            productId: product.id,
-                            name: product.name,
-                            price: typeof product.price === 'number' ? product.price : parseFloat(product.price),
-                            image: imageUrl
+                            const originalText = this.textContent;
+                            this.textContent = 'Adding...';
+                            this.disabled = true;
+
+                            try {
+                                await addToCart({
+                                    productId: product.id,
+                                    name: product.name,
+                                    price: typeof product.price === 'number' ? product.price : parseFloat(product.price),
+                                    image: imageUrl,
+                                    type: 'standard'
+                                });
+
+                                this.textContent = 'Added!';
+                                setTimeout(() => {
+                                    this.textContent = originalText;
+                                    this.disabled = false;
+                                }, 1500);
+                            } catch (err) {
+                                this.textContent = originalText;
+                                this.disabled = false;
+                            }
                         });
-
-                        const originalText = this.textContent;
-                        this.textContent = 'Added!';
-                        this.disabled = true;
-
-                        setTimeout(() => {
-                            this.textContent = originalText;
-                            this.disabled = false;
-                        }, 1500);
                     });
-                });
 
-                Promise.all(Array.from(document.querySelectorAll('.product-image')).map(img => {
-                    return new Promise(resolve => {
-                        if (img.complete) {
-                            resolve();
-                        } else {
-                            img.onload = img.onerror = resolve;
-                        }
+                    Promise.all(Array.from(document.querySelectorAll('.product-image')).map(img => {
+                        return new Promise(resolve => {
+                            if (img.complete) {
+                                resolve();
+                            } else {
+                                img.onload = img.onerror = resolve;
+                            }
+                        });
+                    })).then(() => {
+                        equalizeRowHeights();
                     });
-                })).then(() => {
-                    equalizeRowHeights();
+                })
+                .catch(err => {
+                    console.error('Error fetching products:', err);
+                    productsGrid.innerHTML = '<p style="text-align: center; color: red; grid-column: 1 / -1;">Failed to load products. Please try again later.</p>';
                 });
-            })
-            .catch(err => {
-                console.error('Error fetching products:', err);
-                productsGrid.innerHTML = '<p style="text-align: center; color: red; grid-column: 1 / -1;">Failed to load products. Please try again later.</p>';
-            });
-    });
+        });
 
-    window.addEventListener('resize', () => {
-        equalizeRowHeights();
-    });
+        window.addEventListener('resize', () => {
+            equalizeRowHeights();
+        });
 
-    const observer = new MutationObserver(() => {
-        equalizeRowHeights();
-    });
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        const grid = document.getElementById('productsGrid');
-        if (grid) observer.observe(grid, { childList: true, subtree: false });
-    });
-</script>
+        const observer = new MutationObserver(() => {
+            equalizeRowHeights();
+        });
 
-        </div>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('productsGrid');
+            if (grid) observer.observe(grid, { childList: true, subtree: false });
+        });
+    </script>
+
     </div>
-</section>
+    </div>
+    </section>
 
-<!-- ================================
+    <!-- ================================
      MATERIALS COLLECTION SECTION
 ================================ -->
-<section class="shop-collection materials-section">
-    <div class="shop-collection-wrapper">
-        <!-- Section Header -->
-        <div class="shop-collection-header">
-            <h2 class="shop-collection-title">Premium Materials</h2>
-            <p class="shop-collection-subtitle">Finest fabrics and tailoring materials for your custom creations</p>
-        </div>
+    <section class="shop-collection materials-section">
+        <div class="shop-collection-wrapper">
+            <!-- Section Header -->
+            <div class="shop-collection-header">
+                <h2 class="shop-collection-title">Premium Materials</h2>
+                <p class="shop-collection-subtitle">Finest fabrics and tailoring materials for your custom creations</p>
+            </div>
 
-        <!-- Materials Grid Container -->
-        <div class="products-container" id="materialsGrid">
-    </div>
-</section>
+            <!-- Materials Grid Container -->
+            <div class="products-container" id="materialsGrid">
+            </div>
+    </section>
 
-<!-- ================================
+    <!-- ================================
      MATERIALS SECTION SCRIPTS
 ================================ -->
-<script>
-    function equalizeMaterialRowHeights() {
-        const grid = document.getElementById('materialsGrid');
-        const cards = Array.from(grid.querySelectorAll('.product-card'));
-        
-        if (cards.length === 0) return;
-        
-        // Reset heights first
-        cards.forEach(card => card.style.height = 'auto');
-        
-        // Group cards by row using their top position
-        const rows = {};
-        cards.forEach(card => {
-            const top = card.getBoundingClientRect().top;
-            if (!rows[top]) {
-                rows[top] = [];
-            }
-            rows[top].push(card);
-        });
-        
-        // Equalize height for each row
-        Object.values(rows).forEach(rowCards => {
-            const maxHeight = Math.max(...rowCards.map(card => card.offsetHeight));
-            rowCards.forEach(card => {
-                card.style.height = maxHeight + 'px';
+    <script>
+        function equalizeMaterialRowHeights() {
+            const grid = document.getElementById('materialsGrid');
+            const cards = Array.from(grid.querySelectorAll('.product-card'));
+
+            if (cards.length === 0) return;
+
+            // Reset heights first
+            cards.forEach(card => card.style.height = 'auto');
+
+            // Group cards by row using their top position
+            const rows = {};
+            cards.forEach(card => {
+                const top = card.getBoundingClientRect().top;
+                if (!rows[top]) {
+                    rows[top] = [];
+                }
+                rows[top].push(card);
             });
-        });
-    }
-    
-    // Load materials on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        const materialsGrid = document.getElementById('materialsGrid');
-        const API_URL = 'http://localhost:8080/api/products';
 
-        fetch(API_URL)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(apiResponse => {
-                const products = apiResponse.data || apiResponse;
-                
-                // Filter only materials (category = "Materials")
-                const materials = products.filter(p => p.category === 'Materials');
-                
-                if (!materials || materials.length === 0) {
-                    materialsGrid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No materials available at the moment.</p>';
-                    return;
-                }
+            // Equalize height for each row
+            Object.values(rows).forEach(rowCards => {
+                const maxHeight = Math.max(...rowCards.map(card => card.offsetHeight));
+                rowCards.forEach(card => {
+                    card.style.height = maxHeight + 'px';
+                });
+            });
+        }
 
-                materialsGrid.innerHTML = '';
+        // Load materials on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const materialsGrid = document.getElementById('materialsGrid');
+            const API_URL = 'http://localhost:8080/api/products';
 
-                materials.forEach((material) => {
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
+            fetch(API_URL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(apiResponse => {
+                    const products = apiResponse.data || apiResponse;
 
-                    let imageUrl;
-                    if (material.imageUrl) {
-                        imageUrl = material.imageUrl.startsWith('http')
-                            ? material.imageUrl
-                            : `http://localhost:8080${material.imageUrl}`;
-                    } else {
-                        imageUrl = 'images/placeholder.jpg';
+                    // Filter only materials (category = "Materials")
+                    const materials = products.filter(p => p.category === 'Materials');
+
+                    if (!materials || materials.length === 0) {
+                        materialsGrid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No materials available at the moment.</p>';
+                        return;
                     }
 
-                    const formattedPrice = typeof material.price === 'number' 
-                        ? material.price.toFixed(2) 
-                        : parseFloat(material.price).toFixed(2);
+                    materialsGrid.innerHTML = '';
 
-                    card.innerHTML = `
+                    materials.forEach((material) => {
+                        const card = document.createElement('div');
+                        card.className = 'product-card';
+
+                        let imageUrl;
+                        if (material.imageUrl) {
+                            imageUrl = material.imageUrl.startsWith('http')
+                                ? material.imageUrl
+                                : `http://localhost:8080${material.imageUrl}`;
+                        } else {
+                            imageUrl = 'images/placeholder.jpg';
+                        }
+
+                        const formattedPrice = typeof material.price === 'number'
+                            ? material.price.toFixed(2)
+                            : parseFloat(material.price).toFixed(2);
+
+                        card.innerHTML = `
                         <div class="product-image-wrapper">
                             <img src="${imageUrl}" alt="${material.name || 'Material'}" class="product-image" onerror="this.src='images/placeholder.jpg'">
                         </div>
@@ -415,133 +426,140 @@
                         </div>
                     `;
 
-                    materialsGrid.appendChild(card);
+                        materialsGrid.appendChild(card);
 
-                    const addToCartBtn = card.querySelector('.product-btn-cart');
-                    addToCartBtn.addEventListener('click', function(e) {
-                        e.preventDefault();
+                        const addToCartBtn = card.querySelector('.product-btn-cart');
+                        addToCartBtn.addEventListener('click', async function (e) {
+                            e.preventDefault();
 
-                        addToCart({
-                            productId: material.id,
-                            name: material.name,
-                            price: typeof material.price === 'number' ? material.price : parseFloat(material.price),
-                            image: imageUrl
+                            const originalText = this.textContent;
+                            this.textContent = 'Adding...';
+                            this.disabled = true;
+
+                            try {
+                                await addToCart({
+                                    productId: material.id,
+                                    name: material.name,
+                                    price: typeof material.price === 'number' ? material.price : parseFloat(material.price),
+                                    image: imageUrl,
+                                    type: 'material'
+                                });
+
+                                this.textContent = 'Added!';
+                                setTimeout(() => {
+                                    this.textContent = originalText;
+                                    this.disabled = false;
+                                }, 1500);
+                            } catch (err) {
+                                this.textContent = originalText;
+                                this.disabled = false;
+                            }
                         });
-
-                        const originalText = this.textContent;
-                        this.textContent = 'Added!';
-                        this.disabled = true;
-
-                        setTimeout(() => {
-                            this.textContent = originalText;
-                            this.disabled = false;
-                        }, 1500);
                     });
-                });
 
-                Promise.all(Array.from(materialsGrid.querySelectorAll('.product-image')).map(img => {
-                    return new Promise(resolve => {
-                        if (img.complete) {
-                            resolve();
-                        } else {
-                            img.onload = img.onerror = resolve;
-                        }
+                    Promise.all(Array.from(materialsGrid.querySelectorAll('.product-image')).map(img => {
+                        return new Promise(resolve => {
+                            if (img.complete) {
+                                resolve();
+                            } else {
+                                img.onload = img.onerror = resolve;
+                            }
+                        });
+                    })).then(() => {
+                        equalizeMaterialRowHeights();
                     });
-                })).then(() => {
-                    equalizeMaterialRowHeights();
+                })
+                .catch(err => {
+                    console.error('Error fetching products:', err);
+                    materialsGrid.innerHTML = '<p style="text-align: center; color: red; grid-column: 1 / -1;">Failed to load materials.</p>';
                 });
-            })
-            .catch(err => {
-                console.error('Error fetching products:', err);
-                materialsGrid.innerHTML = '<p style="text-align: center; color: red; grid-column: 1 / -1;">Failed to load materials.</p>';
-            });
-    });
-
-    // Re-run on window resize
-    window.addEventListener('resize', () => {
-        equalizeMaterialRowHeights();
-    });
-    
-    // Watch for DOM changes
-    const materialObserver = new MutationObserver(() => {
-        equalizeMaterialRowHeights();
-    });
-    
-    const materialsGrid = document.getElementById('materialsGrid');
-    if (materialsGrid) {
-        materialObserver.observe(materialsGrid, {
-            childList: true,
-            subtree: false
         });
-    }
-</script>
 
-<!-- ================================
+        // Re-run on window resize
+        window.addEventListener('resize', () => {
+            equalizeMaterialRowHeights();
+        });
+
+        // Watch for DOM changes
+        const materialObserver = new MutationObserver(() => {
+            equalizeMaterialRowHeights();
+        });
+
+        const materialsGrid = document.getElementById('materialsGrid');
+        if (materialsGrid) {
+            materialObserver.observe(materialsGrid, {
+                childList: true,
+                subtree: false
+            });
+        }
+    </script>
+
+    <!-- ================================
      MATERIALS CATEGORY TAB FILTERING
 ================================ -->
-<!-- Category filtering removed - materials display without division -->
+    <!-- Category filtering removed - materials display without division -->
 
-<!-- ================================
+    <!-- ================================
      CRAFT YOUR OWN SECTION
 ================================ -->
-<section class="craft-your-own">
-    <div class="craft-wrapper">
-        <!-- Section Header -->
-        <div class="craft-header">
-            <h2 class="craft-title">Craft Your Own</h2>
-            <p class="craft-subtitle">Create custom pieces tailored to your exact measurements</p>
-        </div>
+    <section class="craft-your-own">
+        <div class="craft-wrapper">
+            <!-- Section Header -->
+            <div class="craft-header">
+                <h2 class="craft-title">Craft Your Own</h2>
+                <p class="craft-subtitle">Create custom pieces tailored to your exact measurements</p>
+            </div>
 
-        <!-- Craft Cards Container -->
-        <div class="craft-cards-container" id="customProductsGrid">
-    </div>
-</section>
+            <!-- Craft Cards Container -->
+            <div class="craft-cards-container" id="customProductsGrid">
+            </div>
+    </section>
 
-<!-- ================================
+    <!-- ================================
      CRAFT YOUR OWN - LOAD CUSTOM PRODUCTS
 ================================ -->
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const customProductsGrid = document.getElementById('customProductsGrid');
-        const CUSTOM_API_URL = 'http://localhost:8080/api/custom-products';
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const customProductsGrid = document.getElementById('customProductsGrid');
+            const CUSTOM_API_URL = 'http://localhost:8080/api/custom-products';
 
-        fetch(CUSTOM_API_URL)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(apiResponse => {
-                const customProducts = apiResponse.data || apiResponse;
-                
-                if (!customProducts || customProducts.length === 0) {
-                    customProductsGrid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No custom products available at the moment.</p>';
-                    return;
-                }
+            fetch(CUSTOM_API_URL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(apiResponse => {
+                    const customProducts = apiResponse.data || apiResponse;
 
-                customProductsGrid.innerHTML = '';
-
-                customProducts.forEach((product) => {
-                    const card = document.createElement('div');
-                    card.className = 'craft-card';
-
-                    let imageUrl;
-                    if (product.imageUrl) {
-                        imageUrl = product.imageUrl.startsWith('http')
-                            ? product.imageUrl
-                            : `http://localhost:8080${product.imageUrl}`;
-                    } else {
-                        imageUrl = 'images/placeholder.jpg';
+                    if (!customProducts || customProducts.length === 0) {
+                        customProductsGrid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No custom products available at the moment.</p>';
+                        return;
                     }
 
-                    const formattedPrice = typeof product.price === 'number' 
-                        ? product.price.toFixed(2) 
-                        : parseFloat(product.price).toFixed(2);
+                    customProductsGrid.innerHTML = '';
 
-                    let measurementFields = '';
-                    if (product.productType === 'Trouser') {
-                        measurementFields = `
+                    customProducts.forEach((product) => {
+                        const card = document.createElement('div');
+                        card.className = 'craft-card';
+
+                        let imageUrl;
+                        if (product.imageUrl) {
+                            imageUrl = product.imageUrl.startsWith('http')
+                                ? product.imageUrl
+                                : `http://localhost:8080${product.imageUrl}`;
+                        } else {
+                            imageUrl = 'images/placeholder.jpg';
+                        }
+
+                        const formattedPrice = typeof product.price === 'number'
+                            ? product.price.toFixed(2)
+                            : parseFloat(product.price).toFixed(2);
+
+                        let measurementFields = '';
+                        if (product.productType === 'Trouser') {
+                            measurementFields = `
                             <div class="measurement-field">
                                 <label>Waist (inches):</label>
                                 <input type="number" class="waist-input" placeholder="32" step="0.5" data-id="${product.id}">
@@ -555,8 +573,8 @@
                                 <input type="number" class="inseam-input" placeholder="32" step="0.5" data-id="${product.id}">
                             </div>
                         `;
-                    } else if (product.productType === 'Shirt') {
-                        measurementFields = `
+                        } else if (product.productType === 'Shirt') {
+                            measurementFields = `
                             <div class="measurement-field">
                                 <label>Chest (inches):</label>
                                 <input type="number" class="chest-input" placeholder="36" step="0.5" data-id="${product.id}">
@@ -570,9 +588,9 @@
                                 <input type="number" class="sleeve-input" placeholder="32" step="0.5" data-id="${product.id}">
                             </div>
                         `;
-                    }
+                        }
 
-                    card.innerHTML = `
+                        card.innerHTML = `
                         <div class="craft-card-image">
                             <img src="${imageUrl}" alt="${product.name || 'Custom Product'}" class="craft-image" onerror="this.src='images/placeholder.jpg'">
                         </div>
@@ -586,213 +604,259 @@
                         </div>
                     `;
 
-                    customProductsGrid.appendChild(card);
+                        customProductsGrid.appendChild(card);
 
-                    const addToCartBtn = card.querySelector('.product-btn-cart');
-                    addToCartBtn.addEventListener('click', function(e) {
-                        e.preventDefault();
+                        const addToCartBtn = card.querySelector('.product-btn-cart');
+                        addToCartBtn.addEventListener('click', async function (e) {
+                            e.preventDefault();
 
-                        addToCart({
-                            productId: product.id,
-                            name: product.name,
-                            price: typeof product.price === 'number' ? product.price : parseFloat(product.price),
-                            image: imageUrl
+                            // Capture measurements
+                            const inputs = card.querySelectorAll('input');
+                            const measureParts = [];
+                            let allFilled = true;
+                            inputs.forEach(input => {
+                                if (!input.value) allFilled = false;
+                                const label = input.closest('.measurement-field').querySelector('label').innerText.replace(':', '');
+                                measureParts.push(`${label}: ${input.value}`);
+                            });
+
+                            if (!allFilled) {
+                                alert('Please fill in all measurements');
+                                return;
+                            }
+
+                            const originalText = this.textContent;
+                            this.textContent = 'Adding...';
+                            this.disabled = true;
+
+                            try {
+                                await addToCart({
+                                    productId: product.id,
+                                    name: product.name,
+                                    price: typeof product.price === 'number' ? product.price : parseFloat(product.price),
+                                    image: imageUrl,
+                                    type: 'custom',
+                                    measurements: measureParts.join(', ')
+                                });
+
+                                this.textContent = 'Added!';
+                                setTimeout(() => {
+                                    this.textContent = originalText;
+                                    this.disabled = false;
+                                }, 1500);
+                            } catch (err) {
+                                this.textContent = originalText;
+                                this.disabled = false;
+                            }
                         });
-
-                        const originalText = this.textContent;
-                        this.textContent = 'Added!';
-                        this.disabled = true;
-
-                        setTimeout(() => {
-                            this.textContent = originalText;
-                            this.disabled = false;
-                        }, 1500);
                     });
+                })
+                .catch(err => {
+                    console.error('Error fetching custom products:', err);
+                    customProductsGrid.innerHTML = '<p style="text-align: center; color: red; grid-column: 1 / -1;">Failed to load custom products.</p>';
                 });
-            })
-            .catch(err => {
-                console.error('Error fetching custom products:', err);
-                customProductsGrid.innerHTML = '<p style="text-align: center; color: red; grid-column: 1 / -1;">Failed to load custom products.</p>';
-            });
-    });
-</script>
+        });
+    </script>
 
-<!-- Category filtering removed - materials display without division -->
+    <!-- Category filtering removed - materials display without division -->
 
-<script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/popper.min.js"></script> 
-<script src="js/bootstrap-4.4.1.js"></script>
-
-<!-- ================================
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap-4.4.1.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/shop.js"></script>
+    <script src="js/user-navbar.js"></script>
+    <!-- ================================
      CART SYSTEM (Frontend Only)
 ================================ -->
-<script>
-    // Persisted cart: load from localStorage (shared with cart.html)
-    let cart = [];
-    try {
-        cart = JSON.parse(localStorage.getItem('cart')) || [];
-    } catch (_) {
-        cart = [];
-    }
-
-    /**
-     * Add product to cart or increase quantity if exists
-     * @param {Object} product - { productId, name, price, image }
-     */
-    function addToCart(product) {
-        const existingItem = cart.find(item => item.productId === product.productId);
-
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({
-                productId: product.productId,
-                name: product.name,
-                price: product.price,
-                image: product.image,
-                quantity: 1
-            });
+    <script>
+        // Persisted cart: load from localStorage (shared with cart.html)
+        let cart = [];
+        try {
+            cart = JSON.parse(localStorage.getItem('cart')) || [];
+        } catch (_) {
+            cart = [];
         }
 
-        localStorage.setItem('cart', JSON.stringify(cart));
-        console.log('Cart updated:', cart);
-    }
-</script>
+        /**
+         * Add product to cart or increase quantity if exists
+         * @param {Object} product - { productId, name, price, image }
+         */
+        async function addToCart(product) {
+            const userSession = JSON.parse(localStorage.getItem('userSession'));
+            if (!userSession || !userSession.id) {
+                alert('Please login to add items to cart');
+                window.location.href = 'login.html';
+                return;
+            }
 
-<!-- ================================
+            try {
+                const payload = {
+                    userId: userSession.id,
+                    productId: product.productId,
+                    productType: product.type || 'standard',
+                    quantity: 1,
+                    measurements: product.measurements || ''
+                };
+                console.log('Sending AddToCart Request:', payload);
+
+                const response = await fetch('http://localhost:8080/api/cart/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    console.log('Added to cart:', data.data);
+                    // Optional: Update cart count badge if you have one
+                } else {
+                    alert('Failed to add to cart: ' + data.message);
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                console.error('Error adding to cart:', error);
+                throw error; // Propagate error to button handler
+            }
+        }
+    </script>
+
+    <!-- ================================
      CATEGORY TAB FILTERING
 ================================ -->
-<script>
-    function filterProducts(category) {
-        const productsGrid = document.getElementById('productsGrid');
-        const productCards = productsGrid.querySelectorAll('.product-card');
-        let visibleCount = 0;
+    <script>
+        function filterProducts(category) {
+            const productsGrid = document.getElementById('productsGrid');
+            const productCards = productsGrid.querySelectorAll('.product-card');
+            let visibleCount = 0;
 
-        productCards.forEach(card => {
-            const cardCategory = card.getAttribute('data-category');
-            
-            if (category === 'all' || cardCategory === category) {
-                card.style.display = '';
-                card.style.animation = 'fadeIn 0.3s ease-in-out';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-            }
-        });
+            productCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
 
-        setTimeout(equalizeRowHeights, 50);
-    }
-
-    function updateActiveTab(category) {
-        const categoryTabs = document.querySelectorAll('.category-tab');
-        categoryTabs.forEach(tab => {
-            if (tab.getAttribute('data-category') === category) {
-                tab.classList.add('active');
-            } else {
-                tab.classList.remove('active');
-            }
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const categoryTabs = document.querySelectorAll('.category-tab');
-        let currentCategory = 'all';
-
-        categoryTabs.forEach(tab => {
-            tab.addEventListener('click', function(e) {
-                e.preventDefault();
-                const selectedCategory = this.getAttribute('data-category');
-                
-                if (selectedCategory !== currentCategory) {
-                    currentCategory = selectedCategory;
-                    updateActiveTab(currentCategory);
-                    filterProducts(currentCategory);
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = '';
+                    card.style.animation = 'fadeIn 0.3s ease-in-out';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
                 }
             });
+
+            setTimeout(equalizeRowHeights, 50);
+        }
+
+        function updateActiveTab(category) {
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            categoryTabs.forEach(tab => {
+                if (tab.getAttribute('data-category') === category) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            let currentCategory = 'all';
+
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const selectedCategory = this.getAttribute('data-category');
+
+                    if (selectedCategory !== currentCategory) {
+                        currentCategory = selectedCategory;
+                        updateActiveTab(currentCategory);
+                        filterProducts(currentCategory);
+                    }
+                });
+            });
+
+            filterProducts('all');
         });
+    </script>
 
-        filterProducts('all');
-    });
-</script>
-
-<!-- ================================
+    <!-- ================================
      ANIMATION FOR FILTERED PRODUCTS
 ================================ -->
-<style>
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
             opacity: 1;
             transform: translateY(0);
         }
-    }
-</style>
+    </style>
 
-<!-- ================================
+    <!-- ================================
      FOOTER
 ================================ -->
-<footer id="footer">
-  <div class="footer-container reveal">
+    <footer id="footer">
+        <div class="footer-container reveal">
 
-    <!-- Column 1 -->
-    <div class="footer-col footer-brand reveal">
-      <h2 class="footer-title">TAILOR</h2>
-      <p class="footer-desc">
-        Our expert tailors craft exquisite garments that fit you perfectly,
-        reflecting your personal style and elegance.
-      </p>
+            <!-- Column 1 -->
+            <div class="footer-col footer-brand reveal">
+                <h2 class="footer-title">TAILOR</h2>
+                <p class="footer-desc">
+                    Our expert tailors craft exquisite garments that fit you perfectly,
+                    reflecting your personal style and elegance.
+                </p>
 
-      <div class="footer-social reveal">
-        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-        <a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a>
-      </div>
-    </div>
+                <div class="footer-social reveal">
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
 
-    <!-- Column 2 -->
-    <div class="footer-col reveal">
-      <h3>Extra links</h3>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="aboutus.html">About Us</a></li>
-        <li><a href="shop.html">Shop</a></li>
-      </ul>
-    </div>
+            <!-- Column 2 -->
+            <div class="footer-col reveal">
+                <h3>Extra links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                </ul>
+            </div>
 
-    <!-- Column 3 -->
-    <div class="footer-col reveal">
-      <h3>Useful links</h3>
-      <ul>
-        <li><a href="cart.html">Cart</a></li>
-        <li><a href="trackorder.html">Track Order</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contactus.html">Contact Us</a></li>
-      </ul>
-    </div>
+            <!-- Column 3 -->
+            <div class="footer-col reveal">
+                <h3>Useful links</h3>
+                <ul>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="trackorder.html">Track Order</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                </ul>
+            </div>
 
-    <!-- Column 4 -->
-    <div class="footer-col reveal">
-      <h3>Our contacts</h3>
-      <p>45 Galle Road, Colombo 03, Western Province, Sri Lanka</p>
-      <p class="email"> 
-		  <a href="info@tailorstudio.lk" style="color: rgba(255, 255, 255, 0.75);">info@tailorstudio.lk</p></a>                                      
-      <p>+94 77 456 7890</p>
+            <!-- Column 4 -->
+            <div class="footer-col reveal">
+                <h3>Our contacts</h3>
+                <p>45 Galle Road, Colombo 03, Western Province, Sri Lanka</p>
+                <p class="email">
+                    <a href="info@tailorstudio.lk" style="color: rgba(255, 255, 255, 0.75);">info@tailorstudio.lk
+                </p></a>
+                <p>+94 77 456 7890</p>
 
-      <p class="working-hours">
-        OUR WORKING HOURS <br>
-        MON – SAT: 8 AM – 6 PM
-      </p>
-    </div>
-  </div>
+                <p class="working-hours">
+                    OUR WORKING HOURS <br>
+                    MON – SAT: 8 AM – 6 PM
+                </p>
+            </div>
+        </div>
 
-  <div class="footer-bottom">
-    <p>© Tailor. All Rights Reserved.</p>
-  </div>
-</footer>
+        <div class="footer-bottom">
+            <p>© Tailor. All Rights Reserved.</p>
+        </div>
+    </footer>
 
 </body>
+
 </html>

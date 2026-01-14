@@ -1,227 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Track Order - Tailor</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Order - Tailor</title>
 
-  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="trackorder.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="trackorder.css">
 
+    <link rel="stylesheet" href="user-auth.css">
 </head>
+
 <body>
-<nav class="navbar navbar-light navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">Tailor.</a>
+    <nav class="navbar navbar-light navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Tailor.</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse justify-content-between" id="navMenu">
-            <div class="nav-left navbar-nav">
-                <a class="nav-link" href="index.html">Home</a>
-                <a class="nav-link" href="aboutus.html">About Us</a>
-                <a class="nav-link" href="services.html">Services</a>
-                <a class="nav-link" href="contactus.html">Contact Us</a>
-            </div>
-
-            <div class="nav-right navbar-nav">
-                <a class="nav-link" href="trackorder.html">Track Order</a>
-                <a class="nav-link" href="shop.html"> Shop</a>
-                <a class="nav-link book-btn" href="cart.html">Cart</a>
-                <a class="nav-link" href="login.html">Login</a>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<div class="track-order-page">
-
-  <section class="track-header-section">
-      <div class="container-fluid">
-          <div class="row align-items-center">
-              <div class="col-md-6">
-                  <h1 class="track-header-title">Track Your Order</h1>
-              </div>
-              <div class="col-md-6">
-                  <div class="track-header-content">
-                      <img src="images/ordertrack.jpg" alt="Track Order Flow" class="track-header-image">
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-
-
-  <div class="track-content-grid">
-      
-      <section class="ordered-items-section">
-          <h2 class="section-title">Ordered Items</h2>
-          <div class="items-container" id="itemsContainer">
-          </div>
-      </section>
-
-  </div>
-
-</div>
-
-<footer id="footer">
-  <div class="footer-container">
-
-    <div class="footer-col footer-brand">
-      <h2 class="footer-title">TAILOR</h2>
-      <p class="footer-desc">
-        Our expert tailors craft exquisite garments that fit you perfectly,
-        reflecting your personal style and elegance.
-      </p>
-
-      <div class="footer-social">
-        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-        <a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a>
-      </div>
-    </div>
-
-    <div class="footer-col">
-      <h3>Extra links</h3>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="aboutus.html">About Us</a></li>
-        <li><a href="shop.html">Shop</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h3>Useful links</h3>
-      <ul>
-        <li><a href="cart.html">Cart</a></li>
-        <li><a href="trackorder.html">Track Order</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contactus.html">Contact Us</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h3>Our contacts</h3>
-      <p>45 Galle Road, Colombo 03, Western Province, Sri Lanka</p>
-      <p class="email"> 
-		  <a href="info@tailorstudio.lk" style="color: rgba(255, 255, 255, 0.75);">info@tailorstudio.lk</p></a>                                      
-      <p>+94 77 456 7890</p>
-
-      <p class="working-hours">
-        OUR WORKING HOURS <br>
-        MON – SAT: 8 AM – 6 PM
-      </p>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>© Tailor. All Rights Reserved.</p>
-  </div>
-</footer>
-
-<script>
-
-// Order configuration - Change orderType to 'custom' or 'readymade'
-const orderConfig = {
-    orderType: 'custom',
-    currentStage: -1
-};
-
-const stepperStages = {
-    custom: [
-        { icon: 'fas fa-check-circle', label: 'Order Confirmed' },
-        { icon: 'fas fa-scissors', label: 'Tailoring in Progress' },
-        { icon: 'fas fa-clipboard-check', label: 'Quality Check' },
-        { icon: 'fas fa-truck', label: 'Shipped' }
-    ],
-    readymade: [
-        { icon: 'fas fa-check-circle', label: 'Order Confirmed' },
-        { icon: 'fas fa-cog', label: 'Processing' },
-        { icon: 'fas fa-truck', label: 'Shipped' }
-    ]
-};
-
-const orderedItems = [
-    {
-        id: 1,
-        name: 'Custom Tailored Blazer',
-        image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400',
-        quantity: 1,
-        price: 15000,
-        isCustom: true,
-        currentStage: 1
-    },
-    {
-        id: 2,
-        name: 'Premium Cotton Shirt',
-        image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400',
-        quantity: 2,
-        price: 4500,
-        isCustom: true,
-        currentStage: 3
-    },
-    {
-        id: 3,
-        name: 'Formal Trousers',
-        image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400',
-        quantity: 1,
-        price: 6000,
-        isCustom: false,
-        currentStage: 2
-    }
-];
-
-const pricingConfig = {
-    deliveryFee: 500,
-    discount: 1000
-};
-
-function renderStepper() {
-    const stepperContainer = document.getElementById('orderStepper');
-    const stages = stepperStages[orderConfig.orderType];
-    const currentStage = orderConfig.currentStage;
-    const progressPercentage = (currentStage / (stages.length - 1)) * 100;
-    
-    const progressLine = `
-        <div class="stepper-progress-line">
-            <div class="stepper-progress-fill" style="width: ${progressPercentage}%"></div>
-        </div>
-    `;
-    
-    const stepsHTML = stages.map((stage, index) => {
-        let stepClass = 'stepper-step';
-        let iconHTML = `<i class="${stage.icon} step-icon"></i>`;
-        
-        if (index < currentStage) {
-            stepClass += ' completed';
-            iconHTML = '<i class="fas fa-check step-icon"></i>';
-        } else if (index === currentStage) {
-            stepClass += ' active';
-        }
-        
-        return `
-            <div class="${stepClass}">
-                <div class="step-icon-wrapper">
-                    ${iconHTML}
+            <div class="collapse navbar-collapse justify-content-between" id="navMenu">
+                <div class="nav-left navbar-nav">
+                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="aboutus.html">About Us</a>
+                    <a class="nav-link" href="services.html">Services</a>
+                    <a class="nav-link" href="contactus.html">Contact Us</a>
                 </div>
-                <div class="step-label">${stage.label}</div>
-            </div>
-        `;
-    }).join('');
-    
-    stepperContainer.innerHTML = progressLine + stepsHTML;
-}
 
-function renderOrderedItems() {
-    const container = document.getElementById('itemsContainer');
-    
-    if (orderedItems.length === 0) {
-        container.innerHTML = `
+                <div class="nav-right navbar-nav">
+                    <a class="nav-link" href="trackorder.html">Track Order</a>
+                    <a class="nav-link" href="shop.html"> Shop</a>
+                    <a class="nav-link book-btn" href="cart.html">Cart</a>
+                    <a class="nav-link" href="login.html">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="track-order-page">
+
+        <section class="track-header-section">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1 class="track-header-title">Track Your Order</h1>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="track-header-content">
+                            <img src="images/ordertrack.jpg" alt="Track Order Flow" class="track-header-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="track-content-grid">
+
+            <section class="ordered-items-section">
+                <h2 class="section-title">Ordered Items</h2>
+                <div class="items-container" id="itemsContainer">
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+
+    <footer id="footer">
+        <div class="footer-container">
+
+            <div class="footer-col footer-brand">
+                <h2 class="footer-title">TAILOR</h2>
+                <p class="footer-desc">
+                    Our expert tailors craft exquisite garments that fit you perfectly,
+                    reflecting your personal style and elegance.
+                </p>
+
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Extra links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Useful links</h3>
+                <ul>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="trackorder.html">Track Order</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Our contacts</h3>
+                <p>45 Galle Road, Colombo 03, Western Province, Sri Lanka</p>
+                <p class="email">
+                    <a href="info@tailorstudio.lk" style="color: rgba(255, 255, 255, 0.75);">info@tailorstudio.lk
+                </p></a>
+                <p>+94 77 456 7890</p>
+
+                <p class="working-hours">
+                    OUR WORKING HOURS <br>
+                    MON – SAT: 8 AM – 6 PM
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© Tailor. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Order configuration
+        const stepperStages = {
+            custom: [
+                { icon: 'fas fa-check-circle', label: 'Order Confirmed' },
+                { icon: 'fas fa-scissors', label: 'Tailoring in Progress' },
+                { icon: 'fas fa-clipboard-check', label: 'Quality Check' },
+                { icon: 'fas fa-box-open', label: 'Delivered' }
+            ],
+            readymade: [
+                { icon: 'fas fa-check-circle', label: 'Order Confirmed' },
+                { icon: 'fas fa-clipboard-check', label: 'Quality Check' },
+                { icon: 'fas fa-box-open', label: 'Delivered' }
+            ]
+        };
+
+        // Helper to map status to stage index
+        function getStageFromStatus(status, type) {
+            status = status || 'Confirmed';
+            const normalizedStatus = status.toLowerCase().replace(/ /g, '_'); // confirmed, tailoring_in_progress, quality_check, delivered
+
+            if (type === 'custom') {
+                if (normalizedStatus === 'confirmed' || normalizedStatus === 'order_confirmed') return 0;
+                if (normalizedStatus === 'tailoring_in_progress') return 1;
+                if (normalizedStatus === 'quality_check') return 2;
+                if (normalizedStatus === 'delivered') return 3;
+            } else {
+                if (normalizedStatus === 'confirmed' || normalizedStatus === 'order_confirmed') return 0;
+                if (normalizedStatus === 'quality_check' || normalizedStatus === 'processing') return 1;
+                if (normalizedStatus === 'delivered') return 2;
+            }
+            return 0; // default
+        }
+
+        async function fetchOrders() {
+            const userSession = JSON.parse(localStorage.getItem('userSession'));
+            if (!userSession || !userSession.id) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/orders/user/${userSession.id}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    renderOrders(result.data);
+                } else {
+                    console.error('Failed to load orders:', result.message);
+                    document.getElementById('itemsContainer').innerHTML = '<p class="text-center">Failed to load orders.</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        }
+
+        function renderOrders(orders) {
+            const container = document.getElementById('itemsContainer');
+
+            if (!orders || orders.length === 0) {
+                container.innerHTML = `
             <div class="empty-state">
                 <div class="empty-icon-wrapper">
                     <i class="fas fa-shopping-bag"></i>
@@ -235,95 +202,105 @@ function renderOrderedItems() {
                 </a>
             </div>
         `;
-        return;
-    }
-    
-    const itemsHTML = orderedItems.map(item => {
-        const subtotal = item.quantity * item.price;
-        const customBadge = item.isCustom ? '<span class="custom-badge">Custom Made</span>' : '';
-        
-        const itemType = item.isCustom ? 'custom' : 'readymade';
-        const stages = stepperStages[itemType];
-        const currentStage = item.currentStage;
-        
-        const miniStepperHTML = stages.map((stage, index) => {
-            let stepClass = 'mini-step';
-            let iconHTML = `<i class="${stage.icon}"></i>`;
-            
-            if (index < currentStage) {
-                stepClass += ' completed';
-                iconHTML = '<i class="fas fa-check"></i>';
-            } else if (index === currentStage) {
-                stepClass += ' active';
+                return;
             }
-            
-            return `
-                <div class="${stepClass}">
-                    <div class="mini-step-icon">${iconHTML}</div>
-                    <div class="mini-step-label">${stage.label}</div>
-                </div>
-            `;
-        }).join('');
-        
-        return `
-            <div class="order-item-card">
-                <div class="item-image-wrapper">
-                    <img src="${item.image}" alt="${item.name}" class="item-image">
-                    ${customBadge}
-                </div>
-                <div class="item-details">
-                    <div>
-                        <h3 class="item-name">${item.name}</h3>
-                        <div class="mini-stepper steps-${stages.length}">
-                            ${miniStepperHTML}
+
+            // Flatten items from all orders or group them? 
+            // The prompt implies listing products. I'll list all items but sorted by latest order.
+
+            // Sort by Latest first
+            orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+
+            let allItemsHTML = '';
+
+            orders.forEach(order => {
+                const orderDate = new Date(order.orderDate).toLocaleDateString();
+
+                order.items.forEach(item => {
+                    const subtotal = item.quantity * item.price;
+                    const isCustom = (item.productType === 'custom');
+                    const customBadge = isCustom ? '<span class="custom-badge">Custom Made</span>' : '';
+
+                    const stages = stepperStages[isCustom ? 'custom' : 'readymade'];
+                    const currentStage = getStageFromStatus(order.status, isCustom ? 'custom' : 'readymade');
+
+                    const miniStepperHTML = stages.map((stage, index) => {
+                        let stepClass = 'mini-step';
+                        let iconHTML = `<i class="${stage.icon}"></i>`;
+
+                        if (index < currentStage) {
+                            stepClass += ' completed';
+                            iconHTML = '<i class="fas fa-check"></i>';
+                        } else if (index === currentStage) {
+                            stepClass += ' active';
+                        }
+
+                        return `
+                        <div class="${stepClass}">
+                            <div class="mini-step-icon">${iconHTML}</div>
+                            <div class="mini-step-label">${stage.label}</div>
                         </div>
-                        <div class="item-meta">
-                            <div>
-                                <span class="item-meta-label">Quantity:</span>
-                                <span class="item-meta-value">${item.quantity}</span>
+                    `;
+                    }).join('');
+
+                    const imageUrl = item.imageUrl || 'https://via.placeholder.com/150';
+
+                    allItemsHTML += `
+                    <div class="order-item-card" style="flex-direction: column;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                             <small style="font-weight:600; color:#6c757d;">Order #${order.id} • ${orderDate}</small>
+                             <small style="color:#b89255; font-weight:bold; text-transform:capitalize;">${order.status || 'Confirmed'}</small>
+                        </div>
+                        <div style="display:flex; gap:20px;">
+                            <div class="item-image-wrapper">
+                                <img src="${imageUrl}" alt="${item.name}" class="item-image">
+                                ${customBadge}
                             </div>
-                            <div>
-                                <span class="item-meta-label">Price:</span>
-                                <span class="item-meta-value">Rs ${formatPrice(item.price)}</span>
+                            <div class="item-details">
+                                <div>
+                                    <h3 class="item-name">${item.name}</h3>
+                                    <div class="mini-stepper steps-${stages.length}">
+                                        ${miniStepperHTML}
+                                    </div>
+                                    <div class="item-meta">
+                                        <div>
+                                            <span class="item-meta-label">Quantity:</span>
+                                            <span class="item-meta-value">${item.quantity}</span>
+                                        </div>
+                                        <div>
+                                            <span class="item-meta-label">Price:</span>
+                                            <span class="item-meta-value">Rs ${formatPrice(item.price)}</span>
+                                        </div>
+                                    </div>
+                                    ${item.measurements ? `<div style="margin-top:8px; font-size:13px; color:#888;">Measurements: ${item.measurements}</div>` : ''}
+                                </div>
+                                <div class="item-pricing">
+                                    <span class="item-subtotal">Rs ${formatPrice(subtotal)}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item-pricing">
-                        <span class="item-subtotal">Rs ${formatPrice(subtotal)}</span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join('');
-    
-    container.innerHTML = itemsHTML;
-}
+                `;
+                });
+            });
 
-function renderOrderSummary() {
-    // Calculate totals
-    const subtotal = orderedItems.reduce((sum, item) => sum + (item.quantity * item.price), 0);
-    const deliveryFee = pricingConfig.deliveryFee;
-    const discount = pricingConfig.discount;
-    const total = subtotal + deliveryFee - discount;
-    
-    document.getElementById('summarySubtotal').textContent = `Rs ${formatPrice(subtotal)}`;
-    document.getElementById('summaryDelivery').textContent = `Rs ${formatPrice(deliveryFee)}`;
-    document.getElementById('summaryDiscount').textContent = `- Rs ${formatPrice(discount)}`;
-    document.getElementById('summaryTotal').textContent = `Rs ${formatPrice(total)}`;
-}
+            container.innerHTML = allItemsHTML;
+        }
 
-function formatPrice(price) {
-    return price.toLocaleString('en-LK', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
+        function formatPrice(price) {
+            return price.toLocaleString('en-LK', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
 
-document.addEventListener('DOMContentLoaded', function() {
-    renderOrderedItems();
-});
-</script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchOrders();
+        });
+    </script>
 
-<script src="js/jquery-3.4.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap-4.4.1.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap-4.4.1.js"></script>
 
+    <script src="js/user-navbar.js"></script>
 </body>
+
 </html>

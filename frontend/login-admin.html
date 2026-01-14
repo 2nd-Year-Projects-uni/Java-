@@ -1,83 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tailor Shop - Admin Login</title>
-  
+
   <!-- Bootstrap -->
   <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="login.css">
 </head>
+
 <body>
 
   <!-- Navbar -->
   <nav class="navbar navbar-light navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">Tailor.</a>
+      <a class="navbar-brand" href="index.html">Tailor.</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <div class="collapse navbar-collapse justify-content-between" id="navMenu">
-            <div class="nav-left navbar-nav">
-                <a class="nav-link" href="index.html">Home</a>
-                <a class="nav-link" href="aboutus.html">About Us</a>
-                <a class="nav-link" href="services.html">Services</a>
-                <a class="nav-link" href="contactus.html">Contact Us</a>
-            </div>
-
-            <div class="nav-right navbar-nav">
-                <a class="nav-link" href="trackorder.html">Track Order</a>
-                <a class="nav-link" href="shop.html">Shop</a>
-                <a class="nav-link book-btn" href="cart.html">Cart</a>
-                <a class="nav-link" href="login.html">Login</a>
-            </div>
+      <div class="collapse navbar-collapse justify-content-between" id="navMenu">
+        <div class="nav-left navbar-nav">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="aboutus.html">About Us</a>
+          <a class="nav-link" href="services.html">Services</a>
+          <a class="nav-link" href="contactus.html">Contact Us</a>
         </div>
+
+        <div class="nav-right navbar-nav">
+          <a class="nav-link" href="trackorder.html">Track Order</a>
+          <a class="nav-link" href="shop.html">Shop</a>
+          <a class="nav-link book-btn" href="cart.html">Cart</a>
+          <a class="nav-link" href="login.html">Login</a>
+        </div>
+      </div>
     </div>
   </nav>
 
-<section class="auth-bg">
-  <div class="auth-card">
+  <section class="auth-bg">
+    <div class="auth-card">
 
-    <!-- LEFT -->
-    <div class="auth-carousel">
-      <div class="carousel-slide active" style="background-image:url('images/img4.png')"></div>
-      <div class="carousel-overlay"></div>
-    </div>
-
-    <!-- RIGHT -->
-    <div class="auth-form">
-      <div class="auth-header">
-        <h2>Admin Login</h2>
-        <p>Authorized personnel only</p>
+      <!-- LEFT -->
+      <div class="auth-carousel">
+        <div class="carousel-slide active" style="background-image:url('images/img4.png')"></div>
+        <div class="carousel-overlay"></div>
       </div>
 
-      <form>
-        <div class="form-group">
-          <label>Email</label>
-          <input class="form-control" required>
+      <!-- RIGHT -->
+      <div class="auth-form">
+        <div class="auth-header">
+          <h2>Admin Login</h2>
+          <p>Authorized personnel only</p>
         </div>
 
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" class="form-control" required>
-        </div>
+        <form>
+          <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" required>
+          </div>
 
-        <button class="auth-btn">Login</button>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" required>
+          </div>
 
-        <div class="auth-footer">
-          <a href="login.html">← Back to user login</a>
-        </div>
-      </form>
+          <button class="auth-btn">Login</button>
+
+          <div class="auth-footer">
+            <a href="login.html">← Back to user login</a>
+          </div>
+        </form>
+      </div>
+
     </div>
+  </section>
 
-  </div>
-</section>
 
+  <script>
+    const form = document.querySelector('form');
+
+    function showError(msg) {
+      let err = form.querySelector('.auth-error');
+      if (!err) {
+        err = document.createElement('div');
+        err.className = 'auth-error';
+        err.style.color = 'red';
+        err.style.textAlign = 'center';
+        err.style.marginTop = '10px';
+        err.style.fontSize = '14px';
+
+        // Place error message just above the footer (or at bottom if no footer)
+        const footer = form.querySelector('.auth-footer');
+        if (footer) {
+          form.insertBefore(err, footer);
+        } else {
+          form.appendChild(err);
+        }
+      }
+      err.textContent = msg;
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault(); // Prevent page reload (which clears fields)
+
+      const emailInput = form.querySelector('input[type="text"], input:not([type="password"])');
+      const passwordInput = form.querySelector('input[type="password"]');
+
+      const email = emailInput ? emailInput.value.trim() : '';
+      const password = passwordInput ? passwordInput.value : '';
+
+      // Clear previous error
+      const existingErr = form.querySelector('.auth-error');
+      if (existingErr) existingErr.remove();
+
+      if (!email || !password) {
+        showError("Please fill all fields");
+        return;
+      }
+
+      try {
+        const res = await fetch('http://localhost:8080/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          // Store admin session
+          localStorage.setItem('adminSession', JSON.stringify(data.data));
+          window.location.href = 'admin-dashboard.html';
+        } else {
+          showError(data.message || "Invalid credentials");
+        }
+
+      } catch (err) {
+        console.error(err);
+        showError("Unable to connect to server");
+      }
+    });
+  </script>
 </body>
+
 </html>

@@ -49,9 +49,12 @@
 }
 
 @keyframes slideRight {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateX(0);
     }
+
     50% {
         transform: translateX(5px);
     }
@@ -190,7 +193,7 @@
 .cart-items-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
 }
 
 /* ================================
@@ -596,7 +599,8 @@
 
     .cart-header-section {
         padding: 110px 20px 50px;
-        min-height: 340px; /* keep mobile comfortable */
+        min-height: 340px;
+        /* keep mobile comfortable */
     }
 
     .cart-header-title {
@@ -718,7 +722,8 @@
     .cart-header-section {
         padding: 90px 15px 35px;
         margin-top: 60px;
-        min-height: auto; /* avoid overly tall on small phones */
+        min-height: auto;
+        /* avoid overly tall on small phones */
     }
 
     .cart-header-title {
@@ -808,6 +813,7 @@
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -832,4 +838,147 @@
 
 .cart-item:nth-child(5) {
     animation-delay: 0.2s;
+}/* ================================
+   CHECKOUT MODAL STYLES
+================================ */
+.modal-content {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+.modal-header {
+    background-color: #2E2B1F;
+    color: white;
+    border-bottom: 2px solid #b89255;
+    padding: 20px 30px;
+    align-items: center;
+}
+
+.modal-title {
+    font-family: 'Times New Roman', serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.modal-header .close {
+    color: white;
+    opacity: 0.8;
+    text-shadow: none;
+    transition: opacity 0.3s;
+    padding: 20px 30px;
+    margin: -20px -30px -20px auto;
+}
+
+.modal-header .close:hover {
+    opacity: 1;
+    color: #b89255;
+}
+
+.modal-body {
+    padding: 30px;
+    background-color: #faf8f4;
+}
+
+.checkout-summary h6 {
+    color: #2E2B1F;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 10px;
+}
+
+.table.table-borderless td,
+.table.table-borderless th {
+    vertical-align: middle;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+.table.table-borderless tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table thead th {
+    color: #888;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    background-color: #fff;
+    justify-content: space-between;
+}
+
+.btn-secondary,
+.btn-primary {
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 12px 24px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: #f1f1f1;
+    color: #666;
+}
+
+.btn-secondary:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+/* Primary confirm button using dark theme */
+.btn-primary {
+    background-color: #2E2B1F;
+    /* Dark color from website */
+    color: #fff;
+    border: 2px solid #2E2B1F;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #b89255 !important;
+    border-color: #b89255 !important;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(184, 146, 85, 0.3);
+}
+
+.text-primary {
+    color: #b89255 !important;
+}
+
+/* Responsive adjustments for modal */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 10px;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-footer {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .btn-secondary,
+    .btn-primary {
+        width: 100%;
+    }
 }

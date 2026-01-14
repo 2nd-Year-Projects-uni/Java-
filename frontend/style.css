@@ -61,6 +61,7 @@ body {
     background: #2E2B1F !important;  
     color: white !important;         
     transition: 0.3s ease;
+    margin-left: 20px; /* Added spacing */
 }
 
 .book-btn:hover { 

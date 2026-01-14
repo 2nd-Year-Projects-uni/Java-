@@ -166,10 +166,8 @@
     margin: 0;
     font-family: Arial, sans-serif;
     flex-grow: 1;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    display: block;
+    overflow: visible;
 }
 
 .product-price {
@@ -293,17 +291,18 @@
 
 /* Tablet and below: Adjust padding and spacing */
 @media (max-width: 768px) {
+
     /* Shop Intro */
     .shop-intro-section {
         padding: 120px 30px 60px;
     }
-    
+
     .shop-intro-title {
         font-size: 70px;
         text-align: center;
         margin-bottom: 30px;
     }
-    
+
     .shop-intro-content {
         padding-left: 0;
     }
@@ -399,6 +398,7 @@
 
 /* Mobile: Compact spacing */
 @media (max-width: 480px) {
+
     /* Mobile tabs - horizontal scrollable */
     .category-tabs {
         width: 100%;
