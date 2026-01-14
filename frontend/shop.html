@@ -673,7 +673,6 @@
         productCards.forEach(card => {
             const cardCategory = card.getAttribute('data-category');
             
-            // Show card if it matches the selected category or if category is 'all'
             if (category === 'all' || cardCategory === category) {
                 card.style.display = '';
                 card.style.animation = 'fadeIn 0.3s ease-in-out';
@@ -683,14 +682,13 @@
             }
         });
 
-        // Re-equalize row heights after filtering
         setTimeout(equalizeRowHeights, 50);
     }
 
-    /**
-     * Update active tab styling
-     * @param {string} category - The selected category
-     */
+    function updateActiveTab(category) {
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        categoryTabs.forEach(tab => {
+            if (tab.getAttribute('data-category') === category) {
                 tab.classList.add('active');
             } else {
                 tab.classList.remove('active');
@@ -698,25 +696,23 @@
         });
     }
 
-    /**
-     * Initialize category tabs and filtering
-     */
     document.addEventListener('DOMContentLoaded', () => {
         const categoryTabs = document.querySelectorAll('.category-tab');
         let currentCategory = 'all';
 
-        /**
-    document.addEventListener('DOMContentLoaded', () => {
-        const categoryTabs = document.querySelectorAll('.category-tab');
-        let currentCategory = 'all';
-         currentCategory = selectedCategory;
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selectedCategory = this.getAttribute('data-category');
+                
+                if (selectedCategory !== currentCategory) {
+                    currentCategory = selectedCategory;
                     updateActiveTab(currentCategory);
                     filterProducts(currentCategory);
                 }
             });
         });
 
-        // Initialize with 'all' category shown
         filterProducts('all');
     });
 </script>
