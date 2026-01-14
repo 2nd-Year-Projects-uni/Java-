@@ -1,23 +1,617 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Untitled Document</title>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - Tailor</title>
+
     <!-- Bootstrap -->
-	<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-	
-  </head>
-  <body>
-  	<!-- body code goes here -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cart.css">
+
+    <link rel="stylesheet" href="user-auth.css">
+</head>
+
+<body>
+
+    <!-- ================================
+     NAVBAR
+================================ -->
+    <nav class="navbar navbar-light navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Tailor.</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navMenu">
+                <div class="nav-left navbar-nav">
+                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="aboutus.html">About Us</a>
+                    <a class="nav-link" href="services.html">Services</a>
+                    <a class="nav-link" href="contactus.html">Contact Us</a>
+                </div>
+
+                <div class="nav-right navbar-nav">
+                    <a class="nav-link" href="trackorder.html">Track Order</a>
+                    <a class="nav-link" href="shop.html">Shop</a>
+                    <a class="nav-link book-btn" href="cart.html">Cart</a>
+                    <a class="nav-link" href="login.html">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================================
+     PROMOTIONAL BANNER
+================================ -->
+    <section class="promo-banner">
+        <div class="promo-content">
+            <i class="fas fa-truck-fast promo-icon"></i>
+            <div class="promo-text">
+                <span class="promo-highlight">Free Delivery</span>
+                <span class="promo-separator">|</span>
+                <span class="promo-description">On orders over Rs 20,000</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="cart-divider-line"></div>
+
+    <!-- ================================
+     CART HEADER SECTION
+================================ -->
+    <section class="cart-header-section">
+        <div class="cart-header-content">
+            <h1 class="cart-header-title">Your Shopping Cart</h1>
+            <p class="cart-header-subtitle">Review your carefully selected items, adjust quantities as needed, and
+                proceed to secure checkout. Each piece is crafted with precision and care, tailored to your exact
+                specifications. Our team is committed to delivering excellence in every stitch.</p>
+        </div>
+    </section>
+
+    <!-- ================================
+     MAIN CART SECTION
+================================ -->
+    <section class="cart-main-section">
+        <div class="cart-container">
+
+            <!-- Cart Items Column -->
+            <div class="cart-items-column">
+
+                <!-- Cart Items List -->
+                <div class="cart-items-wrapper" id="cartItemsWrapper">
+                    <!-- Cart items will be dynamically injected here -->
+                </div>
+
+                <!-- Empty Cart Message -->
+                <div class="empty-cart-message" id="emptyCartMessage" style="display: none;">
+                    <div class="empty-cart-content">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h2>Your Cart is Empty</h2>
+                        <p>Looks like you haven't added any items yet. Explore our collection and find something you
+                            love!</p>
+                        <a href="shop.html" class="btn-continue-shopping">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary Column -->
+            <div class="order-summary-column" id="orderSummaryColumn">
+                <div class="order-summary-wrapper">
+                    <h2 class="order-summary-title">Order Summary</h2>
+
+                    <div class="order-summary-details">
+                        <div class="summary-row">
+                            <span class="summary-label">Subtotal:</span>
+                            <span class="summary-value" id="subtotalValue">Rs 0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Tax:</span>
+                            <span class="summary-value" id="taxValue">Rs 0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Delivery:</span>
+                            <span class="summary-value" id="deliveryValue">Rs 250.00</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row summary-total">
+                            <span class="summary-label">Grand Total:</span>
+                            <span class="summary-value" id="totalValue">Rs 0.00</span>
+                        </div>
+                    </div>
+
+                    <button class="btn-checkout" id="checkoutBtn" disabled>
+                        Proceed to Checkout
+                    </button>
+
+                    <a href="shop.html" class="btn-continue-shop">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+     CHECKOUT MODAL
+    ================================ -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Your Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="checkout-summary">
+                        <h6>Items in your order:</h6>
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th class="text-center">Qty</th>
+                                        <th class="text-right">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="checkoutItemsList">
+                                    <!-- Items injected here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="h5 mb-0">Total Amount (LKR)</span>
+                            <span class="h4 mb-0 text-primary" id="checkoutTotalAmount">Rs 0.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary btn-lg px-5" id="confirmOrderBtn">
+                        Place Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================
+     FOOTER
+================================ -->
+    <footer id="footer">
+        <div class="footer-container reveal">
+
+            <!-- Column 1 -->
+            <div class="footer-col footer-brand reveal">
+                <h2 class="footer-title">TAILOR</h2>
+                <p class="footer-desc">
+                    Our expert tailors craft exquisite garments that fit you perfectly,
+                    reflecting your personal style and elegance.
+                </p>
+
+                <div class="footer-social reveal">
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="footer-col reveal">
+                <h3>Extra links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="footer-col reveal">
+                <h3>Useful links</h3>
+                <ul>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="trackorder.html">Track Order</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="footer-col reveal">
+                <h3>Our contacts</h3>
+                <p>45 Galle Road, Colombo 03, Western Province, Sri Lanka</p>
+                <p class="email">
+                    <a href="info@tailorstudio.lk" style="color: rgba(255, 255, 255, 0.75);">info@tailorstudio.lk</a>
+                </p>
+                <p>+94 77 456 7890</p>
+
+                <p class="working-hours">
+                    OUR WORKING HOURS <br>
+                    MON – SAT: 8 AM – 6 PM
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© Tailor. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ================================
+     SCRIPTS
+================================ -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap-4.4.1.js"></script>
+
+    <script>
+        // ================================
+        // CART DATA STRUCTURE
+        // ================================
+        // Expected localStorage format:
+        // localStorage.setItem('cart', JSON.stringify([
+        //   {
+        //     productId: 1,
+        //     name: 'Product Name',
+        //     price: 99.99,
+        //     image: 'path/to/image.jpg',
+        //     quantity: 2
+        //   }
+        // ]))
+
+        const TAX_RATE = 0.02; // 2% tax
+        const DELIVERY_FEE = 250; // base delivery fee
+
+        // ================================
+        // INITIALIZATION
+        // ================================
+        document.addEventListener('DOMContentLoaded', function () {
+            const userSession = JSON.parse(localStorage.getItem('userSession'));
+            if (!userSession || !userSession.id) {
+                // Redirect if not logged in
+                window.location.href = 'login.html';
+                return;
+            }
+            fetchCart(userSession.id);
+            setupEventListeners();
+        });
+
+        // ================================
+        // RENDER CART
+        // ================================
+        // ================================
+        // FETCH & RENDER CART
+        // ================================
+        async function fetchCart(userId) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/cart/${userId}`);
+                const result = await response.json();
+
+                if (result.success && result.data) {
+                    renderCartItems(result.data.items || []);
+                } else {
+                    console.error('Failed to load cart:', result.message);
+                }
+            } catch (error) {
+                console.error('Error fetching cart:', error);
+            }
+        }
+
+        function renderCartItems(cartItems) {
+            window.currentCartItems = cartItems; // Store for checkout usage
+            const cartItemsWrapper = document.getElementById('cartItemsWrapper');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+            const orderSummaryColumn = document.getElementById('orderSummaryColumn');
+
+            // Clear previous content
+            cartItemsWrapper.innerHTML = '';
+
+            if (cartItems.length === 0) {
+                // Show empty cart message
+                cartItemsWrapper.style.display = 'none';
+                emptyCartMessage.style.display = 'flex';
+                orderSummaryColumn.style.display = 'none';
+            } else {
+                // Show cart items
+                cartItemsWrapper.style.display = 'block';
+                emptyCartMessage.style.display = 'none';
+                orderSummaryColumn.style.display = 'block';
+
+                // Render each cart item
+                cartItems.forEach(item => {
+                    const cartItemElement = createCartItemElement(item);
+                    cartItemsWrapper.appendChild(cartItemElement);
+                });
+
+                // Update order summary
+                updateOrderSummary(cartItems);
+            }
+        }
+
+        // ================================
+        // CREATE CART ITEM ELEMENT
+        // ================================
+        // ================================
+        // CREATE CART ITEM ELEMENT
+        // ================================
+        function createCartItemElement(item) {
+            const container = document.createElement('div');
+            container.className = 'cart-item';
+            container.setAttribute('data-cart-item-id', item.id); // Uses CartItem ID, not Product ID
+
+            const itemTotal = (item.price * item.quantity).toFixed(2);
+
+            // Format measurements display if exists
+            let measurementsHtml = '';
+            if (item.measurements) {
+                measurementsHtml = `<p class="cart-item-measurements" style="font-size: 0.85em; color: #666;"><small>${item.measurements}</small></p>`;
+            }
+
+            container.innerHTML = `
+            <div class="cart-item-image">
+                <img src="${item.imageUrl}" alt="${item.name}" onerror="this.src='images/placeholder.jpg'">
+            </div>
+
+            <div class="cart-item-details">
+                <h3 class="cart-item-name">${item.name}</h3>
+                <p class="cart-item-price">Rs ${item.price.toFixed(2)}</p>
+                ${measurementsHtml}
+            </div>
+
+            <div class="cart-item-quantity">
+                <button class="qty-btn qty-minus" data-cart-item-id="${item.id}" data-current-qty="${item.quantity}">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <input type="number" class="qty-input" value="${item.quantity}" min="1" data-cart-item-id="${item.id}">
+                <button class="qty-btn qty-plus" data-cart-item-id="${item.id}" data-current-qty="${item.quantity}">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+
+            <div class="cart-item-total">
+                <p class="total-label">Total</p>
+                <p class="total-amount">Rs ${itemTotal}</p>
+            </div>
+
+            <div class="cart-item-remove">
+                <button class="btn-remove" data-cart-item-id="${item.id}" title="Remove item">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        `;
+
+            return container;
+        }
+
+        // ================================
+        // SETUP EVENT LISTENERS
+        // ================================
+        // ================================
+        // SETUP EVENT LISTENERS
+        // ================================
+        function setupEventListeners() {
+            // Event delegation
+            document.addEventListener('click', function (event) {
+                const target = event.target.closest('[class*="qty-"]') || event.target.closest('.btn-remove');
+                if (!target) return;
+
+                const cartItemId = target.getAttribute('data-cart-item-id');
+
+                // Handle quantity increase
+                if (target.closest('.qty-plus')) {
+                    const currentQty = parseInt(target.getAttribute('data-current-qty'));
+                    updateQuantity(cartItemId, currentQty + 1);
+                }
+                // Handle quantity decrease
+                else if (target.closest('.qty-minus')) {
+                    const currentQty = parseInt(target.getAttribute('data-current-qty'));
+                    if (currentQty > 1) {
+                        updateQuantity(cartItemId, currentQty - 1);
+                    } else {
+                        // Optional: Confirm before removing if qty goes to 0? For now just stop at 1
+                    }
+                }
+                // Handle item removal
+                else if (target.closest('.btn-remove')) {
+                    removeItem(cartItemId);
+                }
+            });
+
+            // Handle quantity input change
+            document.addEventListener('change', function (event) {
+                if (event.target.classList.contains('qty-input')) {
+                    const cartItemId = event.target.getAttribute('data-cart-item-id');
+                    const newQuantity = parseInt(event.target.value);
+
+                    if (newQuantity >= 1) {
+                        updateQuantity(cartItemId, newQuantity);
+                    } else {
+                        // Reset to 1 if invalid
+                        updateQuantity(cartItemId, 1);
+                    }
+                }
+            });
+        }
+
+        // ================================
+        // CART OPERATIONS
+        // ================================
+
+        // ================================
+        // CART API OPERATIONS
+        // ================================
+
+        async function updateQuantity(cartItemId, newQuantity) {
+            const userSession = JSON.parse(localStorage.getItem('userSession'));
+            try {
+                const response = await fetch(`http://localhost:8080/api/cart/${userSession.id}/item/${cartItemId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ quantity: newQuantity })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    renderCartItems(result.data.items);
+                } else {
+                    alert('Error updating cart');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function removeItem(cartItemId) {
+            if (!confirm('Are you sure you want to remove this item?')) return;
+
+            const userSession = JSON.parse(localStorage.getItem('userSession'));
+            try {
+                const response = await fetch(`http://localhost:8080/api/cart/${userSession.id}/item/${cartItemId}`, {
+                    method: 'DELETE'
+                });
+                const result = await response.json();
+                if (result.success) {
+                    renderCartItems(result.data.items);
+                } else {
+                    alert('Error removing item');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // ================================
+        // ORDER SUMMARY CALCULATIONS
+        // ================================
+
+        function updateOrderSummary(cartItems) {
+            // Calculate subtotal
+            const subtotal = cartItems.reduce((sum, item) => {
+                return sum + (item.price * item.quantity);
+            }, 0);
+
+            // Calculate tax
+            const tax = subtotal * TAX_RATE;
+
+            // Delivery is free if subtotal + tax exceeds Rs 20,000
+            const delivery = (subtotal + tax) > 20000 ? 0 : DELIVERY_FEE;
+
+            // Only zero delivery if cart is empty? No, logic above says free over 20k.
+            // But if cart is empty (subtotal 0), delivery should be 0 logically?
+            // The prompt/logic said "orders over 20,000". 
+            // If subtotal is 0, let's make delivery 0.
+            const finalDelivery = subtotal === 0 ? 0 : delivery;
+
+            // Calculate grand total
+            const grandTotal = subtotal + tax + finalDelivery;
+
+            // Update DOM
+            document.getElementById('subtotalValue').textContent = `Rs ${subtotal.toFixed(2)}`;
+            document.getElementById('taxValue').textContent = `Rs ${tax.toFixed(2)}`;
+            document.getElementById('deliveryValue').textContent = finalDelivery === 0 ? 'Free' : `Rs ${finalDelivery.toFixed(2)}`;
+            document.getElementById('totalValue').textContent = `Rs ${grandTotal.toFixed(2)}`;
+
+            // Enable/Disable checkout button
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            checkoutBtn.disabled = cartItems.length === 0;
+        }
+
+        // ================================
+        // CHECKOUT BUTTON HANDLER
+        // ================================
+        // ================================
+        // CHECKOUT BUTTON HANDLER
+        // ================================
+        document.getElementById('checkoutBtn').addEventListener('click', function () {
+            // Populate modal with current cart state
+            const cartItemsWrapper = document.getElementById('cartItemsWrapper');
+            // We need the data. Best to store it in a global variable or re-fetch/parse from DOM?
+            // Since we render from `cartItems` in `renderCartItems`, let's store it globally or attach to DOM.
+            // But wait, `renderCartItems` is called with `result.data.items`.
+            // Let's modify `fetchCart` to store items in a variable or just re-fetch for safety, 
+            // but re-using current state is better for UI speed.
+
+            // I'll grab the current text content values from the summary for the total.
+            const grandTotal = document.getElementById('totalValue').textContent;
+            document.getElementById('checkoutTotalAmount').textContent = grandTotal;
+
+            // Gather items from DOM (or better, keep a reference). 
+            // I'll add a global `currentCartItems` variable.
+
+            if (!window.currentCartItems || window.currentCartItems.length === 0) return;
+
+            const tbody = document.getElementById('checkoutItemsList');
+            tbody.innerHTML = '';
+
+            window.currentCartItems.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="${item.imageUrl}" style="width: 40px; height: 40px; object-fit: cover; margin-right: 10px; border-radius: 4px;">
+                            <div>
+                                <div class="font-weight-bold">${item.name}</div>
+                                <small class="text-muted">${item.measurements || ''}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-center">${item.quantity}</td>
+                    <td class="text-right">Rs ${(item.price * item.quantity).toFixed(2)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Show Modal
+            $('#checkoutModal').modal('show');
+        });
+
+        // ================================
+        // CONFIRM ORDER HANDLER
+        // ================================
+        document.getElementById('confirmOrderBtn').addEventListener('click', async function () {
+            const btn = this;
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+            const userSession = JSON.parse(localStorage.getItem('userSession'));
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/orders/place/${userSession.id}`, {
+                    method: 'POST'
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    // Success! Redirect to track order
+                    window.location.href = 'trackorder.html';
+                } else {
+                    alert('Failed to place order: ' + result.message);
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }
+            } catch (error) {
+                console.error('Order error:', error);
+                alert('An error occurred while placing the order.');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        });
 
 
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-	<script src="js/jquery-3.4.1.min.js"></script>
+    </script>
 
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="js/popper.min.js"></script> 
-	<script src="js/bootstrap-4.4.1.js"></script>
-  </body>
+    <script src="js/user-navbar.js"></script>
+</body>
+
 </html>

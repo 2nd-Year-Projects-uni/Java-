@@ -1,0 +1,341 @@
+/* ================================
+   CSS VARIABLES
+================================ */
+:root {
+  --navbar-height: 96px;
+}
+
+/* ================================
+   GLOBAL 
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding-top: 85px;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background:  #bdb498;
+}
+
+/* ================================
+   NAVBAR
+================================ */
+.navbar {
+    font-family: "Times New Roman", serif;
+    width: 100%;
+    padding: 20px 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    background: white !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav-left, .nav-right {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #2E2B1F !important;
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.nav-link { 
+	color: #2E2B1F !important;
+	font-size: 18px;
+	padding: 0 !important;
+	transition: 0.3s ease; 
+}
+.nav-link:hover { 
+	color: #b89255 !important;
+}
+.book-btn { 
+    border: 2px solid #2E2B1F !important; 
+    padding: 8px 16px !important; 
+    border-radius: 6px; 
+    background: #2E2B1F !important;  
+    color: white !important;         
+    transition: 0.3s ease;
+}
+
+.book-btn:hover { 
+    background: transparent !important; 
+    color: #2E2B1F !important;          
+}
+
+/* ================================
+   NAVBAR RESPONSIVE 
+================================ */
+@media (max-width: 991px) {
+
+  .navbar {
+    padding: 15px 20px;
+  }
+	
+  .navbar-brand {
+    position: static;
+    transform: none;
+    font-size: 28px;
+  }
+	
+  .navbar-collapse {
+    margin-top: 15px;
+  }
+	
+  .nav-left,
+  .nav-right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .nav-link {
+    font-size: 16px;
+    padding: 6px 0 !important;
+  }
+
+  .book-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* AUTH */
+.auth-bg {
+  min-height: calc(100vh - var(--navbar-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:  #bdb498;
+  padding: 60px 5%;
+}
+
+/* CARD */
+.auth-card {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 680px;
+  background: white;
+  border-radius: 28px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.25);
+}
+
+.auth-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.6));
+}
+
+/* FORM */
+.auth-form {
+  padding: 56px 64px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 680px;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 48px;                 
+  margin: 40px 0 36px;       
+  padding-bottom: 8px;
+}
+
+.auth-tab {
+  position: relative;
+  padding: 10px 2px;
+  background: transparent;
+  border: none;
+  color: #9a968a;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.auth-tab.active {
+  color: #504b36;
+}
+
+.auth-tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -9px;              
+  width: 0;
+  height: 3px;
+  background: #504b36;
+  border-radius: 2px;
+  transition: width 0.35s ease;
+}
+
+.auth-tab.active::after {
+  width: 100%;
+}
+
+.auth-tab:hover {
+  color: #6b6654;
+}
+
+.auth-tab:focus,
+.auth-tab:active,
+.auth-tab:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.auth-panel {
+  display: none;
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+}
+
+.auth-panel.active {
+  display: block;
+}
+
+/* Temporary state for measuring heights without visual flicker */
+.auth-panel.measure {
+  display: block;
+  visibility: hidden;
+}
+
+.auth-panel form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-footer {
+  margin-top: 28px;  
+}
+
+.auth-footer p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #868378;
+}
+
+.auth-footer a {
+  color: #504b36;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+  color: #2E2B1F;
+  text-decoration: underline;
+}
+
+.form-control {
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.auth-btn {
+  height: 52px;
+  width: 40%;  
+  display: block; 
+  border-radius: 14px;
+  background: #504b36;
+  color: #ffffff;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+  background: #2E2B1F;
+  transform: translateY(-1px);
+}
+
+.auth-btn:active {
+  transform: translateY(0);
+}
+
+/* Fixed-height container to keep login/register sizes equal */
+.auth-panels {
+  position: relative;
+  width: 100%;
+  /* Default min-height; JS sets exact height to tallest panel on load */
+  min-height: 360px;
+}
+
+@media (max-width: 900px) {
+  .auth-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto; 
+    height: auto;
+  }
+
+  .auth-carousel {
+    height: auto;
+    min-height: 240px;
+    aspect-ratio: 16 / 10; 
+  }
+
+  .carousel-content {
+    bottom: 24px;
+    left: 24px;
+    max-width: 80%;
+  }
+
+  .carousel-content h2 {
+    font-size: 22px;
+  }
+
+  .carousel-content p {
+    font-size: 14px;
+  }
+
+  .auth-form {
+    padding: 40px 28px;
+  }
+}
+

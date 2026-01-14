@@ -1,6 +1,7 @@
 package com.project.tailorshop.entities;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "products")
@@ -20,8 +21,15 @@ public class Product {
 
     private String imageUrl;
 
+    private int stock = 0;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
     // Constructors
-    public Product() {}
+    public Product() {
+        this.createdDate = LocalDateTime.now();
+    }
 
     public Product(String name, String description, double price, String category, String imageUrl) {
         this.name = name;
@@ -29,6 +37,8 @@ public class Product {
         this.price = price;
         this.category = category;
         this.imageUrl = imageUrl;
+        this.stock = 0;
+        this.createdDate = LocalDateTime.now();
     }
 
     // Getters and setters
@@ -49,4 +59,10 @@ public class Product {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public int getStock() { return stock; }
+    public void setStock(int stock) { this.stock = stock; }
+
+    public LocalDateTime getCreatedDate() { return createdDate; }
+    public void setCreatedDate(LocalDateTime createdDate) { this.createdDate = createdDate; }
 }

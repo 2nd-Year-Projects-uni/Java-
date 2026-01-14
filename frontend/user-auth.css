@@ -1,0 +1,102 @@
+/* --- User Icon & Popup Styles --- */
+.user-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    /* Compact container */
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    /* Subtle border */
+    font-size: 28px;
+    /* Large visible icon */
+    color: #333;
+    cursor: pointer;
+    margin-left: 15px;
+    margin-right: 25px;
+    /* Push left away from edge */
+    transition: all 0.3s ease;
+}
+
+.user-icon:hover {
+    background-color: #f5f5f5;
+    color: #b89255;
+    /* Theme Gold */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* Glow effect */
+}
+
+.user-popup {
+    position: absolute;
+    top: 100px;
+    /* Safe distance below navbar */
+    right: 50px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    /* Subtle border */
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    /* Softer, larger shadow */
+    padding: 24px;
+    min-width: 260px;
+    z-index: 1000;
+    display: none;
+    animation: popupFadeIn 0.2s ease-out forwards;
+}
+
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-popup .user-info {
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 16px;
+}
+
+.user-popup .user-info strong {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2E2B1F;
+    /* Dark theme color */
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.user-popup .user-email {
+    font-size: 14px;
+    color: #777;
+    font-weight: 400;
+}
+
+.user-popup .logout-btn {
+    display: block;
+    width: 100%;
+    background: transparent;
+    color: #2E2B1F;
+    border: 1px solid #2E2B1F;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+}
+
+.user-popup .logout-btn:hover {
+    background: #2E2B1F;
+    color: #fff;
+    border-color: #2E2B1F;
+}

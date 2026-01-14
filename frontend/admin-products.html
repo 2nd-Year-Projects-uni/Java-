@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Products - Tailor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Tailor Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="admin-products.html" class="nav-item active">
+                    <i class="fas fa-box"></i>
+                    <span>Products</span>
+                </a>
+                <a href="login-admin.html" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h1 class="page-title">Products</h1>
+                </div>
+                <div class="topbar-right">
+                    <div class="admin-profile">
+                        <i class="fas fa-user-circle"></i>
+                        <span class="admin-name">Admin User</span>
+                    </div>
+                    <div class="admin-dropdown" id="adminDropdown">
+                        <div class="admin-dropdown-item" id="createAdminBtn">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Add New Admin</span>
+                        </div>
+                        <div class="admin-dropdown-divider"></div>
+                        <a href="login-admin.html" class="admin-dropdown-item" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+
+                <section class="page-actions">
+                    <div class="action-group">
+                        <button class="btn btn-primary" id="openAddProductBtn">
+                            <i class="fas fa-plus"></i>
+                            Add Product
+                        </button>
+                        <button class="btn btn-ghost" id="exportCsvBtn">
+                            <i class="fas fa-file-export"></i>
+                            Export CSV
+                        </button>
+                    </div>
+                </section>
+
+                <div class="modal-overlay" id="addProductModal" aria-hidden="true">
+                    <div class="modal">
+                        <div class="modal-header">
+                            <h3>Add Product</h3>
+                            <button class="icon-btn" id="closeAddProductBtn" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="form-tabs">
+                            <button class="form-tab active" data-tab="readymade">Readymade</button>
+                            <button class="form-tab" data-tab="custom">Custom Made</button>
+                        </div>
+                        <div class="form-tab-content">
+                            <form id="readymadeForm" class="form-grid form-tab-pane active">
+                                <div class="form-group">
+                                    <label for="readyName">Name</label>
+                                    <input type="text" id="readyName" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="readyDescription">Description</label>
+                                    <textarea id="readyDescription" name="description" rows="3" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="readyPrice">Price <span id="readyPriceUnit"
+                                            class="price-unit"></span></label>
+                                    <input type="number" id="readyPrice" name="price" min="0" step="0.01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="readyCategory">Category</label>
+                                    <select id="readyCategory" name="category" required>
+                                        <option value="">Select Category</option>
+                                        <option value="Readymade - Men">Readymade - Men</option>
+                                        <option value="Readymade - Women">Readymade - Women</option>
+                                        <option value="Materials">Materials</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="readyImage">Image</label>
+                                    <input type="file" id="readyImage" name="image" accept="image/*" required>
+                                    <small>Max 5MB. jpg/jpeg/png/gif/webp.</small>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-ghost" id="cancelReadymadeBtn">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Save Product</button>
+                                </div>
+                                <p class="form-status" id="readymadeStatus"></p>
+                            </form>
+                            <form id="customForm" class="form-grid form-tab-pane">
+                                <div class="form-group">
+                                    <label for="customName">Name</label>
+                                    <input type="text" id="customName" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="customPrice">Price</label>
+                                    <input type="number" id="customPrice" name="price" min="0" step="0.01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="customType">Type</label>
+                                    <select id="customType" name="productType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="Trouser">Trouser</option>
+                                        <option value="Shirt">Shirt</option>
+                                    </select>
+                                </div>
+                                <div id="trouserFields" class="form-group hidden">
+                                    <label for="customWaist">Waist (inches)</label>
+                                    <input type="number" id="customWaist" name="waist" min="0" step="0.01">
+                                </div>
+                                <div id="shirtFields" class="form-group hidden">
+                                    <label for="customChest">Chest (inches)</label>
+                                    <input type="number" id="customChest" name="chest" min="0" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customLength">Length (inches)</label>
+                                    <input type="number" id="customLength" name="length" min="0" step="0.01">
+                                </div>
+                                <div id="inseamField" class="form-group hidden">
+                                    <label for="customInseam">Inseam (inches)</label>
+                                    <input type="number" id="customInseam" name="inseam" min="0" step="0.01">
+                                </div>
+                                <div id="sleeveField" class="form-group hidden">
+                                    <label for="customSleeve">Sleeve (inches)</label>
+                                    <input type="number" id="customSleeve" name="sleeve" min="0" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customImage">Image</label>
+                                    <input type="file" id="customImage" name="image" accept="image/*" required>
+                                    <small>Max 5MB. jpg/jpeg/png/gif/webp.</small>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-ghost" id="cancelCustomBtn">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Save Product</button>
+                                </div>
+                                <p class="form-status" id="customStatus"></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="orders-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Product List</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>Stock</th>
+                                    <th>Updated</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productListTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="orders-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Material List</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>Stock</th>
+                                    <th>Updated</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="materialListTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Admin Modal -->
+    <div class="modal-overlay" id="createAdminModal">
+        <div class="modal" style="max-width: 400px; overflow: hidden;">
+            <div class="modal-header">
+                <h3>Create New Admin</h3>
+                <i class="fas fa-times" id="closeAdminModal" style="cursor: pointer;"></i>
+            </div>
+            <div class="form-grid">
+                <form id="createAdminForm">
+                    <div class="form-group">
+                        <label>Admin Email</label>
+                        <input type="text" id="newAdminEmail" required placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="newAdminPassword" required placeholder="Enter password">
+                    </div>
+                    <div id="adminCreateMsg" style="margin-bottom:10px; font-size:14px;"></div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-ghost" id="cancelAdminBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Admin</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check Admin Session
+            const adminSession = JSON.parse(localStorage.getItem('adminSession'));
+            if (!adminSession) {
+                window.location.href = 'login-admin.html';
+                return;
+            }
+            // Update Name
+            const adminName = document.querySelector('.admin-name');
+            if (adminName && adminSession.email) {
+                adminName.textContent = adminSession.email;
+            }
+
+            // Load Products
+            loadProductList();
+            setupAdminInteractions();
+
+            // CSV Export
+            document.getElementById('exportCsvBtn').addEventListener('click', () => {
+                const tables = document.querySelectorAll('.data-table');
+                let allRows = [];
+                tables.forEach(table => {
+                    const rows = table.querySelectorAll('tbody tr');
+                    rows.forEach(row => { if (row.cells.length > 1) allRows.push(row); });
+                });
+                if (allRows.length === 0) { alert('No items to export'); return; }
+
+                const headers = ['ID', 'Name', 'Category', 'Price', 'Stock', 'Updated'];
+                let csvContent = headers.join(',') + '\n';
+                const escapeCsv = (field) => {
+                    field = String(field);
+                    if (field.includes(',') || field.includes('"') || field.includes('\n')) return `"${field.replace(/"/g, '""')}"`;
+                    return field;
+                };
+                allRows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    if (cells.length >= 6) {
+                        const rowData = [
+                            cells[0].textContent.trim(),
+                            cells[1].textContent.trim(),
+                            cells[2].textContent.trim(),
+                            cells[3].textContent.replace('Rs', '').trim(),
+                            cells[4].textContent.trim(),
+                            cells[5].textContent.trim()
+                        ].map(escapeCsv);
+                        csvContent += rowData.join(',') + '\n';
+                    }
+                });
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                const now = new Date();
+                const filename = `products_export.csv`;
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        });
+
+        function setupAdminInteractions() {
+            const profileBtn = document.querySelector('.admin-profile');
+            const dropdown = document.getElementById('adminDropdown');
+            const createModal = document.getElementById('createAdminModal');
+            const createBtn = document.getElementById('createAdminBtn');
+            const closeBtn = document.getElementById('closeAdminModal');
+            const cancelBtn = document.getElementById('cancelAdminBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const createForm = document.getElementById('createAdminForm');
+            const msgBox = document.getElementById('adminCreateMsg');
+
+            // Toggle Dropdown
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+            document.addEventListener('click', () => {
+                dropdown.style.display = 'none';
+            });
+            dropdown.addEventListener('click', (e) => e.stopPropagation());
+
+            // Modal Interactions
+            createBtn.addEventListener('click', () => {
+                dropdown.style.display = 'none';
+                createModal.style.display = 'flex';
+                createForm.reset();
+                msgBox.textContent = '';
+            });
+            function hideModal() { createModal.style.display = 'none'; }
+            closeBtn.addEventListener('click', hideModal);
+            cancelBtn.addEventListener('click', hideModal);
+            createModal.addEventListener('click', (e) => { if (e.target === createModal) hideModal(); });
+
+            // Logout
+            logoutBtn.addEventListener('click', () => localStorage.removeItem('adminSession'));
+
+            // Submit Admin Form
+            createForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('newAdminEmail').value;
+                const password = document.getElementById('newAdminPassword').value;
+                msgBox.style.color = 'blue';
+                msgBox.textContent = 'Creating...';
+                try {
+                    const res = await fetch('http://localhost:8080/api/admin/create', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        msgBox.style.color = 'green';
+                        msgBox.textContent = 'Success!';
+                        setTimeout(hideModal, 1500);
+                    } else {
+                        msgBox.style.color = 'red';
+                        msgBox.textContent = data.message || 'Error';
+                    }
+                } catch (err) {
+                    msgBox.style.color = 'red';
+                    msgBox.textContent = 'Server Error';
+                }
+            });
+        }
+
+        const modal = document.getElementById('addProductModal');
+        const openBtn = document.getElementById('openAddProductBtn');
+        const closeBtn = document.getElementById('closeAddProductBtn');
+        const tabButtons = document.querySelectorAll('.form-tab');
+        const tabPanes = document.querySelectorAll('.form-tab-pane');
+        const readymadeForm = document.getElementById('readymadeForm');
+        const customForm = document.getElementById('customForm');
+        const readyCategory = document.getElementById('readyCategory');
+        const readyPriceUnit = document.getElementById('readyPriceUnit');
+        const customTypeSelect = document.getElementById('customType');
+        const trouserFields = document.getElementById('trouserFields');
+        const shirtFields = document.getElementById('shirtFields');
+        const inseamField = document.getElementById('inseamField');
+        const sleeveField = document.getElementById('sleeveField');
+
+        const updatePriceUnit = () => {
+            const category = readyCategory.value;
+            readyPriceUnit.textContent = category === 'Materials' ? '(per meter)' : '';
+        };
+
+        const toggleModal = (show) => {
+            modal.setAttribute('aria-hidden', show ? 'false' : 'true');
+            modal.classList.toggle('open', show);
+        };
+
+        function loadProductList() {
+            Promise.all([
+                fetch('http://localhost:8080/api/products').then(r => r.json()),
+                fetch('http://localhost:8080/api/custom-products').then(r => r.json())
+            ])
+                .then(([productsResponse, customResponse]) => {
+                    let products = productsResponse.data || productsResponse || [];
+                    let customProducts = customResponse.data || customResponse || [];
+
+                    if (!Array.isArray(products)) {
+                        products = [];
+                    }
+                    if (!Array.isArray(customProducts)) {
+                        customProducts = [];
+                    }
+
+                    // Add category field to custom products for consistency
+                    customProducts = customProducts.map(cp => ({
+                        ...cp,
+                        category: cp.productType || 'Custom',
+                        isCustom: true,
+                        type: 'custom'
+                    }));
+
+                    // Combine both product types
+                    products = products.map(p => ({ ...p, type: 'standard' }));
+                    const allProducts = [...products, ...customProducts];
+
+                    const readymadeProducts = allProducts.filter(p => p.category && !p.category.includes('Materials'));
+                    const materials = allProducts.filter(p => p.category === 'Materials');
+
+                    loadTableData('productListTableBody', readymadeProducts);
+                    loadTableData('materialListTableBody', materials);
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
+        }
+
+        function loadTableData(tableBodyId, products) {
+            const tbody = document.getElementById(tableBodyId);
+            tbody.innerHTML = '';
+
+            if (!products || products.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No items available</td></tr>';
+                return;
+            }
+
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.setAttribute('data-product-id', product.id);
+                row.setAttribute('data-product-type', product.type);
+                const date = product.createdDate ? new Date(product.createdDate).toLocaleDateString() : 'N/A';
+                const isCustom = product.category === 'Custom' || product.category === 'Trouser' || product.category === 'Shirt';
+
+                let stockDisplay = '';
+                if (isCustom) {
+                    stockDisplay = '<span style="color: #6b7280; font-style: italic;">Custom</span>';
+                } else {
+                    const stock = product.stock || 0;
+                    let stockChipClass = 'chip-success';
+                    if (stock <= 5) {
+                        stockChipClass = 'chip-danger';
+                    } else if (stock <= 20) {
+                        stockChipClass = 'chip-warning';
+                    }
+                    stockDisplay = `<span class="chip ${stockChipClass}">${stock}</span>`;
+                }
+
+                row.innerHTML = `
+                    <td class="td-id">${product.id}</td>
+                    <td class="td-name">${product.name}</td>
+                    <td class="td-category">${product.category}</td>
+                    <td class="td-price">Rs ${parseFloat(product.price).toFixed(2)}</td>
+                    <td class="td-desc">${product.description || '-'}</td>
+                    <td class="td-stock">${stockDisplay}</td>
+                    <td class="td-date">${date}</td>
+                    <td class="table-actions">
+                        <button class="icon-btn" onclick="editProductRow(${product.id}, '${product.type}')" aria-label="Edit"><i class="fas fa-pen"></i></button>
+                        <button class="icon-btn danger" onclick="deleteProductRow(${product.id}, '${product.type}')" aria-label="Delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                row.dataset.productName = product.name;
+                row.dataset.productCategory = product.category;
+                row.dataset.productPrice = product.price;
+                row.dataset.productStock = isCustom ? 'custom' : (product.stock || 0);
+                row.dataset.productDescription = product.description || '';
+
+                tbody.appendChild(row);
+            });
+        }
+
+        function editProductRow(productId, type) {
+            const row = document.querySelector(`tr[data-product-id="${productId}"][data-product-type="${type}"]`);
+            if (row.classList.contains('editing')) {
+                cancelEditProductRow(productId, type);
+                return;
+            }
+
+            row.classList.add('editing');
+
+            const nameCell = row.querySelector('.td-name');
+            const categoryCell = row.querySelector('.td-category');
+            const priceCell = row.querySelector('.td-price');
+            const descCell = row.querySelector('.td-desc');
+            const stockCell = row.querySelector('.td-stock');
+            const actionsCell = row.querySelector('.table-actions');
+
+            const name = nameCell.textContent;
+            const category = categoryCell.textContent;
+            const price = parseFloat(priceCell.textContent.replace('Rs ', ''));
+            const desc = descCell.textContent === '-' ? '' : descCell.textContent;
+            const stock = parseInt(stockCell.textContent);
+
+            nameCell.innerHTML = `<input type="text" class="edit-input" value="${name}" placeholder="Name">`;
+            categoryCell.innerHTML = `<input type="text" class="edit-input" value="${category}" placeholder="Category">`;
+            priceCell.innerHTML = `<input type="number" class="edit-input" value="${price}" step="0.01" min="0" placeholder="Price">`;
+            descCell.innerHTML = `<textarea class="edit-input" placeholder="Description">${desc}</textarea>`;
+            if (stockCell.querySelector('.chip')) {
+                // If it was a chip (readymade), make editable
+                stockCell.innerHTML = `<input type="number" class="edit-input" value="${row.dataset.productStock === 'custom' ? 0 : row.dataset.productStock}" min="0" placeholder="Stock">`;
+            } else {
+                // Custom product - keep as is or hidden input
+                // actually custom products don't have stock usually, but let's just make it editable or static
+                // Logic above suggests custom shows "Custom". If we want to keep it "Custom" we can skip edit
+                if (row.dataset.productStock === 'custom') {
+                    stockCell.innerHTML = `<input type="hidden" value="0"><span style="color: #6b7280; font-style: italic;">Custom</span>`;
+                } else {
+                    stockCell.innerHTML = `<input type="number" class="edit-input" value="${stock}" min="0" placeholder="Stock">`;
+                }
+            }
+
+            actionsCell.innerHTML = `
+                <button class="icon-btn success" onclick="saveProductRow(${productId}, '${type}')" aria-label="Save"><i class="fas fa-check"></i></button>
+                <button class="icon-btn" onclick="cancelEditProductRow(${productId}, '${type}')" aria-label="Cancel"><i class="fas fa-times"></i></button>
+            `;
+        }
+
+        function saveProductRow(productId, type) {
+            const row = document.querySelector(`tr[data-product-id="${productId}"][data-product-type="${type}"]`);
+
+            const name = row.querySelector('.td-name input').value.trim();
+            const category = row.querySelector('.td-category input').value.trim();
+            const price = parseFloat(row.querySelector('.td-price input').value);
+            const descIcon = row.querySelector('.td-desc textarea');
+            const description = descIcon ? descIcon.value.trim() : '';
+
+            // Handle stock input safely
+            const stockInput = row.querySelector('.td-stock input');
+            const stock = stockInput ? parseInt(stockInput.value) : 0;
+
+            if (!name || !category || isNaN(price)) {
+                alert('Please fill in all fields with valid values');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('description', description);
+            formData.append('category', category);
+            formData.append('price', price);
+            formData.append('stock', stock);
+
+            // Determine endpoint based on type
+            const endpoint = type === 'custom'
+                ? `http://localhost:8080/api/custom-products/${productId}`
+                : `http://localhost:8080/api/products/${productId}`;
+
+            fetch(endpoint, {
+                method: 'PUT',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        row.classList.remove('editing');
+                        loadProductList();
+                    } else {
+                        alert('Failed to save: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error saving product:', error);
+                    alert('Error saving product');
+                });
+        }
+
+        function cancelEditProductRow(productId, type) {
+            const row = document.querySelector(`tr[data-product-id="${productId}"][data-product-type="${type}"]`);
+            row.classList.remove('editing');
+            loadProductList();
+        }
+
+        function deleteProductRow(productId, type) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                const isCustom = type === 'custom';
+
+                const endpoint = isCustom ? `http://localhost:8080/api/custom-products/${productId}` : `http://localhost:8080/api/products/${productId}`;
+
+                fetch(endpoint, {
+                    method: 'DELETE'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            loadProductList();
+                        } else {
+                            alert('Failed to delete product: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error deleting product:', error);
+                        alert('Error deleting product');
+                    });
+            }
+        }
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabButtons.forEach(b => b.classList.remove('active'));
+                tabPanes.forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                const tab = btn.getAttribute('data-tab');
+                document.querySelector(`.form-tab-pane[data-tab="${tab}"]`) ||
+                    (tab === 'readymade' ? readymadeForm : customForm).classList.add('active');
+            });
+        });
+
+        readyCategory.addEventListener('change', updatePriceUnit);
+
+        customTypeSelect.addEventListener('change', () => {
+            const type = customTypeSelect.value;
+            trouserFields.classList.toggle('hidden', type !== 'Trouser');
+            inseamField.classList.toggle('hidden', type !== 'Trouser');
+            shirtFields.classList.toggle('hidden', type !== 'Shirt');
+            sleeveField.classList.toggle('hidden', type !== 'Shirt');
+        });
+
+        openBtn.addEventListener('click', () => toggleModal(true));
+        closeBtn.addEventListener('click', () => toggleModal(false));
+        document.getElementById('cancelReadymadeBtn').addEventListener('click', () => toggleModal(false));
+        document.getElementById('cancelCustomBtn').addEventListener('click', () => toggleModal(false));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) toggleModal(false);
+        });
+
+        readymadeForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const statusEl = document.getElementById('readymadeStatus');
+            const submitBtn = readymadeForm.querySelector('button[type="submit"]');
+            statusEl.textContent = '';
+            submitBtn.disabled = true;
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Saving...';
+            const formData = new FormData(readymadeForm);
+            try {
+                const res = await fetch('http://localhost:8080/api/products/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const body = await res.json();
+                if (!res.ok || !body.success) {
+                    throw new Error(body.message || 'Failed to save');
+                }
+                readymadeForm.reset();
+                toggleModal(false);
+                loadProductList();
+            } catch (err) {
+                statusEl.textContent = err.message;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+
+        customForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const statusEl = document.getElementById('customStatus');
+            const submitBtn = customForm.querySelector('button[type="submit"]');
+            statusEl.textContent = '';
+            submitBtn.disabled = true;
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Saving...';
+            const formData = new FormData(customForm);
+            try {
+                const res = await fetch('http://localhost:8080/api/custom-products/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const body = await res.json();
+                if (!res.ok || !body.success) {
+                    throw new Error(body.message || 'Failed to save');
+                }
+                customForm.reset();
+                toggleModal(false);
+                loadProductList();
+            } catch (err) {
+                statusEl.textContent = err.message;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+    </script>
+</body>
+
+</html>
