@@ -130,6 +130,13 @@
             });
         }
 
+        function getImageUrl(url) {
+            if (!url) return 'images/blazer.jpg';
+            if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('images/')) return url;
+            if (url.startsWith('/')) return `http://localhost:8080${url}`;
+            return `http://localhost:8080/${url}`;
+        }
+
         function renderProducts(gridId, products, isMaterial = false) {
             const grid = document.getElementById(gridId);
             if (!products || products.length === 0) {
@@ -142,14 +149,7 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
 
-                let imageUrl;
-                if (product.imageUrl) {
-                    imageUrl = product.imageUrl.startsWith('http')
-                        ? product.imageUrl
-                        : `http://localhost:8080${product.imageUrl}`;
-                } else {
-                    imageUrl = 'images/placeholder.jpg';
-                }
+                const imageUrl = getImageUrl(product.imageUrl);
 
                 const formattedPrice = typeof product.price === 'number'
                     ? product.price.toFixed(2)
@@ -159,7 +159,7 @@
 
                 card.innerHTML = `
                 <div class="product-image-wrapper">
-                    <img src="${imageUrl}" alt="${product.name || 'Product'}" class="product-image" onerror="this.src='images/placeholder.jpg'">
+                    <img src="${imageUrl}" alt="${product.name || 'Product'}" class="product-image" onerror="this.src='images/blazer.jpg'">
                 </div>
                 <div class="product-info">
                     <h3 class="product-name">${product.name || 'Unnamed Product'}</h3>
@@ -230,14 +230,7 @@
                         }
                         card.setAttribute('data-category', category);
 
-                        let imageUrl;
-                        if (product.imageUrl) {
-                            imageUrl = product.imageUrl.startsWith('http')
-                                ? product.imageUrl
-                                : `http://localhost:8080${product.imageUrl}`;
-                        } else {
-                            imageUrl = 'images/placeholder.jpg';
-                        }
+                        const imageUrl = getImageUrl(product.imageUrl);
 
                         const formattedPrice = typeof product.price === 'number'
                             ? product.price.toFixed(2)
@@ -247,17 +240,38 @@
 
                         card.innerHTML = `
                         <div class="product-image-wrapper">
-                            <img src="${imageUrl}" alt="${product.name || 'Product'}" class="product-image" onerror="this.src='images/placeholder.jpg'">
+                            <img src="${imageUrl}" alt="${product.name || 'Product'}" class="product-image" onerror="this.src='images/blazer.jpg'">
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">${product.name || 'Unnamed Product'}</h3>
                             <p class="product-description">${product.description || 'No description available'}</p>
                             <p class="product-price">Rs ${formattedPrice}${priceUnit}</p>
+                            <div class="product-size-wrapper">
+                                <span class="product-size-label">Select Size:</span>
+                                <div class="product-size-options">
+                                    <button type="button" class="size-btn" data-size="S">S</button>
+                                    <button type="button" class="size-btn active" data-size="M">M</button>
+                                    <button type="button" class="size-btn" data-size="L">L</button>
+                                    <button type="button" class="size-btn" data-size="XL">XL</button>
+                                    <button type="button" class="size-btn" data-size="XXL">XXL</button>
+                                </div>
+                            </div>
                             <button class="product-btn-cart" data-product-id="${product.id}">Add to Cart</button>
                         </div>
                     `;
 
                         productsGrid.appendChild(card);
+
+                        let selectedSize = 'M';
+                        const sizeBtns = card.querySelectorAll('.size-btn');
+                        sizeBtns.forEach(btn => {
+                            btn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                sizeBtns.forEach(b => b.classList.remove('active'));
+                                btn.classList.add('active');
+                                selectedSize = btn.getAttribute('data-size');
+                            });
+                        });
 
                         const addToCartBtn = card.querySelector('.product-btn-cart');
                         addToCartBtn.addEventListener('click', async function (e) {
@@ -270,10 +284,11 @@
                             try {
                                 await addToCart({
                                     productId: product.id,
-                                    name: product.name,
+                                    name: `${product.name} (Size: ${selectedSize})`,
                                     price: typeof product.price === 'number' ? product.price : parseFloat(product.price),
                                     image: imageUrl,
-                                    type: 'standard'
+                                    type: 'standard',
+                                    size: selectedSize
                                 });
 
                                 this.textContent = 'Added!';
@@ -285,6 +300,30 @@
                                 this.textContent = originalText;
                                 this.disabled = false;
                             }
+                        });
+                    });
+
+                    // Bind Category Tab Click Listeners (All, Men, Women)
+                    const categoryTabs = document.querySelectorAll('.category-tab');
+                    categoryTabs.forEach(tab => {
+                        tab.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            categoryTabs.forEach(t => t.classList.remove('active'));
+                            tab.classList.add('active');
+
+                            const filterCategory = tab.getAttribute('data-category');
+                            const allCards = productsGrid.querySelectorAll('.product-card');
+
+                            allCards.forEach(card => {
+                                const cardCat = card.getAttribute('data-category');
+                                if (filterCategory === 'all' || cardCat === filterCategory) {
+                                    card.style.display = 'flex';
+                                } else {
+                                    card.style.display = 'none';
+                                }
+                            });
+
+                            equalizeRowHeights();
                         });
                     });
 
@@ -401,14 +440,7 @@
                         const card = document.createElement('div');
                         card.className = 'product-card';
 
-                        let imageUrl;
-                        if (material.imageUrl) {
-                            imageUrl = material.imageUrl.startsWith('http')
-                                ? material.imageUrl
-                                : `http://localhost:8080${material.imageUrl}`;
-                        } else {
-                            imageUrl = 'images/placeholder.jpg';
-                        }
+                        const imageUrl = getImageUrl(material.imageUrl);
 
                         const formattedPrice = typeof material.price === 'number'
                             ? material.price.toFixed(2)
@@ -416,7 +448,7 @@
 
                         card.innerHTML = `
                         <div class="product-image-wrapper">
-                            <img src="${imageUrl}" alt="${material.name || 'Material'}" class="product-image" onerror="this.src='images/placeholder.jpg'">
+                            <img src="${imageUrl}" alt="${material.name || 'Material'}" class="product-image" onerror="this.src='images/blazer.jpg'">
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">${material.name || 'Unnamed Material'}</h3>
@@ -544,21 +576,15 @@
                         const card = document.createElement('div');
                         card.className = 'craft-card';
 
-                        let imageUrl;
-                        if (product.imageUrl) {
-                            imageUrl = product.imageUrl.startsWith('http')
-                                ? product.imageUrl
-                                : `http://localhost:8080${product.imageUrl}`;
-                        } else {
-                            imageUrl = 'images/placeholder.jpg';
-                        }
+                        const imageUrl = getImageUrl(product.imageUrl);
 
                         const formattedPrice = typeof product.price === 'number'
                             ? product.price.toFixed(2)
                             : parseFloat(product.price).toFixed(2);
 
                         let measurementFields = '';
-                        if (product.productType === 'Trouser') {
+                        const pType = (product.productType || '').toLowerCase();
+                        if (pType.includes('trouser') || pType.includes('pant')) {
                             measurementFields = `
                             <div class="measurement-field">
                                 <label>Waist (inches):</label>
@@ -570,10 +596,10 @@
                             </div>
                             <div class="measurement-field">
                                 <label>Inseam (inches):</label>
-                                <input type="number" class="inseam-input" placeholder="32" step="0.5" data-id="${product.id}">
+                                <input type="number" class="inseam-input" placeholder="30" step="0.5" data-id="${product.id}">
                             </div>
                         `;
-                        } else if (product.productType === 'Shirt') {
+                        } else {
                             measurementFields = `
                             <div class="measurement-field">
                                 <label>Chest (inches):</label>

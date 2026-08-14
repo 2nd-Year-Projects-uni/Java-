@@ -46,9 +46,10 @@ public class WebConfig {
                 registry.addResourceHandler("/uploads/**")
                     .addResourceLocations("file:" + uploadsRoot + "/");
 
-                // Also serve common static resources
-                registry.addResourceHandler("/static/**")
-                    .addResourceLocations("classpath:/static/");
+                // Serve frontend static files from ../frontend directory
+                String frontendRoot = Paths.get("../frontend").toAbsolutePath().toString();
+                registry.addResourceHandler("/**")
+                    .addResourceLocations("file:" + frontendRoot + "/", "classpath:/static/", "classpath:/public/");
                 }
         };
     }

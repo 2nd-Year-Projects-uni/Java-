@@ -26,11 +26,15 @@ public class Contact {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String message;
 
+    @Column(nullable = false)
+    private boolean isRead = false;
+
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdDate;
 
     public Contact() {
         this.createdDate = LocalDateTime.now();
+        this.isRead = false;
     }
 
     public Contact(String name, String email, String phone, String service, String message) {
@@ -39,6 +43,7 @@ public class Contact {
         this.phone = phone;
         this.service = service;
         this.message = message;
+        this.isRead = false;
         this.createdDate = LocalDateTime.now();
     }
 
@@ -88,6 +93,14 @@ public class Contact {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean read) {
+        isRead = read;
     }
 
     public LocalDateTime getCreatedDate() {

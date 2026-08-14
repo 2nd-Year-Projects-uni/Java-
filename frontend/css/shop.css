@@ -178,6 +178,58 @@
     font-family: "Times New Roman", serif;
 }
 
+/* Ready-made Product Size Selector */
+.product-size-wrapper {
+    margin: 8px 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.product-size-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #555;
+    font-family: Arial, sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.product-size-options {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.size-btn {
+    min-width: 32px;
+    height: 28px;
+    padding: 0 8px;
+    border: 1px solid #dcd6c8;
+    background: #FAF8F5;
+    color: #2E2B1F;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.size-btn:hover {
+    border-color: #2E2B1F;
+    background: #EFECE6;
+}
+
+.size-btn.active {
+    background: #2E2B1F;
+    color: #ffffff;
+    border-color: #2E2B1F;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+}
+
 /* Add to Cart Button */
 .product-btn-cart {
     width: 100%;
@@ -534,8 +586,8 @@
 
 .craft-cards-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 60px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 32px;
     justify-content: center;
 }
 

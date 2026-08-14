@@ -21,7 +21,7 @@ public class Product {
 
     private String imageUrl;
 
-    private int stock = 0;
+    private int stock = 100;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
@@ -29,6 +29,7 @@ public class Product {
     // Constructors
     public Product() {
         this.createdDate = LocalDateTime.now();
+        this.stock = 100;
     }
 
     public Product(String name, String description, double price, String category, String imageUrl) {
@@ -37,7 +38,7 @@ public class Product {
         this.price = price;
         this.category = category;
         this.imageUrl = imageUrl;
-        this.stock = 0;
+        this.stock = 100;
         this.createdDate = LocalDateTime.now();
     }
 

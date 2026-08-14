@@ -52,7 +52,10 @@ public class CustomProductController {
     public ResponseEntity<ApiResponse<CustomProduct>> uploadCustomProduct(
             @RequestParam String name,
             @RequestParam double price,
-            @RequestParam String productType,
+            @RequestParam(required = false) String productType,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false, defaultValue = "100") Integer stock,
             @RequestParam(required = false) Double chest,
             @RequestParam(required = false) Double waist,
             @RequestParam(required = false) Double length,
@@ -71,9 +74,9 @@ public class CustomProductController {
                         .body(new ApiResponse<>(false, "Product price must be greater than 0", null));
             }
 
-            if (productType == null || productType.trim().isEmpty()) {
-                return ResponseEntity.badRequest()
-                        .body(new ApiResponse<>(false, "Product type is required", null));
+            String type = (productType != null && !productType.trim().isEmpty()) ? productType : category;
+            if (type == null || type.trim().isEmpty()) {
+                type = "Custom";
             }
 
             String imageUrl = null;
@@ -81,7 +84,8 @@ public class CustomProductController {
                 imageUrl = imageService.saveProductImage(image);
             }
 
-            CustomProduct product = new CustomProduct(name, price, productType, imageUrl);
+            CustomProduct product = new CustomProduct(name, description, price, type, imageUrl);
+            product.setStock(stock != null ? stock : 100);
             product.setChest(chest);
             product.setWaist(waist);
             product.setLength(length);
@@ -106,7 +110,10 @@ public class CustomProductController {
             @PathVariable Long id,
             @RequestParam String name,
             @RequestParam double price,
-            @RequestParam String productType,
+            @RequestParam(required = false) String productType,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) Integer stock,
             @RequestParam(required = false) Double chest,
             @RequestParam(required = false) Double waist,
             @RequestParam(required = false) Double length,
@@ -123,7 +130,19 @@ public class CustomProductController {
 
             CustomProduct product = existingProduct.get();
             product.setName(name);
-            product.setProductType(productType);
+            product.setPrice(price);
+
+            String type = (productType != null && !productType.trim().isEmpty()) ? productType : category;
+            if (type != null && !type.trim().isEmpty()) {
+                product.setProductType(type);
+            }
+            if (description != null) {
+                product.setDescription(description);
+            }
+            if (stock != null) {
+                product.setStock(stock);
+            }
+
             product.setChest(chest);
             product.setWaist(waist);
             product.setLength(length);

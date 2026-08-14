@@ -138,6 +138,7 @@
                                     <th>Phone Number</th>
                                     <th>Service</th>
                                     <th>Message</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="feedbacksTableBody">
@@ -280,12 +281,24 @@
                                 userName = order.user.name || order.user.email || 'User #' + order.user.id;
                             }
 
-                            // Products list
-                            const productNames = order.items ? order.items.map(item => item.name).join(', ') : 'No items';
+                            // Products list formatting (showing all items clearly line-by-line)
+                            let productDisplay = '';
+                            if (order.items && order.items.length > 0) {
+                                productDisplay = `<div style="display: flex; flex-direction: column; gap: 6px; padding: 4px 0;">` +
+                                    order.items.map(item => {
+                                        const qty = item.quantity || 1;
+                                        const itemPrice = (item.price || 0) * qty;
+                                        return `<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #f8fafc; padding: 6px 10px; border-radius: 6px; border: 1px solid #e2e8f0;">` +
+                                            `<span style="font-weight: 600; color: #1e293b; font-size: 13px;">• ${item.name}</span>` +
+                                            `<span style="color: #64748b; font-size: 12px; white-space: nowrap;">Qty: ${qty} | Rs ${parseFloat(itemPrice).toFixed(2)}</span>` +
+                                        `</div>`;
+                                    }).join('') +
+                                    `</div>`;
+                            } else {
+                                productDisplay = '<span style="color: #9ca3af;">No items</span>';
+                            }
 
                             // Determine status options based on product type
-                            // If any item is custom, show custom options (with Tailoring). 
-                            // Otherwise (readymade/materials) show simplified options.
                             const hasCustomItem = order.items && order.items.some(item => item.productType === 'custom');
 
                             const currentOptions = hasCustomItem ?
@@ -293,7 +306,7 @@
                                 ['Order Confirmed', 'Quality Check', 'Delivered'];
 
                             // Status Dropdown
-                            let statusSelect = `<select class="status-select" onchange="updateOrderStatus(${order.id}, this.value)" style="padding: 5px; border-radius: 4px; border: 1px solid #ddd;">`;
+                            let statusSelect = `<select class="status-select" onchange="updateOrderStatus(${order.id}, this.value)" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #d1d5db; font-size: 13px; background: #fff; cursor: pointer;">`;
                             currentOptions.forEach(opt => {
                                 const selected = (order.status === opt) ? 'selected' : '';
                                 statusSelect += `<option value="${opt}" ${selected}>${opt}</option>`;
@@ -301,12 +314,12 @@
                             statusSelect += `</select>`;
 
                             row.innerHTML = `
-                                <td>${order.id}</td>
+                                <td style="font-weight: 600;">#${order.id}</td>
                                 <td>${userName}</td>
-                                <td title="${productNames}" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${productNames}</td>
+                                <td style="min-width: 280px;">${productDisplay}</td>
                                 <td>${statusSelect}</td>
                                 <td>${date}</td>
-                                <td>Rs ${order.totalAmount ? parseFloat(order.totalAmount).toFixed(2) : '0.00'}</td>
+                                <td><strong style="color: #059669; font-size: 15px;">Rs ${order.totalAmount ? parseFloat(order.totalAmount).toFixed(2) : '0.00'}</strong></td>
                             `;
 
                             tbody.appendChild(row);
@@ -481,22 +494,31 @@
                     tbody.innerHTML = '';
 
                     if (!contacts || contacts.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No feedbacks yet</td></tr>';
-                        // Update count to 0 if no feedbacks
+                        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No feedbacks yet</td></tr>';
                         const feedbacksCountElement = document.getElementById('newFeedbacksCount');
                         if (feedbacksCountElement) feedbacksCountElement.textContent = '0';
                         return;
                     }
 
-                    // Update New Feedbacks Count Live
+                    // Count unread feedbacks
+                    const unreadCount = contacts.filter(c => !c.read && !c.isRead).length;
                     const feedbacksCountElement = document.getElementById('newFeedbacksCount');
                     if (feedbacksCountElement) {
-                        feedbacksCountElement.textContent = contacts.length;
+                        feedbacksCountElement.textContent = unreadCount;
                     }
 
                     contacts.forEach(contact => {
                         const row = document.createElement('tr');
-                        const date = new Date(contact.createdDate).toLocaleDateString();
+                        const isSeen = contact.read || contact.isRead || false;
+                        if (!isSeen) {
+                            row.classList.add('unread');
+                        }
+
+                        const date = contact.createdDate ? new Date(contact.createdDate).toLocaleDateString() : new Date().toLocaleDateString();
+
+                        const seenBtnHtml = isSeen
+                            ? `<button class="seen-btn active" onclick="toggleFeedbackRead(${contact.id})" title="Click to mark as Unread" style="background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;"><i class="fas fa-check-circle" style="color: #4f46e5; font-size: 14px;"></i> <span>Seen</span></button>`
+                            : `<button class="seen-btn" onclick="toggleFeedbackRead(${contact.id})" title="Click to mark as Seen" style="background: #ffffff; color: #374151; border: 1px solid #d1d5db; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s;"><i class="fas fa-check" style="color: #9ca3af; font-size: 13px;"></i> <span>Mark Seen</span></button>`;
 
                         row.innerHTML = `
                             <td>${contact.name}</td>
@@ -504,7 +526,8 @@
                             <td>${contact.email}</td>
                             <td>${contact.phone}</td>
                             <td>${contact.service}</td>
-                            <td title="${contact.message}" style="cursor: help;">${contact.message}</td>
+                            <td title="${contact.message}" style="max-width: 280px; font-size: 13px; line-height: 1.4;">${contact.message}</td>
+                            <td>${seenBtnHtml}</td>
                         `;
 
                         tbody.appendChild(row);
@@ -515,7 +538,29 @@
                 });
         }
 
+        function toggleFeedbackRead(contactId) {
+            fetch(`http://localhost:8080/api/contact/${contactId}/toggle-read`, {
+                method: 'PUT'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        fetchFeedbacks();
+                    } else {
+                        alert('Error updating status: ' + data.message);
+                    }
+                })
+                .catch(err => console.error('Error toggling read status:', err));
+        }
+
         fetchFeedbacks();
+
+        // Automatic Live Polling: Auto-refresh Orders, Feedbacks, and Low Stock counts every 10 seconds
+        setInterval(() => {
+            loadOrders();
+            loadLowStockCount();
+            fetchFeedbacks();
+        }, 10000);
     </script>
 </body>
 

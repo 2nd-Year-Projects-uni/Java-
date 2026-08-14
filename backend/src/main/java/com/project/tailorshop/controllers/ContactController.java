@@ -40,4 +40,18 @@ public class ContactController {
         return ResponseEntity.ok(new ApiResponse<>(true, "Contacts retrieved successfully", contacts));
     }
 
+    @PutMapping("/{id}/toggle-read")
+    public ResponseEntity<ApiResponse<Contact>> toggleReadStatus(@PathVariable Long id) {
+        java.util.Optional<Contact> contactOpt = contactRepository.findById(id);
+        if (contactOpt.isPresent()) {
+            Contact contact = contactOpt.get();
+            contact.setRead(!contact.isRead());
+            Contact updated = contactRepository.save(contact);
+            return ResponseEntity.ok(new ApiResponse<>(true, "Contact read status updated", updated));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse<>(false, "Contact not found", null));
+        }
+    }
+
 }
