@@ -1,24 +1,15 @@
 package com.project.tailorshop.services;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.core.sync.RequestBody;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.IOException;
-import java.net.URI;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -26,37 +17,19 @@ public class ImageService {
 
     private static final Logger log = LoggerFactory.getLogger(ImageService.class);
 
-    // Allowed image types
     private static final String[] ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "gif", "webp"};
     private static final long MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
-    private final S3Client s3Client;
-    private final String bucketName;
-    private final String region;
+    private final Cloudinary cloudinary;
 
-    public ImageService(
-            @Value("${aws.s3.bucket}") String bucketName,
-            @Value("${aws.region}") String region,
-            @Value("${aws.accessKey:}") String accessKey,
-            @Value("${aws.secretKey:}") String secretKey) {
-
-        this.bucketName = bucketName;
-        this.region = region;
-
-        AwsCredentialsProvider credentialsProvider = buildCredentialsProvider(accessKey, secretKey);
-
-        this.s3Client = S3Client.builder()
-                .region(Region.of(region))
-                .credentialsProvider(credentialsProvider)
-                .build();
+    public ImageService(Cloudinary cloudinary) {
+        this.cloudinary = cloudinary;
     }
 
     /**
-     * Validate and save an uploaded image file to S3
+     * Validate and upload image file to Cloudinary
      * @param file MultipartFile from request
-     * @return Public S3 URL
-     * @throws IllegalArgumentException if file is invalid
-     * @throws IOException if upload fails
+     * @return Public Cloudinary image URL
      */
     public String saveProductImage(MultipartFile file) throws IOException {
         if (file == null || file.isEmpty()) {
@@ -77,54 +50,42 @@ public class ImageService {
             throw new IllegalArgumentException("File type not allowed. Allowed types: jpg, jpeg, png, gif, webp");
         }
 
-        String objectKey = generateObjectKey(originalFilename, fileExtension);
+        String fileNameWithoutExt = sanitizeFilename(originalFilename);
+        String publicId = "products/" + UUID.randomUUID().toString().substring(0, 8) + "_" + fileNameWithoutExt;
 
-        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-                .bucket(bucketName)
-                .key(objectKey)
-                .contentType(file.getContentType())
-                .contentLength(file.getSize())
-                .build();
+        Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap(
+                "public_id", publicId,
+                "resource_type", "auto"
+        ));
 
-        s3Client.putObject(putObjectRequest, RequestBody.fromBytes(file.getBytes()));
+        String secureUrl = (String) uploadResult.get("secure_url");
+        if (!StringUtils.hasText(secureUrl)) {
+            secureUrl = (String) uploadResult.get("url");
+        }
 
-        return buildPublicUrl(objectKey);
+        return secureUrl;
     }
 
     /**
-     * Delete an image from S3 by its URL
-     * @param imageUrl Public S3 URL
-     * @return true if deleted, false otherwise
+     * Delete an image from Cloudinary by its public URL or public ID
      */
     public boolean deleteProductImage(String imageUrl) {
         if (!StringUtils.hasText(imageUrl)) {
             return false;
         }
 
-        String objectKey = extractObjectKey(imageUrl);
-        if (!StringUtils.hasText(objectKey)) {
+        String publicId = extractPublicId(imageUrl);
+        if (!StringUtils.hasText(publicId)) {
             return false;
         }
 
         try {
-            DeleteObjectRequest deleteRequest = DeleteObjectRequest.builder()
-                    .bucket(bucketName)
-                    .key(objectKey)
-                    .build();
-            s3Client.deleteObject(deleteRequest);
-            return true;
-        } catch (S3Exception e) {
-            log.error("Error deleting image from S3: {}", e.awsErrorDetails().errorMessage());
+            Map<?, ?> result = cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
+            return "ok".equals(result.get("result"));
+        } catch (Exception e) {
+            log.error("Error deleting image from Cloudinary: {}", e.getMessage());
             return false;
         }
-    }
-
-    private AwsCredentialsProvider buildCredentialsProvider(String accessKey, String secretKey) {
-        if (StringUtils.hasText(accessKey) && StringUtils.hasText(secretKey)) {
-            return StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey));
-        }
-        // Fallback to default provider chain (env vars, profile, etc.)
-        return DefaultCredentialsProvider.create();
     }
 
     private String getFileExtension(String filename) {
@@ -141,29 +102,76 @@ public class ImageService {
         return false;
     }
 
-    private String generateObjectKey(String originalFilename, String extension) {
+    private String sanitizeFilename(String originalFilename) {
         int lastDot = originalFilename.lastIndexOf('.');
         String nameWithoutExtension = (lastDot > 0) ? originalFilename.substring(0, lastDot) : originalFilename;
-        String sanitized = nameWithoutExtension.replaceAll("[^a-zA-Z0-9._-]", "_");
-        String uuid = UUID.randomUUID().toString().substring(0, 8);
-        return "products/" + uuid + "_" + sanitized + "." + extension;
+        return nameWithoutExtension.replaceAll("[^a-zA-Z0-9._-]", "_");
     }
 
-    private String buildPublicUrl(String objectKey) {
-        return "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + objectKey;
-    }
-
-    private String extractObjectKey(String imageUrl) {
+    private String extractPublicId(String imageUrl) {
         try {
-            URI uri = URI.create(imageUrl);
-            String path = uri.getPath();
-            if (path.startsWith("/")) {
-                path = path.substring(1);
+            if (imageUrl.contains("/upload/")) {
+                String afterUpload = imageUrl.substring(imageUrl.indexOf("/upload/") + 8);
+                if (afterUpload.matches("^v\\d+/.*")) {
+                    afterUpload = afterUpload.substring(afterUpload.indexOf('/') + 1);
+                }
+                int lastDot = afterUpload.lastIndexOf('.');
+                return (lastDot > 0) ? afterUpload.substring(0, lastDot) : afterUpload;
             }
-            return path;
-        } catch (IllegalArgumentException e) {
-            log.warn("Could not parse image URL for deletion: {}", imageUrl);
+            return imageUrl;
+        } catch (Exception e) {
+            log.warn("Could not parse Cloudinary image URL: {}", imageUrl);
             return null;
         }
     }
+
+    /*
+    ===================================================================
+    PREVIOUS AWS S3 INTEGRATION IMPLEMENTATION (Kept as proof of work)
+    ===================================================================
+
+    // AWS S3 dependencies & fields:
+    // private final S3Client s3Client;
+    // private final String bucketName;
+    // private final String region;
+
+    // Previous AWS S3 Constructor:
+    // public ImageService(
+    //         @Value("${aws.s3.bucket}") String bucketName,
+    //         @Value("${aws.region}") String region,
+    //         @Value("${aws.accessKey:}") String accessKey,
+    //         @Value("${aws.secretKey:}") String secretKey) {
+    //     this.bucketName = bucketName;
+    //     this.region = region;
+    //     AwsCredentialsProvider credentialsProvider = buildCredentialsProvider(accessKey, secretKey);
+    //     this.s3Client = S3Client.builder()
+    //             .region(Region.of(region))
+    //             .credentialsProvider(credentialsProvider)
+    //             .build();
+    // }
+
+    // Previous S3 Image Upload Method:
+    // public String saveProductImageS3(MultipartFile file) throws IOException {
+    //     String objectKey = "products/" + UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+    //     PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+    //             .bucket(bucketName)
+    //             .key(objectKey)
+    //             .contentType(file.getContentType())
+    //             .contentLength(file.getSize())
+    //             .build();
+    //     s3Client.putObject(putObjectRequest, RequestBody.fromBytes(file.getBytes()));
+    //     return "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + objectKey;
+    // }
+
+    // Previous S3 Image Delete Method:
+    // public boolean deleteProductImageS3(String imageUrl) {
+    //     DeleteObjectRequest deleteRequest = DeleteObjectRequest.builder()
+    //             .bucket(bucketName)
+    //             .key(extractObjectKey(imageUrl))
+    //             .build();
+    //     s3Client.deleteObject(deleteRequest);
+    //     return true;
+    // }
+    */
 }
+
