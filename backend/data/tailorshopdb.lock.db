@@ -1,6 +1,6 @@
 #FileLock
-#Tue Aug 18 13:52:45 IST 2026
-hostName=Pmi
-id=1a013f739fecdd005683d354e6410eba993ae171c2b
+#Tue Aug 18 20:01:08 IST 2026
+hostName=Pmi.bbrouter
+id=1a015487ad2041ec0b1472d9a8540400914b542867b
 method=file
-server=10.47.107.72\:52265
+server=192.168.1.8\:65038
