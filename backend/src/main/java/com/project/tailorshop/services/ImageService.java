@@ -53,17 +53,32 @@ public class ImageService {
         String fileNameWithoutExt = sanitizeFilename(originalFilename);
         String publicId = "products/" + UUID.randomUUID().toString().substring(0, 8) + "_" + fileNameWithoutExt;
 
-        Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap(
-                "public_id", publicId,
-                "resource_type", "auto"
-        ));
+        try {
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap(
+                    "public_id", publicId,
+                    "resource_type", "auto"
+            ));
 
-        String secureUrl = (String) uploadResult.get("secure_url");
-        if (!StringUtils.hasText(secureUrl)) {
-            secureUrl = (String) uploadResult.get("url");
+            String secureUrl = (String) uploadResult.get("secure_url");
+            if (!StringUtils.hasText(secureUrl)) {
+                secureUrl = (String) uploadResult.get("url");
+            }
+            if (StringUtils.hasText(secureUrl)) {
+                return secureUrl;
+            }
+        } catch (Exception e) {
+            log.warn("Cloudinary upload failed or unreachable, saving image to local storage: {}", e.getMessage());
         }
 
-        return secureUrl;
+        // Local storage fallback
+        java.nio.file.Path uploadPath = java.nio.file.Paths.get("uploads/products");
+        if (!java.nio.file.Files.exists(uploadPath)) {
+            java.nio.file.Files.createDirectories(uploadPath);
+        }
+        String localFileName = UUID.randomUUID().toString().substring(0, 8) + "_" + sanitizeFilename(originalFilename) + "." + fileExtension;
+        java.nio.file.Path targetLocation = uploadPath.resolve(localFileName);
+        java.nio.file.Files.copy(file.getInputStream(), targetLocation, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        return "uploads/products/" + localFileName;
     }
 
     /**
