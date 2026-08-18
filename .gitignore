@@ -1,0 +1,14 @@
+# Secret application properties
+backend/src/main/resources/application.properties
+application.properties
+*.properties.secret
+
+# Build & Runtime
+backend/target/
+backend/data/*.db
+!backend/data/
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.iml
