@@ -1,0 +1,32 @@
+spring.application.name=tailorshop
+
+# Database Configuration (H2 file-based database by default - zero setup required!)
+spring.datasource.url=jdbc:h2:file:./data/tailorshopdb;AUTO_SERVER=TRUE
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+# Uncomment the lines below if you prefer to use a local MySQL server instead:
+# spring.datasource.url=jdbc:mysql://localhost:3307/tailorshop?createDatabaseIfNotExist=true
+# spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+# spring.datasource.username=root
+# spring.datasource.password=root
+
+# JPA settings
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+# File upload settings
+spring.servlet.multipart.max-file-size=5MB
+spring.servlet.multipart.max-request-size=10MB
+
+# Custom upload directory
+upload.dir=uploads/products
+
+# Cloudinary Configuration 
+cloudinary.cloud-name=${CLOUDINARY_CLOUD_NAME:your_cloud_name}
+cloudinary.api-key=${CLOUDINARY_API_KEY:your_api_key}
+cloudinary.api-secret=${CLOUDINARY_API_SECRET:your_api_secret}
