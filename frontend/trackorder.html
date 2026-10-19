@@ -145,11 +145,16 @@
             ]
         };
 
-        // Helper to map status string to stage index (0 to 3)
+        const CANCELLED_STAGE = -1;
+        const POLL_INTERVAL_MS = 4000;
+        let lastOrdersJson = null;
+
+        // Helper to map status string to stage index (0 to 3, or CANCELLED_STAGE)
         function getStageFromStatus(status) {
             if (!status) return 0;
             const normalizedStatus = status.toLowerCase().replace(/[\s_-]+/g, '_');
 
+            if (normalizedStatus.includes('cancel')) return CANCELLED_STAGE;
             if (normalizedStatus.includes('deliver') || normalizedStatus.includes('complete')) return 3;
             if (normalizedStatus.includes('quality') || normalizedStatus.includes('check')) return 2;
             if (normalizedStatus.includes('tailor') || normalizedStatus.includes('progress') || normalizedStatus.includes('prepar') || normalizedStatus.includes('process')) return 1;
@@ -187,13 +192,19 @@
                 const result = await response.json();
 
                 if (result.success) {
+                    // Skip re-rendering on polls where nothing changed to avoid flicker
+                    const ordersJson = JSON.stringify(result.data);
+                    if (ordersJson === lastOrdersJson) return;
+                    lastOrdersJson = ordersJson;
                     renderOrders(result.data);
                 } else {
                     console.error('Failed to load orders:', result.message);
+                    if (lastOrdersJson !== null) return; // keep showing last known orders
                     container.innerHTML = '<p class="text-center" style="padding: 40px; color: #888;">Unable to retrieve orders at this time. Please try again later.</p>';
                 }
             } catch (error) {
                 console.error('Error fetching orders:', error);
+                if (lastOrdersJson !== null) return; // keep showing last known orders
                 container.innerHTML = '<p class="text-center" style="padding: 40px; color: #888;">Unable to connect to order tracking service. Please ensure the backend server is running.</p>';
             }
         }
@@ -238,8 +249,13 @@
                     const stages = stepperStages[isCustom ? 'custom' : 'readymade'];
                     const currentStage = getStageFromStatus(order.status);
                     const isDelivered = (currentStage === 3);
+                    const isCancelled = (currentStage === CANCELLED_STAGE);
 
-                    const miniStepperHTML = stages.map((stage, index) => {
+                    const miniStepperHTML = isCancelled ? `
+                        <div style="display:flex; align-items:center; gap:8px; padding:10px 14px; margin:10px 0; border-radius:8px; background:#fef2f2; color:#b91c1c; font-weight:600;">
+                            <i class="fas fa-times-circle"></i> This order has been cancelled
+                        </div>
+                    ` : stages.map((stage, index) => {
                         let stepClass = 'mini-step';
                         let iconHTML = `<i class="${stage.icon}"></i>`;
 
@@ -264,7 +280,7 @@
                     <div class="order-item-card" style="flex-direction: column;">
                         <div style="display:flex; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;">
                              <small style="font-weight:600; color:#6c757d;">Order #${order.id} • ${orderDate}</small>
-                             <small style="color:#b89255; font-weight:bold; text-transform:capitalize;">${order.status || 'Confirmed'}</small>
+                             <small style="color:${isCancelled ? '#b91c1c' : '#b89255'}; font-weight:bold; text-transform:capitalize;">${order.status || 'Confirmed'}</small>
                         </div>
                         <div style="display:flex; gap:20px;">
                             <div class="item-image-wrapper">
@@ -309,7 +325,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             fetchOrders();
             // Automatically poll every 4 seconds so status updates from admin appear in real-time
-            setInterval(fetchOrders, 4000);
+            setInterval(fetchOrders, POLL_INTERVAL_MS);
         });
     </script>
 
