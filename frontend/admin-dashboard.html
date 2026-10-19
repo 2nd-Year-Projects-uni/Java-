@@ -298,17 +298,22 @@
                                 productDisplay = '<span style="color: #9ca3af;">No items</span>';
                             }
 
-                            // Determine status options based on product type
+                            // Status Dropdown options (second stage matches the customer's tracking stepper wording)
                             const hasCustomItem = order.items && order.items.some(item => item.productType === 'custom');
-
                             const currentOptions = hasCustomItem ?
-                                ['Order Confirmed', 'Tailoring in Progress', 'Quality Check', 'Delivered'] :
-                                ['Order Confirmed', 'Quality Check', 'Delivered'];
+                                ['Order Confirmed', 'Tailoring in Progress', 'Quality Check', 'Delivered', 'Cancelled'] :
+                                ['Order Confirmed', 'Preparing Order', 'Quality Check', 'Delivered', 'Cancelled'];
 
                             // Status Dropdown
-                            let statusSelect = `<select class="status-select" onchange="updateOrderStatus(${order.id}, this.value)" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #d1d5db; font-size: 13px; background: #fff; cursor: pointer;">`;
+                            let statusSelect = `<select class="status-select" onchange="updateOrderStatus(${order.id}, this.value, this)" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #d1d5db; font-size: 13px; background: #fff; cursor: pointer; transition: all 0.2s ease;">`;
+                            const normOrderStatus = (order.status || '').toLowerCase().replace(/[\s_-]+/g, '');
+                            const inProgressStatuses = ['tailoringinprogress', 'preparingorder'];
                             currentOptions.forEach(opt => {
-                                const selected = (order.status === opt) ? 'selected' : '';
+                                const normOpt = opt.toLowerCase().replace(/[\s_-]+/g, '');
+                                const isSelected = (normOrderStatus === normOpt) ||
+                                    (normOrderStatus === 'confirmed' && normOpt === 'orderconfirmed') ||
+                                    (inProgressStatuses.includes(normOrderStatus) && inProgressStatuses.includes(normOpt));
+                                const selected = isSelected ? 'selected' : '';
                                 statusSelect += `<option value="${opt}" ${selected}>${opt}</option>`;
                             });
                             statusSelect += `</select>`;
@@ -335,7 +340,11 @@
                 });
         }
 
-        function updateOrderStatus(orderId, newStatus) {
+        function updateOrderStatus(orderId, newStatus, selectEl) {
+            if (selectEl) {
+                selectEl.style.borderColor = '#3b82f6';
+                selectEl.style.backgroundColor = '#eff6ff';
+            }
             fetch(`http://localhost:8080/api/orders/${orderId}/status`, {
                 method: 'PUT',
                 headers: {
@@ -346,13 +355,25 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
-                        // distinct visual feedback could be added here
-                        console.log('Status updated');
+                        console.log('Status updated to', newStatus);
+                        if (selectEl) {
+                            selectEl.style.borderColor = '#10b981';
+                            selectEl.style.backgroundColor = '#ecfdf5';
+                            setTimeout(() => {
+                                selectEl.style.borderColor = '#d1d5db';
+                                selectEl.style.backgroundColor = '#fff';
+                            }, 1200);
+                        }
                     } else {
                         alert('Failed to update status: ' + data.message);
+                        if (selectEl) selectEl.style.borderColor = '#ef4444';
                     }
                 })
-                .catch(err => console.error('Error updating status:', err));
+                .catch(err => {
+                    console.error('Error updating status:', err);
+                    alert('Network error updating status');
+                    if (selectEl) selectEl.style.borderColor = '#ef4444';
+                });
         }
 
         document.addEventListener('DOMContentLoaded', function () {
