@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.file.Paths;
@@ -16,7 +17,7 @@ public class WebConfig {
     private String uploadDir;
 
     /**
-     * Configure CORS and static resource handling for uploaded images
+     * Configure CORS, view controllers, and static resource handling for uploaded images and frontend
      */
     @Bean
     public WebMvcConfigurer corsAndStaticConfigurer() {
@@ -35,11 +36,27 @@ public class WebConfig {
             }
 
             /**
+             * Forward root and clean URLs to corresponding HTML pages
+             */
+            @Override
+            public void addViewControllers(ViewControllerRegistry registry) {
+                registry.addViewController("/").setViewName("forward:/index.html");
+                registry.addViewController("/shop").setViewName("forward:/shop.html");
+                registry.addViewController("/trackorder").setViewName("forward:/trackorder.html");
+                registry.addViewController("/cart").setViewName("forward:/cart.html");
+                registry.addViewController("/aboutus").setViewName("forward:/aboutus.html");
+                registry.addViewController("/services").setViewName("forward:/services.html");
+                registry.addViewController("/contactus").setViewName("forward:/contactus.html");
+                registry.addViewController("/login").setViewName("forward:/login.html");
+                registry.addViewController("/admin").setViewName("forward:/admin-dashboard.html");
+            }
+
+            /**
              * Serve uploaded images from /uploads/** endpoints
              * Maps virtual path /uploads/** to actual file system directory
              */
-                @Override
-                public void addResourceHandlers(ResourceHandlerRegistry registry) {
+            @Override
+            public void addResourceHandlers(ResourceHandlerRegistry registry) {
                 // Serve images from uploads root. Pattern /uploads/** should map to /uploads/** on disk.
                 // Example: request /uploads/products/grey.jpg -> file:<project>/uploads/products/grey.jpg
                 String uploadsRoot = Paths.get("uploads").toAbsolutePath().toString();
@@ -50,7 +67,7 @@ public class WebConfig {
                 String frontendRoot = Paths.get("../frontend").toAbsolutePath().toString();
                 registry.addResourceHandler("/**")
                     .addResourceLocations("file:" + frontendRoot + "/", "classpath:/static/", "classpath:/public/");
-                }
+            }
         };
     }
 }

@@ -139,33 +139,46 @@
             ],
             readymade: [
                 { icon: 'fas fa-check-circle', label: 'Order Confirmed' },
+                { icon: 'fas fa-boxes-packing', label: 'Preparing Order' },
                 { icon: 'fas fa-clipboard-check', label: 'Quality Check' },
                 { icon: 'fas fa-box-open', label: 'Delivered' }
             ]
         };
 
-        // Helper to map status to stage index
-        function getStageFromStatus(status, type) {
-            status = status || 'Confirmed';
-            const normalizedStatus = status.toLowerCase().replace(/ /g, '_'); // confirmed, tailoring_in_progress, quality_check, delivered
+        // Helper to map status string to stage index (0 to 3)
+        function getStageFromStatus(status) {
+            if (!status) return 0;
+            const normalizedStatus = status.toLowerCase().replace(/[\s_-]+/g, '_');
 
-            if (type === 'custom') {
-                if (normalizedStatus === 'confirmed' || normalizedStatus === 'order_confirmed') return 0;
-                if (normalizedStatus === 'tailoring_in_progress') return 1;
-                if (normalizedStatus === 'quality_check') return 2;
-                if (normalizedStatus === 'delivered') return 3;
-            } else {
-                if (normalizedStatus === 'confirmed' || normalizedStatus === 'order_confirmed') return 0;
-                if (normalizedStatus === 'quality_check' || normalizedStatus === 'processing') return 1;
-                if (normalizedStatus === 'delivered') return 2;
-            }
+            if (normalizedStatus.includes('deliver') || normalizedStatus.includes('complete')) return 3;
+            if (normalizedStatus.includes('quality') || normalizedStatus.includes('check')) return 2;
+            if (normalizedStatus.includes('tailor') || normalizedStatus.includes('progress') || normalizedStatus.includes('prepar') || normalizedStatus.includes('process')) return 1;
+            if (normalizedStatus.includes('confirm')) return 0;
             return 0; // default
         }
 
         async function fetchOrders() {
-            const userSession = JSON.parse(localStorage.getItem('userSession'));
+            const container = document.getElementById('itemsContainer');
+            let userSession = null;
+            try {
+                userSession = JSON.parse(localStorage.getItem('userSession'));
+            } catch (e) {}
+
             if (!userSession || !userSession.id) {
-                window.location.href = 'login.html';
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon-wrapper">
+                            <i class="fas fa-user-lock"></i>
+                            <div class="empty-icon-circle"></div>
+                        </div>
+                        <h2 class="empty-title">Please Log In to Track Your Orders</h2>
+                        <p class="empty-description">You need an active account session to view and track your orders in real-time.</p>
+                        <a href="login.html" class="btn-start-shopping">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Login to Your Account
+                        </a>
+                    </div>
+                `;
                 return;
             }
 
@@ -177,10 +190,11 @@
                     renderOrders(result.data);
                 } else {
                     console.error('Failed to load orders:', result.message);
-                    document.getElementById('itemsContainer').innerHTML = '<p class="text-center">Failed to load orders.</p>';
+                    container.innerHTML = '<p class="text-center" style="padding: 40px; color: #888;">Unable to retrieve orders at this time. Please try again later.</p>';
                 }
             } catch (error) {
                 console.error('Error fetching orders:', error);
+                container.innerHTML = '<p class="text-center" style="padding: 40px; color: #888;">Unable to connect to order tracking service. Please ensure the backend server is running.</p>';
             }
         }
 
@@ -222,13 +236,14 @@
                     const customBadge = isCustom ? '<span class="custom-badge">Custom Made</span>' : '';
 
                     const stages = stepperStages[isCustom ? 'custom' : 'readymade'];
-                    const currentStage = getStageFromStatus(order.status, isCustom ? 'custom' : 'readymade');
+                    const currentStage = getStageFromStatus(order.status);
+                    const isDelivered = (currentStage === 3);
 
                     const miniStepperHTML = stages.map((stage, index) => {
                         let stepClass = 'mini-step';
                         let iconHTML = `<i class="${stage.icon}"></i>`;
 
-                        if (index < currentStage) {
+                        if (index < currentStage || (isDelivered && index === currentStage)) {
                             stepClass += ' completed';
                             iconHTML = '<i class="fas fa-check"></i>';
                         } else if (index === currentStage) {
@@ -293,6 +308,8 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             fetchOrders();
+            // Automatically poll every 4 seconds so status updates from admin appear in real-time
+            setInterval(fetchOrders, 4000);
         });
     </script>
 
